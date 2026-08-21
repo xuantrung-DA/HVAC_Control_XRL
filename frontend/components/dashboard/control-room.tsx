@@ -7,6 +7,7 @@ import { TelemetryChart } from "@/components/charts/telemetry-chart";
 import { SimulationControls } from "@/components/controls/simulation-controls";
 import { MetricCard } from "@/components/dashboard/metric-card";
 import { ExplanationPanel } from "@/components/xai/explanation-panel";
+import { V2DevelopmentLab } from "@/components/dashboard/v2-development-lab";
 import { getBenchmark, runSimulation } from "@/services/api";
 import type { BenchmarkReport, Controller, Scenario, SimulationResult } from "@/types/api";
 
@@ -63,7 +64,7 @@ export function ControlRoom() {
       <header className="hero shell">
         <nav>
           <a className="brand" href="#top" aria-label="XRL-HVAC home"><span className="brand-mark"><Wind /></span><span>XRL<span>·</span>HVAC</span></a>
-          <div className="nav-links"><a href="#simulator">Simulator</a><a href="#explainability">Explainability</a><a href="#evidence">Evidence</a></div>
+          <div className="nav-links"><a href="#simulator">V1 Demo</a><a href="#explainability">Explainability</a><a href="#evidence">Evidence</a><a href="#v2-lab">V2 Lab</a></div>
           <span className="model-status"><i /> DQN · frozen</span>
         </nav>
         <div className="hero__content" id="top">
@@ -111,6 +112,7 @@ export function ControlRoom() {
             <span><small>Generalization</small><strong>{dqnEvidence?.generalizes_to_unseen_test ? "PASS" : "PASS"}</strong><em>5 deterministic seeds</em></span>
           </div>
         </section>
+        <V2DevelopmentLab />
       </div>
       <footer className="shell"><span>XRL-HVAC · Portfolio engineering project</span><span>*Frozen DQN aggregate on held-out combined-stress evaluation.</span></footer>
     </main>

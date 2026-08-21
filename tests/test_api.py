@@ -121,3 +121,42 @@ def test_validation_and_artifact_errors(client: TestClient) -> None:
     xai = client.get("/api/v1/metrics/xai")
     assert xai.status_code == 200
     assert xai.json()["validation"]["deterministic_replay_passed"] is True
+
+
+def test_v2_status_is_honest_and_held_out_is_sealed(client: TestClient) -> None:
+    response = client.get("/api/v2/status")
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["development_status"] == "FAIL"
+    assert payload["official_demo_controller"] == "v1_frozen_dqn"
+    assert payload["held_out"]["status"] == "SEALED_NOT_RUN"
+    assert payload["held_out"]["final_test_opened"] is False
+    assert payload["v2_controller"]["eligible_for_demo_replacement"] is False
+
+    scenarios = client.get("/api/v2/scenarios").json()
+    assert all(item["runnable"] for item in scenarios["development"])
+    assert not any(item["runnable"] for item in scenarios["held_out"])
+
+    rejected = client.post(
+        "/api/v2/simulations/run",
+        json={"scenario": "combined_stress_v2", "seed": 1701},
+    )
+    assert rejected.status_code == 422
+    assert "sealed" in rejected.json()["detail"].lower()
+
+
+def test_v2_development_simulation_contract(client: TestClient) -> None:
+    response = client.post(
+        "/api/v2/simulations/run",
+        json={"scenario": "normal_v2", "seed": 901, "include_explanations": False},
+    )
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["status"] == "DEVELOPMENT_FAIL"
+    assert len(payload["trajectory"]) == 96
+    first = payload["trajectory"][0]
+    assert first["policy_explanation"] is None
+    assert first["shield_explanation"]["method"] == "deterministic_predictive_constraint_check"
+    assert "priority_percent" in first["reward_audit"]
+    assert "whole_building_kwh" in first["energy"]
+    assert "solar_kw" in first["heat_flows"]

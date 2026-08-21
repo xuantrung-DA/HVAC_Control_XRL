@@ -90,3 +90,90 @@ export interface BenchmarkReport {
   };
   split_summary: Array<Record<string, number | string>>;
 }
+
+export type V2Scenario =
+  | "normal_v2"
+  | "hot_day_v2"
+  | "high_occupancy_v2"
+  | "high_humidity_v2"
+  | "expensive_electricity_v2"
+  | "meeting_surge_v2"
+  | "high_electronics_load_v2"
+  | "cleaning_event_v2";
+
+export interface V2Status {
+  simulator_version: string;
+  lifecycle: "development";
+  development_status: "FAIL";
+  official_demo_controller: string;
+  v2_controller: {
+    parameters: number;
+    role: string;
+    eligible_for_demo_replacement: false;
+    checkpoint_sha256: string;
+    development_gates: Record<string, boolean>;
+  };
+  held_out: { status: "SEALED_NOT_RUN"; final_test_opened: false; reason: string };
+  scenario_access: { development: V2Scenario[]; held_out_sealed: string[] };
+}
+
+export interface V2TrajectoryStep {
+  step: number;
+  timestamp: string;
+  hour: number;
+  state: Record<string, number>;
+  proposed_action: number;
+  proposed_action_name: string;
+  executed_action: number;
+  executed_action_name: string;
+  reward: number;
+  reward_audit: {
+    priority_percent: Record<"energy" | "comfort" | "co2", number>;
+    effective_weights: Record<string, number>;
+    weighted_penalties: Record<string, number>;
+    comfort_margin_c: number;
+    humidity_margin_pct: number;
+    co2_margin_ppm: number;
+  };
+  energy: Record<string, number>;
+  heat_flows: Record<string, number>;
+  risk: Record<string, number>;
+  forecast: {
+    forecasts: Array<{
+      horizon_hours: number;
+      values: Record<string, { point: number; lower: number; upper: number }>;
+    }>;
+  };
+  policy_explanation?: {
+    human_readable: string;
+    causal_claim: false;
+    contributions: Array<{
+      feature: string;
+      signed_contribution: number;
+      absolute_importance_pct: number;
+    }>;
+    counterfactual?: {
+      found: boolean;
+      human_readable: string;
+      counterfactual_action_name?: string;
+    };
+  };
+  shield_explanation: {
+    decision: string;
+    intervention: boolean;
+    reason: string;
+    human_readable: string;
+  };
+  comfort_status: "comfortable" | "violation";
+  co2_status: "acceptable" | "violation";
+}
+
+export interface V2SimulationResult {
+  controller: "v2_dqn_experimental";
+  scenario: V2Scenario;
+  seed: number;
+  status: "DEVELOPMENT_FAIL";
+  disclaimer: string;
+  summary: Record<string, unknown>;
+  trajectory: V2TrajectoryStep[];
+}

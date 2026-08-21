@@ -9,8 +9,14 @@ from typing import AsyncIterator
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.routes import agent, building, explanations, metrics, simulation
-from src.services import AgentService, ExplanationService, SimulationService
+from api.routes import agent, building, explanations, metrics, simulation, v2
+from src.services import (
+    AgentService,
+    ExplanationService,
+    SimulationService,
+    V2AgentService,
+    V2SimulationService,
+)
 
 
 @asynccontextmanager
@@ -20,6 +26,9 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     app.state.agent_service = agent_service
     app.state.explanation_service = explanation_service
     app.state.simulation_service = SimulationService(agent_service, explanation_service)
+    v2_agent_service = V2AgentService()
+    app.state.v2_agent_service = v2_agent_service
+    app.state.v2_simulation_service = V2SimulationService(v2_agent_service)
     yield
 
 
@@ -27,7 +36,7 @@ def create_app() -> FastAPI:
     application = FastAPI(
         title="XRL-HVAC API",
         summary="Explainable reinforcement learning for smart-building HVAC control.",
-        version="1.0.0",
+        version="2.0.0-dev",
         lifespan=lifespan,
     )
     origins = os.getenv("XRL_HVAC_CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",")
@@ -41,7 +50,13 @@ def create_app() -> FastAPI:
 
     @application.get("/health", tags=["system"])
     def health() -> dict[str, str]:
-        return {"status": "healthy", "project": "XRL-HVAC", "version": "1.0.0"}
+        return {
+            "status": "healthy",
+            "project": "XRL-HVAC",
+            "version": "2.0.0-dev",
+            "official_demo": "v1_frozen",
+            "v2_status": "development_fail_heldout_sealed",
+        }
 
     prefix = "/api/v1"
     application.include_router(building.router, prefix=prefix)
@@ -49,6 +64,7 @@ def create_app() -> FastAPI:
     application.include_router(simulation.router, prefix=prefix)
     application.include_router(metrics.router, prefix=prefix)
     application.include_router(explanations.router, prefix=prefix)
+    application.include_router(v2.router, prefix="/api")
     return application
 
 
