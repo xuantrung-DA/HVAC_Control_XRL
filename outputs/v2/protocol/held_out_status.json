@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-21T15:01:20.937738+00:00",
+  "protocol_id": "xrl_hvac_v2_001",
+  "status": "SEALED_NOT_RUN",
+  "final_test_opened": false,
+  "candidate_checkpoint": null,
+  "reason": "No DQN or SAC candidate passed locked development comfort and IAQ gates; opening held-out scenarios would violate the predeclared protocol and invite test tuning.",
+  "development_evidence": {
+    "dqn_status": "FAIL",
+    "dqn_sha256": "0078e35d8ab7de0729eef0a0ccc6e866e4d20c86a3d743f1ddb03210eaf2fdfe",
+    "sac_status": "FAIL",
+    "sac_sha256": "ad702f0c8b050c9f17281b52353b1014fe2cd9ce377113367b5b9ac03417e5dd"
+  },
+  "sealed_scenarios": [
+    "combined_stress_v2",
+    "unexpected_occupancy_surge_v2",
+    "forecast_failure_v2",
+    "heatwave_v2",
+    "door_left_open_v2"
+  ],
+  "acceptance_result": "NOT_ELIGIBLE_FOR_FINAL_TEST"
+}

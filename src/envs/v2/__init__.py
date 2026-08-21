@@ -17,6 +17,7 @@ from src.envs.v2.reward import (
 from src.envs.v2.scenario_sampler import V2ScenarioSamplerEnv
 from src.envs.v2.continuous_env import V2ContinuousHVACEnv
 from src.envs.v2.continuous_sampler import V2ContinuousScenarioSamplerEnv
+from src.envs.v2.masking import MaskedController, MaskedObservationEnv
 
 __all__ = [
     "DoorState",
@@ -33,6 +34,8 @@ __all__ = [
     "V2ScenarioSamplerEnv",
     "V2ContinuousHVACEnv",
     "V2ContinuousScenarioSamplerEnv",
+    "MaskedController",
+    "MaskedObservationEnv",
     "V2BuildingState",
     "V2ExogenousInputs",
 ]

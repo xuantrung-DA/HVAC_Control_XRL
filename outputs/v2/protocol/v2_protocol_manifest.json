@@ -3,7 +3,7 @@
   "protocol_id": "xrl_hvac_v2_001",
   "simulator_version": "XRL-HVAC-v2",
   "status": "development",
-  "generated_at_utc": "2026-08-21T14:53:56.197701+00:00",
+  "generated_at_utc": "2026-08-21T15:01:20.794443+00:00",
   "v1_git_tag": "v1-frozen",
   "v1_git_commit": "4bbd1450c01a9bf862c340a108e1a598533bf3de",
   "config_hashes": {
@@ -22,7 +22,7 @@
     "configs/v2/sac.yaml": "f7535a92d5b011d93222ee518c9f5781d6ca565b08e342425be48e90e18770df"
   },
   "protocol_bundle_sha256": "a78b87dbd2d05879a80b1f8dd8833679c9de468bef92c204f7f969eda0f6675b",
-  "v1_baseline_manifest_sha256": "ef284227ceda0f8260358d790a1e8d75fb28de4c0a0c65827bb065d2e6d9b404",
+  "v1_baseline_manifest_sha256": "866c599a38e4015c90670463610aa62c231da45399225320e85a763ed31a166a",
   "scenario_splits": {
     "train": [
       "normal_v2",
