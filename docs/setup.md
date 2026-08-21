@@ -2,50 +2,70 @@
 
 ## Local Windows setup
 
-Use Python 3.12 and Node.js 24. From the repository root:
+From the repository root in PowerShell:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 Copy-Item .env.example .env
-pytest -q
+.\.venv\Scripts\python.exe -m pytest -q
 ```
 
-Start the backend:
+Start FastAPI from the repository root:
 
 ```powershell
-python scripts\start_demo.py
+.\.venv\Scripts\python.exe scripts\start_demo.py
 ```
 
-Start the frontend in a second terminal:
+Start Next.js in a second terminal:
 
 ```powershell
 cd frontend
 Copy-Item .env.example .env.local
-npm install
-npm run dev
+npm.cmd install
+npm.cmd run dev
 ```
 
-The frontend expects `NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1`. If the frontend origin changes, add it to `XRL_HVAC_CORS_ORIGINS` as a comma-separated value.
+Use `npm.cmd` if PowerShell blocks `npm.ps1` under its execution policy. The frontend expects `NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1`; it derives the V2 API origin from the same setting.
+
+Open:
+
+- Dashboard: `http://localhost:3000`
+- OpenAPI: `http://localhost:8000/docs`
+- Health: `http://localhost:8000/health`
+
+## Troubleshooting `No module named 'api'`
+
+Run the script from the repository root with the virtual-environment interpreter:
+
+```powershell
+Set-Location "C:\path\to\HVAC_control"
+.\.venv\Scripts\python.exe scripts\start_demo.py
+```
+
+Do not call a globally installed `uvicorn` executable. The startup script adds the repository root to `sys.path` before Uvicorn imports `api.main`.
 
 ## Docker
 
-```bash
+```powershell
 docker compose up --build
 ```
 
-The Compose demo is CPU-first and exposes frontend port 3000 and API port 8000. GPU access is unnecessary for inference.
+Compose runs CPU inference and waits for the API health check before starting the frontend. GPU access is unnecessary for the dashboard.
 
-## Recreate XAI artifacts
+## Verification
 
 ```powershell
-python scripts\generate_xai_artifacts.py
+.\.venv\Scripts\python.exe -m pytest -q
+Set-Location frontend
+npm.cmd run typecheck
+npm.cmd run build
 ```
 
-The script refuses to run if the frozen checkpoint hash differs from the manifest. Full trajectory JSON/CSV is written under `outputs/trajectories/xai`; the compact validation report is retained for the API and portfolio evidence.
+## Reproducibility and evidence
 
-## Training and evaluation
+V1 checkpoint integrity is declared in `models/demo_manifest.json`. V2 checkpoint hashes and development metrics are in `outputs/v2/training`; the held-out seal receipt is `outputs/v2/protocol/held_out_status.json`.
 
-Full training is separate from demo startup. Configuration lives in `configs/evaluation.yaml`; outputs go to `outputs/metrics/step5` and best checkpoints to `models`. The intended laptop profile is RTX 4050 6 GB / 16 GB RAM, with small networks and no broad hyperparameter sweep.
+Training is intentionally separate from runtime startup. V2 scripts live in `scripts/v2`, write only to `models/v2` and `outputs/v2`, and use the locked configuration in `configs/v2`.

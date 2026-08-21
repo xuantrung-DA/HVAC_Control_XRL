@@ -2,20 +2,22 @@
 
 ## Recommended walkthrough
 
-1. Start on Combined Stress with the frozen DQN. Explain that weather, occupancy, and peak pricing were combined only in the held-out test.
-2. Run the simulation and play the 96-step timeline. Point out that building airflow and dashboard metrics follow the selected timestep rather than a decorative animation.
-3. At a HIGH action, show signed feature contributions and normalized importance. State clearly that these are local model attributions, not physical causes.
-4. Show the counterfactual card. The proposed feature edit is bounded, and the target action was verified with another DQN forward pass.
-5. Move to the evidence panel: DQN spends roughly 15% more energy than Rule-Based but removes almost all comfort violation and all measured CO₂ violation on held-out stress.
-6. Switch to Rule-Based to demonstrate that the same simulator and metrics contract supports traditional control.
+1. Begin with the **V1 frozen DQN** and Combined Stress. Run the 24-hour replay and explain that V1 is the evidence-backed official demo controller.
+2. At a HIGH action, show signed attribution and normalized importance. State that these are local model sensitivities, not physical causes.
+3. Show the verified bounded counterfactual and compare the same V1 scenario with Rule-Based control.
+4. Move to the **V2 Development Lab**. Point out the visible `DEVELOPMENT FAIL` and `HELD-OUT SEALED` labels.
+5. Run a development scenario. Show actual vs 1-hour forecast, risk, dynamic reward priority, and the separate `DQN proposed → shield → executed` path.
+6. Use the heat-flow and energy ledgers to explain why indoor state changes and where electricity is consumed.
+7. Close with the protocol story: V2 energy/cost improved, but comfort/IAQ gates failed; therefore the final test was not opened and the benchmark was not bent after seeing results.
 
 ## Recruiter-friendly summary
 
-“I built a reproducible building digital twin, trained and benchmarked four RL families against traditional control, selected a DQN from multi-seed held-out evidence, then made its decisions inspectable with attribution and validated counterfactuals. The result is delivered through a typed API and an interactive dashboard, with Docker and automated tests.”
+> I built two generations of an explainable HVAC-control system. V1 proves the end-to-end RL/XAI product. V2 adds richer building physics, forecasts, online risk, dynamic reward auditing, and a predictive shield. When no V2 policy passed the locked constraints, I preserved the failed evidence and kept held-out data sealed instead of overstating performance.
 
 ## Honest caveats
 
-- The simulator is lightweight and single-zone; it does not replace EnergyPlus validation.
-- The selected policy optimizes a configured multi-objective reward, so different stakeholder weights can change the preferred controller.
-- Integrated Gradients is reference-dependent and local.
-- Counterfactual feature vectors can be valid yet dynamically unreachable from a particular history.
+- The simulator is lightweight, single-zone, and not a substitute for EnergyPlus or commissioning data.
+- V1 and V2 optimize configured objectives; stakeholder priorities can change the preferred controller.
+- Local feature attribution and counterfactuals do not establish physical causality.
+- The V2 discrete action map couples cooling and ventilation; this is a documented source of conflicting comfort/IAQ behavior.
+- No V2 held-out generalization claim is valid until an eligible checkpoint is frozen and the one-shot final protocol is executed.

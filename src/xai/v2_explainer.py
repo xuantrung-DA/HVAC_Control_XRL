@@ -8,9 +8,10 @@ it measures a local Q-margin response and is never presented as a causal claim.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Iterable
+from typing import Any
 
 import numpy as np
+import torch
 
 from src.agents.dqn import DQNAgent
 from src.envs.building import HVACAction
@@ -45,10 +46,11 @@ class V2PolicyExplainer:
         reference = (self.low + self.high) / 2.0
         contributions: list[dict[str, Any]] = []
 
+        ablated_batch = np.repeat(values[None, :], len(V2_OBSERVATION_NAMES), axis=0)
+        ablated_batch[np.arange(len(V2_OBSERVATION_NAMES)), np.arange(len(V2_OBSERVATION_NAMES))] = reference
+        ablated_scores = self._batch_scores(ablated_batch)
         for index, name in enumerate(V2_OBSERVATION_NAMES):
-            ablated = values.copy()
-            ablated[index] = reference[index]
-            scores = self.agent.action_scores(ablated)
+            scores = ablated_scores[index]
             ablated_margin = float(scores[action] - scores[contrast])
             signed = margin - ablated_margin
             contributions.append(
@@ -94,7 +96,8 @@ class V2PolicyExplainer:
         return result
 
     def _counterfactual(self, observation: np.ndarray, original_action: int) -> dict[str, Any]:
-        best: tuple[float, int, float, int] | None = None
+        candidates: list[np.ndarray] = []
+        metadata: list[tuple[float, int, float]] = []
         for feature in _FRONTEND_FEATURES:
             index = V2_OBSERVATION_NAMES.index(feature)
             span = float(self.high[index] - self.low[index])
@@ -103,13 +106,21 @@ class V2PolicyExplainer:
                     continue
                 edited = observation.copy()
                 edited[index] = candidate
-                action = int(np.argmax(self.agent.action_scores(edited)))
-                if action == original_action:
-                    continue
-                distance = abs(float(candidate) - float(observation[index])) / max(span, 1e-9)
-                proposal = (distance, index, float(candidate), action)
-                if best is None or proposal < best:
-                    best = proposal
+                candidates.append(edited)
+                metadata.append((
+                    abs(float(candidate) - float(observation[index])) / max(span, 1e-9),
+                    index,
+                    float(candidate),
+                ))
+        best: tuple[float, int, float, int] | None = None
+        actions = np.argmax(self._batch_scores(np.stack(candidates)), axis=1)
+        for (distance, index, candidate), action_value in zip(metadata, actions, strict=True):
+            action = int(action_value)
+            if action == original_action:
+                continue
+            proposal = (distance, index, float(candidate), action)
+            if best is None or proposal < best:
+                best = proposal
         if best is None:
             return {
                 "found": False,
@@ -153,6 +164,13 @@ class V2PolicyExplainer:
         if not np.isfinite(values).all():
             raise ValueError("V2 explanation input contains non-finite values")
         return np.clip(values, self.low, self.high)
+
+    def _batch_scores(self, observations: np.ndarray) -> np.ndarray:
+        scaled = self.agent.scaler.transform(np.asarray(observations, dtype=np.float32))
+        tensor = torch.as_tensor(scaled, device=self.agent.device)
+        with torch.no_grad():
+            scores = self.agent.online_network(tensor)
+        return scores.detach().cpu().numpy().astype(np.float32)
 
 
 def explain_shield(control: dict[str, Any]) -> dict[str, Any]:

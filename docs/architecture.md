@@ -1,37 +1,60 @@
 # Architecture
 
-XRL-HVAC separates physical simulation, controller inference, explanation, evaluation, and delivery. No API route owns domain logic; routes validate input and delegate to application services.
+XRL-HVAC keeps simulation, control, explanation, evaluation, and delivery independent. HTTP routes validate inputs and delegate to services; training is never exposed through the runtime API.
 
 ```text
-Next.js control room
-        │ typed JSON / HTTP
-        ▼
-FastAPI schemas + routes
-        │
-        ├── SimulationService ──► Gymnasium HVACEnv
-        │                              ├── BuildingSimulator
-        │                              ├── ThermalModel / CO2Model
-        │                              └── decomposed reward
-        ├── AgentService ───────► SHA-verified frozen DQN
-        └── ExplanationService ─► attribution + counterfactual
-                                       │
-                                       └── trajectory artifacts
+Next.js dashboard
+        | typed JSON
+        v
+FastAPI routes
+        +-- V1 services ---> frozen DQN + V1 Gymnasium environment
+        +-- V2 services ---> SHA-verified experimental DQN
+                                  | proposed action
+                                  v
+                          predictive safety shield
+                                  | executed action
+                                  v
+       scenario --> forecast --> risk --> V2 Gymnasium environment
+                                         |
+                                         v
+                         2R1C physics + reward audit
 ```
 
-## Stable model interfaces
+## V1 boundary
 
-All controllers implement `BaseAgent.predict(observation, deterministic=True) -> int`. The observation vector has nine stable positions: indoor temperature, outdoor temperature, relative humidity, occupancy, CO₂, price, time sine, time cosine, and prior HVAC action. The discrete action contract is OFF, LOW, MEDIUM, HIGH.
+All V1 controllers implement `BaseAgent.predict(observation, deterministic=True) -> int`. The stable nine-feature observation contains indoor/outdoor temperature, relative humidity, occupancy, CO₂, price, time sine/cosine, and prior action. Actions are `OFF`, `LOW`, `MEDIUM`, and `HIGH`.
 
-The DQN consumes observations scaled to `[-1, 1]`. Its 9→128→128→4 MLP contains 18,308 trainable parameters. Checkpoint loading checks the algorithm identifier; `AgentService` additionally verifies the frozen SHA-256 from `models/demo_manifest.json`.
+The frozen 9→128→128→4 DQN has 18,308 parameters. `AgentService` verifies its SHA-256 against `models/demo_manifest.json` before inference.
 
-## Evaluation boundary
+## V2 physical boundary
 
-The training curriculum uses Normal, Hot Day, and High Occupancy. Expensive Electricity is a validation-only scenario and Combined Stress is held out for final generalization testing. Model selection uses a balanced Energy/Cost–Comfort–CO₂ score with feasibility and reproducibility checks rather than cumulative reward alone.
+`V2HVACEnv` exposes a 35-feature observation schema (`xrl_hvac_v2_obs_002`) with current state, 1h/4h forecasts, uncertainty, online trends, risk, and reliability. The underlying 2R1C simulator accounts separately for:
+
+- opaque envelope and window transfer;
+- infiltration and controlled ventilation;
+- solar, occupant, electronics, lighting, base, and cleaning gains;
+- delayed cooling delivery and nonlinear efficiency;
+- indoor moisture and occupancy/airflow-coupled CO₂;
+- HVAC, fan, lights, electronics, base-load energy, peak power, and TOU cost.
+
+V1 is not overwritten: V2 lives under versioned configs, models, outputs, tests, and environment modules.
+
+## Control and safety boundary
+
+The V2 learned DQN proposes a discrete action. `PredictiveSafetyShield` independently evaluates constraints and records one of `ALLOW`, `CLAMP`, `REJECT`, or `FALLBACK`; only the executed action reaches physics. Both proposed and executed actions are present in every trajectory row.
+
+Continuous SAC was implemented only after development evidence showed that discrete actions coupled cooling and ventilation in conflicting ways. It did not pass the go/no-go gate and is not exposed as a demo controller.
 
 ## Explainability boundary
 
-Integrated Gradients targets `Q(selected) - Q(runner-up)` using a configured reference observation. Per-feature reference ablation supplies an independent local sensitivity check. Counterfactual search prioritizes one-feature edits, then a bounded two-feature fallback. Neither method claims physical causality.
+V1 uses Integrated Gradients, ablation checks, and bounded counterfactual search. V2 uses local selected-vs-runner-up Q-margin ablation across all 35 features and a bounded one-feature counterfactual search over interpretable physical inputs.
+
+Policy and shield explanations are separate. The policy explanation is associational and explicitly sets `causal_claim=false`; the shield explanation is grounded in deterministic constraint evaluation but is also not labeled causal.
+
+## Evaluation boundary
+
+V2 train, validation, and held-out scenarios are disjoint. Model selection uses development gates in this order: critical safety, comfort/CO₂, energy/cost, resilience, then Pareto/reward. The API enforces the held-out seal while no eligible checkpoint exists.
 
 ## Runtime boundary
 
-FastAPI exposes only inference, deterministic simulation, explanations, and read-only benchmark evidence. Training is intentionally excluded from the runtime API. The frontend replays a completed episode locally, so animation never changes environment semantics or model results.
+The frontend requests a deterministic 96-step trajectory, then replays it locally. Animation cannot change simulator state or model outputs. V1 remains the official demo; V2 panels are visibly labeled `DEVELOPMENT FAIL` and `HELD-OUT SEALED`.

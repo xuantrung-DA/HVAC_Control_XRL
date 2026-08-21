@@ -13,8 +13,13 @@ COPY api api
 COPY configs configs
 COPY models/demo_manifest.json models/demo_manifest.json
 COPY models/dqn/demo_best.pt models/dqn/demo_best.pt
+COPY models/v2/dqn/xrl_hvac_v2_dqn_002_humidity_risk/seed_2026_full_best.pt models/v2/dqn/xrl_hvac_v2_dqn_002_humidity_risk/seed_2026_full_best.pt
 COPY outputs/metrics/step5/benchmark_report.json outputs/metrics/step5/benchmark_report.json
 COPY outputs/trajectories/xai/step6_xai_report.json outputs/trajectories/xai/step6_xai_report.json
+COPY outputs/v2/forecasting/forecast_model.json outputs/v2/forecasting/forecast_model.json
+COPY outputs/v2/training/dqn_development_summary.json outputs/v2/training/dqn_development_summary.json
+COPY outputs/v2/baselines/development_baseline_report.json outputs/v2/baselines/development_baseline_report.json
+COPY outputs/v2/protocol/held_out_status.json outputs/v2/protocol/held_out_status.json
 COPY src src
 
 EXPOSE 8000
