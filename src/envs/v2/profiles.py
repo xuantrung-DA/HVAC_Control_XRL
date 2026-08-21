@@ -205,6 +205,9 @@ class V2ScenarioGenerator:
                     "start_hour": start,
                     "end_hour": end,
                     "forecast_visible": bool(event.get("forecast_visible", True)),
+                    "additional_fraction_of_capacity": float(
+                        event.get("additional_fraction_of_capacity", 0.0)
+                    ),
                 }
             )
         for start, end in config["cleaning"]:

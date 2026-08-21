@@ -57,44 +57,44 @@
       "horizon_steps": 4,
       "horizon_hours": 1.0,
       "samples": 1840,
-      "mae": 2.1023300830306946,
-      "rmse": 4.59565050391811,
-      "bias": 0.626280402054059,
-      "interval_coverage": 0.9717391304347827,
-      "mean_interval_width": 18.59296017715296
+      "mae": 1.8955853240875764,
+      "rmse": 3.855015703979144,
+      "bias": 1.1196062879572828,
+      "interval_coverage": 0.9826086956521739,
+      "mean_interval_width": 18.297843320001455
     },
     {
       "feature": "occupancy",
       "horizon_steps": 8,
       "horizon_hours": 2.0,
       "samples": 1760,
-      "mae": 2.873076355326272,
-      "rmse": 5.755854444500255,
-      "bias": 1.2055393233399543,
-      "interval_coverage": 0.9818181818181818,
-      "mean_interval_width": 25.96383816603843
+      "mae": 2.351890755187962,
+      "rmse": 4.286429028208838,
+      "bias": 1.8419029597035907,
+      "interval_coverage": 0.9914772727272727,
+      "mean_interval_width": 25.561820628297955
     },
     {
       "feature": "occupancy",
       "horizon_steps": 12,
       "horizon_hours": 3.0,
       "samples": 1680,
-      "mae": 3.180982396443382,
-      "rmse": 5.697740706142008,
-      "bias": 1.6663290006493563,
+      "mae": 2.6660306815204775,
+      "rmse": 4.241908301968277,
+      "bias": 2.332995667316023,
       "interval_coverage": 0.9940476190476191,
-      "mean_interval_width": 32.19157218242451
+      "mean_interval_width": 31.613720015753305
     },
     {
       "feature": "occupancy",
       "horizon_steps": 16,
       "horizon_hours": 4.0,
       "samples": 1600,
-      "mae": 3.443794354262518,
-      "rmse": 5.721285019425247,
-      "bias": 1.9680912858054362,
+      "mae": 2.961794648940954,
+      "rmse": 4.386013055668662,
+      "bias": 2.6680912858054366,
       "interval_coverage": 0.9875,
-      "mean_interval_width": 37.35938112039093
+      "mean_interval_width": 36.6610732922694
     },
     {
       "feature": "outdoor_relative_humidity_pct",
@@ -230,7 +230,7 @@
     }
   ],
   "schema_version": 1,
-  "generated_at_utc": "2026-08-21T13:30:50.684306+00:00",
+  "generated_at_utc": "2026-08-21T13:35:41.639643+00:00",
   "forecast_config_sha256": "a29f7ec7855469472222dac542208ec0bcb6c7bf7efe58a4595b8b6279e613a7",
   "fit_metadata": {
     "scenarios": [

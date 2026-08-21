@@ -55,6 +55,24 @@ def test_hidden_surge_does_not_leak_into_pre_event_forecast(fitted) -> None:
     assert surge.inputs[56].occupancy > normal.inputs[56].occupancy
 
 
+def test_visible_meeting_can_be_included_but_hidden_surge_cannot(fitted) -> None:
+    generator, forecaster, _ = fitted
+    normal = generator.generate("normal_v2", 42)
+    meeting = generator.generate("meeting_surge_v2", 42)
+    surge = generator.generate("unexpected_occupancy_surge_v2", 42)
+    current_step = 52
+    baseline = forecaster.predict(normal.inputs[current_step], current_step)
+    meeting_forecast = forecaster.predict(
+        meeting.inputs[current_step], current_step, planned_events=meeting.event_metadata
+    )
+    surge_forecast = forecaster.predict(
+        surge.inputs[current_step], current_step, planned_events=surge.event_metadata
+    )
+    baseline_occupancy = baseline.forecasts[0].values["occupancy"].point
+    assert meeting_forecast.forecasts[0].values["occupancy"].point > baseline_occupancy
+    assert surge_forecast.forecasts[0].values["occupancy"].point == baseline_occupancy
+
+
 def test_validation_errors_are_finite(fitted) -> None:
     generator, forecaster, _ = fitted
     errors: list[float] = []

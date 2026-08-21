@@ -25,7 +25,9 @@ def evaluate_forecaster(
         timeline_count += 1
         scenario_names.add(timeline.scenario)
         for step, current in enumerate(timeline.inputs):
-            bundle = forecaster.predict(current, step)
+            bundle = forecaster.predict(
+                current, step, planned_events=timeline.event_metadata
+            )
             for forecast in bundle.forecasts:
                 if step + forecast.horizon_steps >= len(timeline.inputs):
                     continue

@@ -93,7 +93,13 @@ class SeasonalProfileForecaster:
             "held_out_used": False,
         }
 
-    def predict(self, current: V2ExogenousInputs, current_step: int) -> ForecastBundle:
+    def predict(
+        self,
+        current: V2ExogenousInputs,
+        current_step: int,
+        *,
+        planned_events: Sequence[Mapping[str, Any]] = (),
+    ) -> ForecastBundle:
         if not self._means:
             raise RuntimeError("Forecaster must be fitted before predict")
         if not 0 <= current_step < self.steps_per_day:
@@ -110,6 +116,9 @@ class SeasonalProfileForecaster:
                 current_mean = float(self._means[feature][current_step])
                 target_mean = float(self._means[feature][target_step])
                 point = target_mean + decay * (current_value - current_mean)
+                if feature == "occupancy":
+                    target_hour = target_step * int(self.config["timestep_minutes"]) / 60.0
+                    point += self._planned_occupancy_adjustment(target_hour, planned_events)
                 minimum_std = float(self.config["minimum_standard_deviation"][feature])
                 standard_deviation = max(
                     minimum_std,
@@ -133,6 +142,21 @@ class SeasonalProfileForecaster:
             source="seasonal_profile_with_online_bias_correction",
             forecasts=tuple(predictions),
         )
+
+    @staticmethod
+    def _planned_occupancy_adjustment(
+        target_hour: float, events: Sequence[Mapping[str, Any]]
+    ) -> float:
+        adjustment = 0.0
+        for event in events:
+            if not event.get("forecast_visible", False):
+                continue
+            if event.get("event") not in {"meeting", "occupancy_surge"}:
+                continue
+            if float(event["start_hour"]) <= target_hour < float(event["end_hour"]):
+                # Scenario capacity is locked at 100 in the forecast config bounds.
+                adjustment += 100.0 * float(event.get("additional_fraction_of_capacity", 0.0))
+        return adjustment
 
     def model_state(self) -> dict[str, Any]:
         if not self._means:

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "simulator_version": "XRL-HVAC-v2",
-  "generated_at_utc": "2026-08-21T13:27:31.744425+00:00",
+  "generated_at_utc": "2026-08-21T13:35:40.921357+00:00",
   "seed": 42,
   "scenario_config_sha256": "8b56808882de33f6f14bbb7df023119047ed81f44e40a9ec53191dd6bcb2c716",
   "scenario_count": 13,
@@ -211,7 +211,8 @@
           "event": "meeting",
           "start_hour": 14.0,
           "end_hour": 16.0,
-          "forecast_visible": true
+          "forecast_visible": true,
+          "additional_fraction_of_capacity": 0.28
         },
         {
           "event": "cleaning",
@@ -289,7 +290,8 @@
           "event": "door_left_open",
           "start_hour": 20.0,
           "end_hour": 20.75,
-          "forecast_visible": true
+          "forecast_visible": true,
+          "additional_fraction_of_capacity": 0.0
         },
         {
           "event": "cleaning",
@@ -367,7 +369,8 @@
           "event": "occupancy_surge",
           "start_hour": 13.5,
           "end_hour": 15.5,
-          "forecast_visible": false
+          "forecast_visible": false,
+          "additional_fraction_of_capacity": 0.38
         },
         {
           "event": "cleaning",
@@ -485,7 +488,8 @@
           "event": "door_left_open",
           "start_hour": 11.0,
           "end_hour": 13.0,
-          "forecast_visible": false
+          "forecast_visible": false,
+          "additional_fraction_of_capacity": 0.0
         },
         {
           "event": "cleaning",

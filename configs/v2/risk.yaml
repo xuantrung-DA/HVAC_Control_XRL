@@ -1,0 +1,40 @@
+monitoring:
+  rolling_window_steps: 8
+  ewma_alpha: 0.25
+  cusum_drift: 0.35
+  cusum_threshold: 3.0
+  minimum_scale:
+    occupancy: 3.0
+    indoor_temperature_c: 0.15
+    co2_ppm: 20.0
+  score_scales:
+    occupancy_surge_per_step: 12.0
+    thermal_change_c_per_step: 0.35
+    co2_growth_ppm_per_step: 55.0
+    forecast_standardized_error: 3.0
+
+reliability:
+  ewma_alpha: 0.25
+  anomaly_penalty: 0.35
+  domains:
+    weather: [outdoor_temperature_c, outdoor_relative_humidity_pct, solar_radiation_w_per_m2]
+    occupancy: [occupancy]
+    price: [electricity_price_per_kwh]
+
+risk:
+  co2_warning_ppm: 800.0
+  comfort_warning_margin_c: 1.0
+  price_low: 0.10
+  price_high: 0.58
+  forecast_uncertainty_scales:
+    outdoor_temperature_c: 5.0
+    outdoor_relative_humidity_pct: 15.0
+    solar_radiation_w_per_m2: 250.0
+    occupancy: 25.0
+    electricity_price_per_kwh: 0.15
+  projected_horizon_steps: 4
+  blend:
+    thermal_current: 0.65
+    thermal_trend: 0.35
+    co2_current: 0.60
+    co2_trend: 0.40

@@ -1,0 +1,2337 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-21T13:35:40.611429+00:00",
+  "risk_config_sha256": "4de54d666be8428f1d02bdd4dc6494c737119af029705f5725e054d62a2caef7",
+  "validation_scenario": "meeting_surge_v2",
+  "held_out_used": false,
+  "meeting_event_start_step": 56,
+  "detection_step": 56,
+  "detection_delay_steps": 0,
+  "pre_event_alert_steps": [
+    53
+  ],
+  "occupancy_reliability_before_fault": 0.9753099120283326,
+  "occupancy_reliability_after_fault": 0.0,
+  "weather_reliability_when_unavailable": 0.0,
+  "checks": {
+    "development_scenario_only": true,
+    "held_out_not_used": true,
+    "meeting_surge_detected": true,
+    "detection_delay_within_two_steps": true,
+    "bad_forecast_lowers_reliability": true,
+    "unavailable_weather_reliability_zero": true,
+    "all_risk_values_bounded": true
+  },
+  "all_checks_passed": true,
+  "risk_formula_note": "All values use current state, past residuals, declared forecasts, and configured thresholds; no future truth or simulator latent state is used.",
+  "limitations": [
+    "Raw change detection may alert on a legitimate post-lunch return; policy context must combine the surge score with forecast residual and reliability.",
+    "This phase validates signals on a development meeting scenario, not final controller resilience on the sealed unexpected-surge test."
+  ],
+  "trajectory": [
+    {
+      "step": 0,
+      "hour": 0.0,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.0,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 1.0,
+        "occupancy": 1.0,
+        "price": 1.0
+      },
+      "risk": {
+        "thermal_risk": 0.0,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22313190661484866,
+        "forecast_error": 0.0,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 1.0,
+        "occupancy_reliability": 1.0,
+        "price_reliability": 1.0
+      }
+    },
+    {
+      "step": 1,
+      "hour": 0.25,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.0,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 1.0,
+        "occupancy": 1.0,
+        "price": 1.0
+      },
+      "risk": {
+        "thermal_risk": 0.012444076946965622,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22389316337292695,
+        "forecast_error": 0.0,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 1.0,
+        "occupancy_reliability": 1.0,
+        "price_reliability": 1.0
+      }
+    },
+    {
+      "step": 2,
+      "hour": 0.5,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.0,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 1.0,
+        "occupancy": 1.0,
+        "price": 1.0
+      },
+      "risk": {
+        "thermal_risk": 0.003552042911310272,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22179766093860898,
+        "forecast_error": 0.0,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 1.0,
+        "occupancy_reliability": 1.0,
+        "price_reliability": 1.0
+      }
+    },
+    {
+      "step": 3,
+      "hour": 0.75,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.0,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 1.0,
+        "occupancy": 1.0,
+        "price": 1.0
+      },
+      "risk": {
+        "thermal_risk": 0.014635962907960225,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2226907505232131,
+        "forecast_error": 0.0,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 1.0,
+        "occupancy_reliability": 1.0,
+        "price_reliability": 1.0
+      }
+    },
+    {
+      "step": 4,
+      "hour": 1.0,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.011243321321163182,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.9788534611896273,
+        "occupancy": 0.9960648375375929,
+        "price": 0.9960648375375929
+      },
+      "risk": {
+        "thermal_risk": 0.02203150382009591,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22238186027040752,
+        "forecast_error": 0.011243321321163182,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.9788534611896273,
+        "occupancy_reliability": 0.9960648375375929,
+        "price_reliability": 0.9960648375375929
+      }
+    },
+    {
+      "step": 5,
+      "hour": 1.25,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.014360326681698293,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.970826709289818,
+        "occupancy": 0.9949738856614055,
+        "price": 0.9949738856614055
+      },
+      "risk": {
+        "thermal_risk": 0.02720185139306637,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22359074870372048,
+        "forecast_error": 0.014360326681698293,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.970826709289818,
+        "occupancy_reliability": 0.9949738856614055,
+        "price_reliability": 0.9949738856614055
+      }
+    },
+    {
+      "step": 6,
+      "hour": 1.5,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.029201271418068817,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.9400424555945767,
+        "occupancy": 0.9897795550036759,
+        "price": 0.9897795550036759
+      },
+      "risk": {
+        "thermal_risk": 0.030912450663224227,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22233113968840526,
+        "forecast_error": 0.029201271418068817,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.9400424555945767,
+        "occupancy_reliability": 0.9897795550036759,
+        "price_reliability": 0.9897795550036759
+      }
+    },
+    {
+      "step": 7,
+      "hour": 1.75,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.048656803689120405,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.913083668053315,
+        "occupancy": 0.9829701187088079,
+        "price": 0.9829701187088079
+      },
+      "risk": {
+        "thermal_risk": 0.033654646223517846,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22006117964200791,
+        "forecast_error": 0.048656803689120405,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.913083668053315,
+        "occupancy_reliability": 0.9829701187088079,
+        "price_reliability": 0.9829701187088079
+      }
+    },
+    {
+      "step": 8,
+      "hour": 2.0,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.04350193163659183,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.9194797268192259,
+        "occupancy": 0.9847743239271929,
+        "price": 0.9847743239271929
+      },
+      "risk": {
+        "thermal_risk": 0.04044731023693624,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.21962994579393738,
+        "forecast_error": 0.04350193163659183,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.9194797268192259,
+        "occupancy_reliability": 0.9847743239271929,
+        "price_reliability": 0.9847743239271929
+      }
+    },
+    {
+      "step": 9,
+      "hour": 2.25,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.04561783183193605,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.9129275107786705,
+        "occupancy": 0.9840337588588224,
+        "price": 0.9840337588588224
+      },
+      "risk": {
+        "thermal_risk": 0.04368751277776356,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22087857266751984,
+        "forecast_error": 0.04561783183193605,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.9129275107786705,
+        "occupancy_reliability": 0.9840337588588224,
+        "price_reliability": 0.9840337588588224
+      }
+    },
+    {
+      "step": 10,
+      "hour": 2.5,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.047276780042005695,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.903472421716429,
+        "occupancy": 0.983453126985298,
+        "price": 0.983453126985298
+      },
+      "risk": {
+        "thermal_risk": 0.04538659991795304,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22161506469744635,
+        "forecast_error": 0.047276780042005695,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.903472421716429,
+        "occupancy_reliability": 0.983453126985298,
+        "price_reliability": 0.983453126985298
+      }
+    },
+    {
+      "step": 11,
+      "hour": 2.75,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.05257302525993222,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.90156745791091,
+        "occupancy": 0.9815994411590238,
+        "price": 0.9815994411590238
+      },
+      "risk": {
+        "thermal_risk": 0.04661041268302626,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22257850546362343,
+        "forecast_error": 0.05257302525993222,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.90156745791091,
+        "occupancy_reliability": 0.9815994411590238,
+        "price_reliability": 0.9815994411590238
+      }
+    },
+    {
+      "step": 12,
+      "hour": 3.0,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.05677488376106388,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8903388807058417,
+        "occupancy": 0.9801287906836277,
+        "price": 0.9801287906836277
+      },
+      "risk": {
+        "thermal_risk": 0.04748233118095689,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22467756725703197,
+        "forecast_error": 0.05677488376106388,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8903388807058417,
+        "occupancy_reliability": 0.9801287906836277,
+        "price_reliability": 0.9801287906836277
+      }
+    },
+    {
+      "step": 13,
+      "hour": 3.25,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.07524347614823429,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8748051548743653,
+        "occupancy": 0.973664783348118,
+        "price": 0.973664783348118
+      },
+      "risk": {
+        "thermal_risk": 0.04812952695250774,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22313983426160208,
+        "forecast_error": 0.07524347614823429,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8748051548743653,
+        "occupancy_reliability": 0.973664783348118,
+        "price_reliability": 0.973664783348118
+      }
+    },
+    {
+      "step": 14,
+      "hour": 3.5,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.06612023919420197,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8833247081217803,
+        "occupancy": 0.9768579162820293,
+        "price": 0.9768579162820293
+      },
+      "risk": {
+        "thermal_risk": 0.04869128665584294,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22362188268363242,
+        "forecast_error": 0.06612023919420197,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8833247081217803,
+        "occupancy_reliability": 0.9768579162820293,
+        "price_reliability": 0.9768579162820293
+      }
+    },
+    {
+      "step": 15,
+      "hour": 3.75,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.07577462685541653,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.877056989738935,
+        "occupancy": 0.9734788806006042,
+        "price": 0.9734788806006042
+      },
+      "risk": {
+        "thermal_risk": 0.048784244370161836,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2262135154014145,
+        "forecast_error": 0.07577462685541653,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.877056989738935,
+        "occupancy_reliability": 0.9734788806006042,
+        "price_reliability": 0.9734788806006042
+      }
+    },
+    {
+      "step": 16,
+      "hour": 4.0,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.06813878134828585,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8828775955880923,
+        "occupancy": 0.9761514265280999,
+        "price": 0.9761514265280999
+      },
+      "risk": {
+        "thermal_risk": 0.04865157985914121,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22739424402696753,
+        "forecast_error": 0.06813878134828585,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8828775955880923,
+        "occupancy_reliability": 0.9761514265280999,
+        "price_reliability": 0.9761514265280999
+      }
+    },
+    {
+      "step": 17,
+      "hour": 4.25,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.05408797796950426,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8893226571411814,
+        "occupancy": 0.9810692077106735,
+        "price": 0.9810692077106735
+      },
+      "risk": {
+        "thermal_risk": 0.048182568668500445,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2260932724849995,
+        "forecast_error": 0.05408797796950426,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8893226571411814,
+        "occupancy_reliability": 0.9810692077106735,
+        "price_reliability": 0.9810692077106735
+      }
+    },
+    {
+      "step": 18,
+      "hour": 4.5,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.063033386742729,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8777217982698667,
+        "occupancy": 0.9779383146400449,
+        "price": 0.9779383146400449
+      },
+      "risk": {
+        "thermal_risk": 0.047394871062320175,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22796820269055956,
+        "forecast_error": 0.063033386742729,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8777217982698667,
+        "occupancy_reliability": 0.9779383146400449,
+        "price_reliability": 0.9779383146400449
+      }
+    },
+    {
+      "step": 19,
+      "hour": 4.75,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.08794410411503634,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8521294437525981,
+        "occupancy": 0.9692195635597373,
+        "price": 0.9692195635597373
+      },
+      "risk": {
+        "thermal_risk": 0.046272184915572674,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22700889429121668,
+        "forecast_error": 0.08794410411503634,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8521294437525981,
+        "occupancy_reliability": 0.9692195635597373,
+        "price_reliability": 0.9692195635597373
+      }
+    },
+    {
+      "step": 20,
+      "hour": 5.0,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.08686144181379257,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8510652408836574,
+        "occupancy": 0.9695984953651726,
+        "price": 0.9695984953651726
+      },
+      "risk": {
+        "thermal_risk": 0.044913429739902935,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2264934341734061,
+        "forecast_error": 0.08686144181379257,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8510652408836574,
+        "occupancy_reliability": 0.9695984953651726,
+        "price_reliability": 0.9695984953651726
+      }
+    },
+    {
+      "step": 21,
+      "hour": 5.25,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.07962702582774106,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8468677756602987,
+        "occupancy": 0.9721305409602906,
+        "price": 0.9721305409602906
+      },
+      "risk": {
+        "thermal_risk": 0.043631075059722704,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22705987142028258,
+        "forecast_error": 0.07962702582774106,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8468677756602987,
+        "occupancy_reliability": 0.9721305409602906,
+        "price_reliability": 0.9721305409602906
+      }
+    },
+    {
+      "step": 22,
+      "hour": 5.5,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.07714413234536859,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8301645236362898,
+        "occupancy": 0.9729995536791209,
+        "price": 0.9729995536791209
+      },
+      "risk": {
+        "thermal_risk": 0.042701770381937634,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.22834077857026114,
+        "forecast_error": 0.07714413234536859,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8301645236362898,
+        "occupancy_reliability": 0.9729995536791209,
+        "price_reliability": 0.9729995536791209
+      }
+    },
+    {
+      "step": 23,
+      "hour": 5.75,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.095320239384427,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8020316600041518,
+        "occupancy": 0.9666379162154506,
+        "price": 0.9666379162154506
+      },
+      "risk": {
+        "thermal_risk": 0.04070367689068585,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2302331084162931,
+        "forecast_error": 0.095320239384427,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8020316600041518,
+        "occupancy_reliability": 0.9666379162154506,
+        "price_reliability": 0.9666379162154506
+      }
+    },
+    {
+      "step": 24,
+      "hour": 6.0,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.10293815031052506,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7924191376753793,
+        "occupancy": 0.9639716473913162,
+        "price": 0.9639716473913162
+      },
+      "risk": {
+        "thermal_risk": 0.03820512201169529,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2320908885284912,
+        "forecast_error": 0.10293815031052506,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.7924191376753793,
+        "occupancy_reliability": 0.9639716473913162,
+        "price_reliability": 0.9639716473913162
+      }
+    },
+    {
+      "step": 25,
+      "hour": 6.25,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.10911696578219297,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.786096622323601,
+        "occupancy": 0.9618090619762325,
+        "price": 0.9618090619762325
+      },
+      "risk": {
+        "thermal_risk": 0.0349264108372595,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.23759328469270408,
+        "forecast_error": 0.10911696578219297,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.786096622323601,
+        "occupancy_reliability": 0.9618090619762325,
+        "price_reliability": 0.9618090619762325
+      }
+    },
+    {
+      "step": 26,
+      "hour": 6.5,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.08438704436016749,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8255812018389379,
+        "occupancy": 0.9704645344739414,
+        "price": 0.9704645344739414
+      },
+      "risk": {
+        "thermal_risk": 0.030140856779575977,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2426156678575339,
+        "forecast_error": 0.08438704436016749,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8255812018389379,
+        "occupancy_reliability": 0.9704645344739414,
+        "price_reliability": 0.9704645344739414
+      }
+    },
+    {
+      "step": 27,
+      "hour": 6.75,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.09946741198608615,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8054178564993364,
+        "occupancy": 0.9651864058048698,
+        "price": 0.9651864058048698
+      },
+      "risk": {
+        "thermal_risk": 0.024323354802833947,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2499970729272031,
+        "forecast_error": 0.09946741198608615,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8054178564993364,
+        "occupancy_reliability": 0.9651864058048698,
+        "price_reliability": 0.9651864058048698
+      }
+    },
+    {
+      "step": 28,
+      "hour": 7.0,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.13128945110037074,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7331449619837058,
+        "occupancy": 0.9540486921148702,
+        "price": 0.9540486921148695
+      },
+      "risk": {
+        "thermal_risk": 0.01720597087809274,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2609388207254197,
+        "forecast_error": 0.13128945110037074,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.7331449619837058,
+        "occupancy_reliability": 0.9540486921148702,
+        "price_reliability": 0.9540486921148695
+      }
+    },
+    {
+      "step": 29,
+      "hour": 7.25,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.15494303546611385,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.6790210051862692,
+        "occupancy": 0.9457699375868601,
+        "price": 0.9457699375868589
+      },
+      "risk": {
+        "thermal_risk": 0.009039107820520736,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.27595942289769315,
+        "forecast_error": 0.15494303546611385,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.6790210051862692,
+        "occupancy_reliability": 0.9457699375868601,
+        "price_reliability": 0.9457699375868589
+      }
+    },
+    {
+      "step": 30,
+      "hour": 7.5,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.1490282544050798,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.6675390665263016,
+        "occupancy": 0.9478401109582221,
+        "price": 0.9478401109582205
+      },
+      "risk": {
+        "thermal_risk": 4.339866751911306e-05,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2964166655963755,
+        "forecast_error": 0.1490282544050798,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.6675390665263016,
+        "occupancy_reliability": 0.9478401109582221,
+        "price_reliability": 0.9478401109582205
+      }
+    },
+    {
+      "step": 31,
+      "hour": 7.75,
+      "occupancy": 12,
+      "occupancy_surge_score": 1.0,
+      "forecast_error_score": 0.1292222273754771,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.704096696249845,
+        "occupancy": 0.656530218360473,
+        "price": 0.9547722204185811
+      },
+      "risk": {
+        "thermal_risk": 0.010539292137216008,
+        "co2_risk": 0.0,
+        "occupancy_surge": 1.0,
+        "forecast_uncertainty": 0.3194894649716905,
+        "forecast_error": 0.1292222273754771,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.704096696249845,
+        "occupancy_reliability": 0.656530218360473,
+        "price_reliability": 0.9547722204185811
+      }
+    },
+    {
+      "step": 32,
+      "hour": 8.0,
+      "occupancy": 17,
+      "occupancy_surge_score": 0.4166666666666667,
+      "forecast_error_score": 0.1358698631566594,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.6892015726886445,
+        "occupancy": 0.6339707435549823,
+        "price": 0.9524455478951678
+      },
+      "risk": {
+        "thermal_risk": 0.02544467263903532,
+        "co2_risk": 0.020689373682377922,
+        "occupancy_surge": 0.4166666666666667,
+        "forecast_uncertainty": 0.3394280002933291,
+        "forecast_error": 0.1358698631566594,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.6892015726886445,
+        "occupancy_reliability": 0.6339707435549823,
+        "price_reliability": 0.9524455478951678
+      }
+    },
+    {
+      "step": 33,
+      "hour": 8.25,
+      "occupancy": 24,
+      "occupancy_surge_score": 0.5833333333333334,
+      "forecast_error_score": 0.12304379509640713,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.6842173488648303,
+        "occupancy": 0.7070213236370771,
+        "price": 0.9569346717162563
+      },
+      "risk": {
+        "thermal_risk": 0.04334338515348839,
+        "co2_risk": 0.06421220012772515,
+        "occupancy_surge": 0.5833333333333334,
+        "forecast_uncertainty": 0.3610001274715918,
+        "forecast_error": 0.12304379509640713,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.6842173488648303,
+        "occupancy_reliability": 0.7070213236370771,
+        "price_reliability": 0.9569346717162563
+      }
+    },
+    {
+      "step": 34,
+      "hour": 8.5,
+      "occupancy": 30,
+      "occupancy_surge_score": 0.5,
+      "forecast_error_score": 0.12907917492016002,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.6882789020936383,
+        "occupancy": 0.6337521019098823,
+        "price": 0.9548222887779432
+      },
+      "risk": {
+        "thermal_risk": 0.06437957896898397,
+        "co2_risk": 0.13005723783393391,
+        "occupancy_surge": 0.5,
+        "forecast_uncertainty": 0.3628428988211602,
+        "forecast_error": 0.12907917492016002,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.6882789020936383,
+        "occupancy_reliability": 0.6337521019098823,
+        "price_reliability": 0.9548222887779432
+      }
+    },
+    {
+      "step": 35,
+      "hour": 8.75,
+      "occupancy": 36,
+      "occupancy_surge_score": 0.5,
+      "forecast_error_score": 0.20462035599849382,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.6792028988141094,
+        "occupancy": 0.46963987471214713,
+        "price": 0.9283828754005266
+      },
+      "risk": {
+        "thermal_risk": 0.08680543779216442,
+        "co2_risk": 0.21346091450049914,
+        "occupancy_surge": 0.5,
+        "forecast_uncertainty": 0.3732046669652809,
+        "forecast_error": 0.20462035599849382,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.6792028988141094,
+        "occupancy_reliability": 0.46963987471214713,
+        "price_reliability": 0.9283828754005266
+      }
+    },
+    {
+      "step": 36,
+      "hour": 9.0,
+      "occupancy": 44,
+      "occupancy_surge_score": 0.6666666666666666,
+      "forecast_error_score": 0.22568881674412414,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7102217491933598,
+        "occupancy": 0.4291142746990887,
+        "price": 0.9210089141395561
+      },
+      "risk": {
+        "thermal_risk": 0.10981280400871767,
+        "co2_risk": 0.30722675139334377,
+        "occupancy_surge": 0.6666666666666666,
+        "forecast_uncertainty": 0.37567680001650866,
+        "forecast_error": 0.22568881674412414,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.7102217491933598,
+        "occupancy_reliability": 0.4291142746990887,
+        "price_reliability": 0.9210089141395561
+      }
+    },
+    {
+      "step": 37,
+      "hour": 9.25,
+      "occupancy": 52,
+      "occupancy_surge_score": 0.6666666666666666,
+      "forecast_error_score": 0.21714801234720724,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7213289999149104,
+        "occupancy": 0.4452906630346734,
+        "price": 0.9239981956784772
+      },
+      "risk": {
+        "thermal_risk": 0.13214736481264944,
+        "co2_risk": 0.40002329747448734,
+        "occupancy_surge": 0.6666666666666666,
+        "forecast_uncertainty": 0.3758178156422188,
+        "forecast_error": 0.21714801234720724,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.7213289999149104,
+        "occupancy_reliability": 0.4452906630346734,
+        "price_reliability": 0.9239981956784772
+      }
+    },
+    {
+      "step": 38,
+      "hour": 9.5,
+      "occupancy": 60,
+      "occupancy_surge_score": 0.6666666666666666,
+      "forecast_error_score": 0.18204321878980187,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7494886159593597,
+        "occupancy": 0.5154720046352097,
+        "price": 0.9362848734235691
+      },
+      "risk": {
+        "thermal_risk": 0.21397364018377077,
+        "co2_risk": 0.7043332546420673,
+        "occupancy_surge": 0.6666666666666666,
+        "forecast_uncertainty": 0.3727729840063655,
+        "forecast_error": 0.18204321878980187,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.7494886159593597,
+        "occupancy_reliability": 0.5154720046352097,
+        "price_reliability": 0.9362848734235691
+      }
+    },
+    {
+      "step": 39,
+      "hour": 9.75,
+      "occupancy": 60,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.1430133496929997,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7667012943288067,
+        "occupancy": 0.6010791789552379,
+        "price": 0.9499453276074499
+      },
+      "risk": {
+        "thermal_risk": 0.29836340261491023,
+        "co2_risk": 0.6716631719511711,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.37270481033306846,
+        "forecast_error": 0.1430133496929997,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.7667012943288067,
+        "occupancy_reliability": 0.6010791789552379,
+        "price_reliability": 0.9499453276074499
+      }
+    },
+    {
+      "step": 40,
+      "hour": 10.0,
+      "occupancy": 60,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.11338078819135626,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.747185884986577,
+        "occupancy": 0.6719857232294215,
+        "price": 0.9603167241330252
+      },
+      "risk": {
+        "thermal_risk": 0.3630792671566373,
+        "co2_risk": 1.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.3701979789439889,
+        "forecast_error": 0.11338078819135626,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.747185884986577,
+        "occupancy_reliability": 0.6719857232294215,
+        "price_reliability": 0.9603167241330252
+      }
+    },
+    {
+      "step": 41,
+      "hour": 10.25,
+      "occupancy": 62,
+      "occupancy_surge_score": 0.16666666666666666,
+      "forecast_error_score": 0.1057864322831248,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7404919550265352,
+        "occupancy": 0.7241564344542528,
+        "price": 0.9629747487009062
+      },
+      "risk": {
+        "thermal_risk": 0.4395433548847041,
+        "co2_risk": 0.8555130050063499,
+        "occupancy_surge": 0.16666666666666666,
+        "forecast_uncertainty": 0.3798990236625867,
+        "forecast_error": 0.1057864322831248,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.7404919550265352,
+        "occupancy_reliability": 0.7241564344542528,
+        "price_reliability": 0.9629747487009062
+      }
+    },
+    {
+      "step": 42,
+      "hour": 10.5,
+      "occupancy": 62,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.10823521848489005,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7626789618200189,
+        "occupancy": 0.7388039622532661,
+        "price": 0.9621176735302883
+      },
+      "risk": {
+        "thermal_risk": 0.4958167412283534,
+        "co2_risk": 0.7162985579748874,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.3814701659070646,
+        "forecast_error": 0.10823521848489005,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.7626789618200189,
+        "occupancy_reliability": 0.7388039622532661,
+        "price_reliability": 0.9621176735302883
+      }
+    },
+    {
+      "step": 43,
+      "hour": 10.75,
+      "occupancy": 59,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.10198569206897608,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.759058717542535,
+        "occupancy": 0.7131772430906671,
+        "price": 0.9643050077758583
+      },
+      "risk": {
+        "thermal_risk": 0.5381040045546188,
+        "co2_risk": 0.5363047506029912,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.38772882104212913,
+        "forecast_error": 0.10198569206897608,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.759058717542535,
+        "occupancy_reliability": 0.7131772430906671,
+        "price_reliability": 0.9643050077758583
+      }
+    },
+    {
+      "step": 44,
+      "hour": 11.0,
+      "occupancy": 60,
+      "occupancy_surge_score": 0.08333333333333333,
+      "forecast_error_score": 0.15413257494770738,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7152710454381195,
+        "occupancy": 0.699056546904929,
+        "price": 0.9460535987683024
+      },
+      "risk": {
+        "thermal_risk": 0.570649519397803,
+        "co2_risk": 0.3481810537978128,
+        "occupancy_surge": 0.08333333333333333,
+        "forecast_uncertainty": 0.42182266022918363,
+        "forecast_error": 0.15413257494770738,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.7152710454381195,
+        "occupancy_reliability": 0.699056546904929,
+        "price_reliability": 0.9460535987683024
+      }
+    },
+    {
+      "step": 45,
+      "hour": 11.25,
+      "occupancy": 62,
+      "occupancy_surge_score": 0.16666666666666666,
+      "forecast_error_score": 0.1392515908210122,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7385492292635475,
+        "occupancy": 0.7423541483821468,
+        "price": 0.9512619432126457
+      },
+      "risk": {
+        "thermal_risk": 0.6020769693161578,
+        "co2_risk": 0.2580021380182195,
+        "occupancy_surge": 0.16666666666666666,
+        "forecast_uncertainty": 0.42113209411224267,
+        "forecast_error": 0.1392515908210122,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.7385492292635475,
+        "occupancy_reliability": 0.7423541483821468,
+        "price_reliability": 0.9512619432126457
+      }
+    },
+    {
+      "step": 46,
+      "hour": 11.5,
+      "occupancy": 62,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.1330036193412166,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7500986843368781,
+        "occupancy": 0.7873904380297724,
+        "price": 0.9534487332305736
+      },
+      "risk": {
+        "thermal_risk": 0.6428975618571462,
+        "co2_risk": 0.14782111205528234,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.42887912308722786,
+        "forecast_error": 0.1330036193412166,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.7500986843368781,
+        "occupancy_reliability": 0.7873904380297724,
+        "price_reliability": 0.9534487332305736
+      }
+    },
+    {
+      "step": 47,
+      "hour": 11.75,
+      "occupancy": 62,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.13109616332051108,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7579527530911166,
+        "occupancy": 0.7621328311605657,
+        "price": 0.9541163428378199
+      },
+      "risk": {
+        "thermal_risk": 0.684994956066082,
+        "co2_risk": 0.19520722127801443,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.42535692183827123,
+        "forecast_error": 0.13109616332051108,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.7579527530911166,
+        "occupancy_reliability": 0.7621328311605657,
+        "price_reliability": 0.9541163428378199
+      }
+    },
+    {
+      "step": 48,
+      "hour": 12.0,
+      "occupancy": 32,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.10835326191991383,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7663958395787703,
+        "occupancy": 0.7779284475727655,
+        "price": 0.9620763583280285
+      },
+      "risk": {
+        "thermal_risk": 0.7283101142127986,
+        "co2_risk": 0.22380500239172785,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.4134211290174994,
+        "forecast_error": 0.10835326191991383,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.7663958395787703,
+        "occupancy_reliability": 0.7779284475727655,
+        "price_reliability": 0.9620763583280285
+      }
+    },
+    {
+      "step": 49,
+      "hour": 12.25,
+      "occupancy": 31,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.13097210839763743,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7197407020576285,
+        "occupancy": 0.7832990018096857,
+        "price": 0.954159762060825
+      },
+      "risk": {
+        "thermal_risk": 0.7565139338590188,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.3808642002352941,
+        "forecast_error": 0.13097210839763743,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.7197407020576285,
+        "occupancy_reliability": 0.7832990018096857,
+        "price_reliability": 0.954159762060825
+      }
+    },
+    {
+      "step": 50,
+      "hour": 12.5,
+      "occupancy": 30,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.19926314746140564,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.6427122532925167,
+        "occupancy": 0.7277266607242129,
+        "price": 0.9302578983885066
+      },
+      "risk": {
+        "thermal_risk": 0.7789858005440227,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.3830731310308787,
+        "forecast_error": 0.19926314746140564,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.6427122532925167,
+        "occupancy_reliability": 0.7277266607242129,
+        "price_reliability": 0.9302578983885066
+      }
+    },
+    {
+      "step": 51,
+      "hour": 12.75,
+      "occupancy": 28,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.2486448022644542,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.5803444358672635,
+        "occupancy": 0.6882706950074139,
+        "price": 0.9129743192074399
+      },
+      "risk": {
+        "thermal_risk": 0.7751353405509845,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.38522274889696023,
+        "forecast_error": 0.2486448022644542,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.5803444358672635,
+        "occupancy_reliability": 0.6882706950074139,
+        "price_reliability": 0.9129743192074399
+      }
+    },
+    {
+      "step": 52,
+      "hour": 13.0,
+      "occupancy": 28,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.2668453560163096,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.565772683906393,
+        "occupancy": 0.6657276343017976,
+        "price": 0.9066041253942909
+      },
+      "risk": {
+        "thermal_risk": 0.7627760560996116,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.3879570134482989,
+        "forecast_error": 0.2668453560163096,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.565772683906393,
+        "occupancy_reliability": 0.6657276343017976,
+        "price_reliability": 0.9066041253942909
+      }
+    },
+    {
+      "step": 53,
+      "hour": 13.25,
+      "occupancy": 62,
+      "occupancy_surge_score": 1.0,
+      "forecast_error_score": 0.2895980603777762,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.5479066413044147,
+        "occupancy": 0.7077069244124751,
+        "price": 0.8986406788677778
+      },
+      "risk": {
+        "thermal_risk": 0.749211953040957,
+        "co2_risk": 0.0,
+        "occupancy_surge": 1.0,
+        "forecast_uncertainty": 0.3853154524928118,
+        "forecast_error": 0.2895980603777762,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.5479066413044147,
+        "occupancy_reliability": 0.7077069244124751,
+        "price_reliability": 0.8986406788677778
+      }
+    },
+    {
+      "step": 54,
+      "hour": 13.5,
+      "occupancy": 60,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.31999879155252464,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.5354361660659946,
+        "occupancy": 0.7255200908964672,
+        "price": 0.888000422956616
+      },
+      "risk": {
+        "thermal_risk": 0.740778855153208,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.38274301329254656,
+        "forecast_error": 0.31999879155252464,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.5354361660659946,
+        "occupancy_reliability": 0.7255200908964672,
+        "price_reliability": 0.888000422956616
+      }
+    },
+    {
+      "step": 55,
+      "hour": 13.75,
+      "occupancy": 62,
+      "occupancy_surge_score": 0.16666666666666666,
+      "forecast_error_score": 0.2791821295636371,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.5891093987864977,
+        "occupancy": 0.764344256792047,
+        "price": 0.9022862546527267
+      },
+      "risk": {
+        "thermal_risk": 0.7364642579549552,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.16666666666666666,
+        "forecast_uncertainty": 0.3719866964733363,
+        "forecast_error": 0.2791821295636371,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.5891093987864977,
+        "occupancy_reliability": 0.764344256792047,
+        "price_reliability": 0.9022862546527267
+      }
+    },
+    {
+      "step": 56,
+      "hour": 14.0,
+      "occupancy": 90,
+      "occupancy_surge_score": 1.0,
+      "forecast_error_score": 0.23644340265089284,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.6352006616724125,
+        "occupancy": 0.798483045732328,
+        "price": 0.9172448090721873
+      },
+      "risk": {
+        "thermal_risk": 0.7385712039128605,
+        "co2_risk": 0.16810307321593887,
+        "occupancy_surge": 1.0,
+        "forecast_uncertainty": 0.36458544311913366,
+        "forecast_error": 0.23644340265089284,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.6352006616724125,
+        "occupancy_reliability": 0.798483045732328,
+        "price_reliability": 0.9172448090721873
+      }
+    },
+    {
+      "step": 57,
+      "hour": 14.25,
+      "occupancy": 90,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.23487161726246478,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.6400342016453358,
+        "occupancy": 0.7820163618360192,
+        "price": 0.917794933958137
+      },
+      "risk": {
+        "thermal_risk": 0.7465239829621534,
+        "co2_risk": 0.6420449005164681,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.3681437509228981,
+        "forecast_error": 0.23487161726246478,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.6400342016453358,
+        "occupancy_reliability": 0.7820163618360192,
+        "price_reliability": 0.917794933958137
+      }
+    },
+    {
+      "step": 58,
+      "hour": 14.5,
+      "occupancy": 90,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.26682275402757577,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.6070723000980784,
+        "occupancy": 0.7902577374516827,
+        "price": 0.9066120360903483
+      },
+      "risk": {
+        "thermal_risk": 0.757225851307854,
+        "co2_risk": 0.9493340870987166,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.36160926993964504,
+        "forecast_error": 0.26682275402757577,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.6070723000980784,
+        "occupancy_reliability": 0.7902577374516827,
+        "price_reliability": 0.9066120360903483
+      }
+    },
+    {
+      "step": 59,
+      "hour": 14.75,
+      "occupancy": 90,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.2529499292693605,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.620894071195069,
+        "occupancy": 0.7835630028259057,
+        "price": 0.9114675247557237
+      },
+      "risk": {
+        "thermal_risk": 0.7680428782147951,
+        "co2_risk": 1.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.3546013489613311,
+        "forecast_error": 0.2529499292693605,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.620894071195069,
+        "occupancy_reliability": 0.7835630028259057,
+        "price_reliability": 0.9114675247557237
+      }
+    },
+    {
+      "step": 60,
+      "hour": 15.0,
+      "occupancy": 90,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.247326617075765,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.619486262015182,
+        "occupancy": 0.6317224265049961,
+        "price": 0.9134356840234822
+      },
+      "risk": {
+        "thermal_risk": 0.7760197469617354,
+        "co2_risk": 1.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.3471489955247883,
+        "forecast_error": 0.247326617075765,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.619486262015182,
+        "occupancy_reliability": 0.6317224265049961,
+        "price_reliability": 0.9134356840234822
+      }
+    },
+    {
+      "step": 61,
+      "hour": 15.25,
+      "occupancy": 89,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.2222825519439069,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.6277473569509613,
+        "occupancy": 0.5321132652760573,
+        "price": 0.9222011068196325
+      },
+      "risk": {
+        "thermal_risk": 0.7793564764642815,
+        "co2_risk": 0.97546898801656,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.3489085080919549,
+        "forecast_error": 0.2222825519439069,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.6277473569509613,
+        "occupancy_reliability": 0.5321132652760573,
+        "price_reliability": 0.9222011068196325
+      }
+    },
+    {
+      "step": 62,
+      "hour": 15.5,
+      "occupancy": 90,
+      "occupancy_surge_score": 0.08333333333333333,
+      "forecast_error_score": 0.21521464103689536,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.6161173982551089,
+        "occupancy": 0.4778018589562374,
+        "price": 0.9246748756370866
+      },
+      "risk": {
+        "thermal_risk": 0.7801070972904715,
+        "co2_risk": 0.9156885367588523,
+        "occupancy_surge": 0.08333333333333333,
+        "forecast_uncertainty": 0.3424766068424463,
+        "forecast_error": 0.21521464103689536,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.6161173982551089,
+        "occupancy_reliability": 0.4778018589562374,
+        "price_reliability": 0.9246748756370866
+      }
+    },
+    {
+      "step": 63,
+      "hour": 15.75,
+      "occupancy": 90,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.22206118467187877,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.6074080974254759,
+        "occupancy": 0.4359438026277661,
+        "price": 0.9222785853648424
+      },
+      "risk": {
+        "thermal_risk": 0.7758700041877492,
+        "co2_risk": 0.8401301816427609,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.3348851855069447,
+        "forecast_error": 0.22206118467187877,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.6074080974254759,
+        "occupancy_reliability": 0.4359438026277661,
+        "price_reliability": 0.9222785853648424
+      }
+    },
+    {
+      "step": 64,
+      "hour": 16.0,
+      "occupancy": 61,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.35376918834338866,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.5640298508881261,
+        "occupancy": 0.2221838769510468,
+        "price": 0.8761807840798139
+      },
+      "risk": {
+        "thermal_risk": 0.7671758287250374,
+        "co2_risk": 0.7441406826704932,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.32458367894200646,
+        "forecast_error": 0.35376918834338866,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.5640298508881261,
+        "occupancy_reliability": 0.2221838769510468,
+        "price_reliability": 0.8761807840798139
+      }
+    },
+    {
+      "step": 65,
+      "hour": 16.25,
+      "occupancy": 62,
+      "occupancy_surge_score": 0.08333333333333333,
+      "forecast_error_score": 0.42614329615353164,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.5680218371435087,
+        "occupancy": 0.12932403926848413,
+        "price": 0.8508498463462639
+      },
+      "risk": {
+        "thermal_risk": 0.75525871931896,
+        "co2_risk": 0.634002692650489,
+        "occupancy_surge": 0.08333333333333333,
+        "forecast_uncertainty": 0.30848200823192984,
+        "forecast_error": 0.42614329615353164,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.5680218371435087,
+        "occupancy_reliability": 0.12932403926848413,
+        "price_reliability": 0.8508498463462639
+      }
+    },
+    {
+      "step": 66,
+      "hour": 16.5,
+      "occupancy": 62,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.48926339720435635,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.5635629884650604,
+        "occupancy": 0.05919194923665544,
+        "price": 0.8287578109784752
+      },
+      "risk": {
+        "thermal_risk": 0.7414222095907638,
+        "co2_risk": 0.48707100615219845,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.295448131912306,
+        "forecast_error": 0.48926339720435635,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.5635629884650604,
+        "occupancy_reliability": 0.05919194923665544,
+        "price_reliability": 0.8287578109784752
+      }
+    },
+    {
+      "step": 67,
+      "hour": 16.75,
+      "occupancy": 62,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.5290898808282402,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.5307592759641905,
+        "occupancy": 0.019301704080799703,
+        "price": 0.8148185417101159
+      },
+      "risk": {
+        "thermal_risk": 0.7267659311626957,
+        "co2_risk": 0.39994642382853657,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2804397580285193,
+        "forecast_error": 0.5290898808282402,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.5307592759641905,
+        "occupancy_reliability": 0.019301704080799703,
+        "price_reliability": 0.8148185417101159
+      }
+    },
+    {
+      "step": 68,
+      "hour": 17.0,
+      "occupancy": 57,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.4186006966575852,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.5863936828121332,
+        "occupancy": 0.13833703959198507,
+        "price": 0.8534897561698451
+      },
+      "risk": {
+        "thermal_risk": 0.7117280742305426,
+        "co2_risk": 0.34736625263945414,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2795097348408845,
+        "forecast_error": 0.4186006966575852,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.5863936828121332,
+        "occupancy_reliability": 0.13833703959198507,
+        "price_reliability": 0.8534897561698451
+      }
+    },
+    {
+      "step": 69,
+      "hour": 17.25,
+      "occupancy": 50,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.3289616788947205,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.6144578278652487,
+        "occupancy": 0.25759935574735027,
+        "price": 0.8848634123868478
+      },
+      "risk": {
+        "thermal_risk": 0.696510893036789,
+        "co2_risk": 0.27063382616993475,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2632397405361345,
+        "forecast_error": 0.3289616788947205,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.6144578278652487,
+        "occupancy_reliability": 0.25759935574735027,
+        "price_reliability": 0.8848634123868478
+      }
+    },
+    {
+      "step": 70,
+      "hour": 17.5,
+      "occupancy": 42,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.24768262864828294,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.629938174551811,
+        "occupancy": 0.38897302054796545,
+        "price": 0.913311079973101
+      },
+      "risk": {
+        "thermal_risk": 0.680922820369152,
+        "co2_risk": 0.1613253789795343,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2543312545105599,
+        "forecast_error": 0.24768262864828294,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.629938174551811,
+        "occupancy_reliability": 0.38897302054796545,
+        "price_reliability": 0.913311079973101
+      }
+    },
+    {
+      "step": 71,
+      "hour": 17.75,
+      "occupancy": 32,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.20162907558317866,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.6794281410041108,
+        "occupancy": 0.4755658362462492,
+        "price": 0.9294298235458874
+      },
+      "risk": {
+        "thermal_risk": 0.6650063241218848,
+        "co2_risk": 0.02335712165885525,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.25286752674344803,
+        "forecast_error": 0.20162907558317866,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.6794281410041108,
+        "occupancy_reliability": 0.4755658362462492,
+        "price_reliability": 0.9294298235458874
+      }
+    },
+    {
+      "step": 72,
+      "hour": 18.0,
+      "occupancy": 26,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.15595002109631706,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.7296799803168506,
+        "occupancy": 0.5717649217072249,
+        "price": 0.945417492616289
+      },
+      "risk": {
+        "thermal_risk": 0.6510607906520993,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2507432302497522,
+        "forecast_error": 0.15595002109631706,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.7296799803168506,
+        "occupancy_reliability": 0.5717649217072249,
+        "price_reliability": 0.945417492616289
+      }
+    },
+    {
+      "step": 73,
+      "hour": 18.25,
+      "occupancy": 21,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.1560018649445736,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.7454036222743682,
+        "occupancy": 0.5716493671524248,
+        "price": 0.9453993472693992
+      },
+      "risk": {
+        "thermal_risk": 0.6702291041507248,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2494731699477327,
+        "forecast_error": 0.1560018649445736,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.7454036222743682,
+        "occupancy_reliability": 0.5716493671524248,
+        "price_reliability": 0.9453993472693992
+      }
+    },
+    {
+      "step": 74,
+      "hour": 18.5,
+      "occupancy": 18,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.26015483552024965,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.723086549894045,
+        "occupancy": 0.36713893572003653,
+        "price": 0.9089458075679127
+      },
+      "risk": {
+        "thermal_risk": 0.6905820197844551,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.24732400406688923,
+        "forecast_error": 0.26015483552024965,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.723086549894045,
+        "occupancy_reliability": 0.36713893572003653,
+        "price_reliability": 0.9089458075679127
+      }
+    },
+    {
+      "step": 75,
+      "hour": 18.75,
+      "occupancy": 11,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.42233184826094017,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.6790519321059646,
+        "occupancy": 0.1338604896871694,
+        "price": 0.852183853108671
+      },
+      "risk": {
+        "thermal_risk": 0.710215357953746,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.24599844918321065,
+        "forecast_error": 0.42233184826094017,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.6790519321059646,
+        "occupancy_reliability": 0.1338604896871694,
+        "price_reliability": 0.852183853108671
+      }
+    },
+    {
+      "step": 76,
+      "hour": 19.0,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.3167488861957051,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.7275340944164543,
+        "occupancy": 0.27578353205536293,
+        "price": 0.8891378898315032
+      },
+      "risk": {
+        "thermal_risk": 0.07829600245252523,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.24478719488644818,
+        "forecast_error": 0.3167488861957051,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.7275340944164543,
+        "occupancy_reliability": 0.27578353205536293,
+        "price_reliability": 0.8891378898315032
+      }
+    },
+    {
+      "step": 77,
+      "hour": 19.25,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.23756166464677886,
+      "anomaly_detected": true,
+      "reliability": {
+        "weather": 0.7758106420049735,
+        "occupancy": 0.4071793237373964,
+        "price": 0.9168534173736274
+      },
+      "risk": {
+        "thermal_risk": 0.09675463508108652,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2439326110848198,
+        "forecast_error": 0.23756166464677886,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.7758106420049735,
+        "occupancy_reliability": 0.4071793237373964,
+        "price_reliability": 0.9168534173736274
+      }
+    },
+    {
+      "step": 78,
+      "hour": 19.5,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.2130026316379767,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7889924321738555,
+        "occupancy": 0.4532648920510509,
+        "price": 0.9254490789267081
+      },
+      "risk": {
+        "thermal_risk": 0.11406609600384891,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.24490075507934442,
+        "forecast_error": 0.2130026316379767,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.7889924321738555,
+        "occupancy_reliability": 0.4532648920510509,
+        "price_reliability": 0.9254490789267081
+      }
+    },
+    {
+      "step": 79,
+      "hour": 19.75,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.2393665637922369,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.7873908985721819,
+        "occupancy": 0.4038998175723388,
+        "price": 0.9162217026727171
+      },
+      "risk": {
+        "thermal_risk": 0.12935577657520397,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2431828975328655,
+        "forecast_error": 0.2393665637922369,
+        "energy_peak_risk": 0.3958333333333333,
+        "weather_reliability": 0.7873908985721819,
+        "occupancy_reliability": 0.4038998175723388,
+        "price_reliability": 0.9162217026727171
+      }
+    },
+    {
+      "step": 80,
+      "hour": 20.0,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.17952492284417768,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8065880382836972,
+        "occupancy": 0.5207456726705184,
+        "price": 0.9371662770045371
+      },
+      "risk": {
+        "thermal_risk": 0.14296331883131783,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.24168279409340285,
+        "forecast_error": 0.17952492284417768,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.8065880382836972,
+        "occupancy_reliability": 0.5207456726705184,
+        "price_reliability": 0.9371662770045371
+      }
+    },
+    {
+      "step": 81,
+      "hour": 20.25,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.13464369213313326,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8108264084008713,
+        "occupancy": 0.6205648470449353,
+        "price": 0.9528747077534021
+      },
+      "risk": {
+        "thermal_risk": 0.1536513098848607,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.23980129490631746,
+        "forecast_error": 0.13464369213313326,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.8108264084008713,
+        "occupancy_reliability": 0.6205648470449353,
+        "price_reliability": 0.9528747077534021
+      }
+    },
+    {
+      "step": 82,
+      "hour": 20.5,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.1072610571890416,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8153525287306842,
+        "occupancy": 0.7010959075229948,
+        "price": 0.9624586299838339
+      },
+      "risk": {
+        "thermal_risk": 0.16116969810592258,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.23770253411105585,
+        "forecast_error": 0.1072610571890416,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.8153525287306842,
+        "occupancy_reliability": 0.7010959075229948,
+        "price_reliability": 0.9624586299838339
+      }
+    },
+    {
+      "step": 83,
+      "hour": 20.75,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.11340533921061512,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8102745976156703,
+        "occupancy": 0.7570605973886917,
+        "price": 0.9603081312762828
+      },
+      "risk": {
+        "thermal_risk": 0.16441681302490607,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.236647280012337,
+        "forecast_error": 0.11340533921061512,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.8102745976156703,
+        "occupancy_reliability": 0.7570605973886917,
+        "price_reliability": 0.9603081312762828
+      }
+    },
+    {
+      "step": 84,
+      "hour": 21.0,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.11338755770424987,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8204033697273195,
+        "occupancy": 0.8036346697619582,
+        "price": 0.9603143548035111
+      },
+      "risk": {
+        "thermal_risk": 0.16378507656695854,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.23817162716796889,
+        "forecast_error": 0.11338755770424987,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.8204033697273195,
+        "occupancy_reliability": 0.8036346697619582,
+        "price_reliability": 0.9603143548035111
+      }
+    },
+    {
+      "step": 85,
+      "hour": 21.25,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.09331692703435884,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8523550452340373,
+        "occupancy": 0.8473628837037712,
+        "price": 0.9673390755379733
+      },
+      "risk": {
+        "thermal_risk": 0.1641687175807924,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.23489006431848458,
+        "forecast_error": 0.09331692703435884,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.8523550452340373,
+        "occupancy_reliability": 0.8473628837037712,
+        "price_reliability": 0.9673390755379733
+      }
+    },
+    {
+      "step": 86,
+      "hour": 21.5,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.0887415715399088,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8622657593438239,
+        "occupancy": 0.8775364410452612,
+        "price": 0.9689404499610311
+      },
+      "risk": {
+        "thermal_risk": 0.1657182749715743,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.23449748943382293,
+        "forecast_error": 0.0887415715399088,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.8622657593438239,
+        "occupancy_reliability": 0.8775364410452612,
+        "price_reliability": 0.9689404499610311
+      }
+    },
+    {
+      "step": 87,
+      "hour": 21.75,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.082219838562491,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.873152341144848,
+        "occupancy": 0.9018553360213292,
+        "price": 0.9712230565031276
+      },
+      "risk": {
+        "thermal_risk": 0.16847701296399012,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.23506342323288004,
+        "forecast_error": 0.082219838562491,
+        "energy_peak_risk": 0.125,
+        "weather_reliability": 0.873152341144848,
+        "occupancy_reliability": 0.9018553360213292,
+        "price_reliability": 0.9712230565031276
+      }
+    },
+    {
+      "step": 88,
+      "hour": 22.0,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.07127967952119081,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8777165594651819,
+        "occupancy": 0.9225616364677106,
+        "price": 0.9750521121675828
+      },
+      "risk": {
+        "thermal_risk": 0.17276806473362863,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.23891109824847967,
+        "forecast_error": 0.07127967952119081,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8777165594651819,
+        "occupancy_reliability": 0.9225616364677106,
+        "price_reliability": 0.9750521121675828
+      }
+    },
+    {
+      "step": 89,
+      "hour": 22.25,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.06324629159537504,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8789865582104651,
+        "occupancy": 0.9382318143707907,
+        "price": 0.9778637979416184
+      },
+      "risk": {
+        "thermal_risk": 0.17699983482355278,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.2405287322108643,
+        "forecast_error": 0.06324629159537504,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8789865582104651,
+        "occupancy_reliability": 0.9382318143707907,
+        "price_reliability": 0.9778637979416184
+      }
+    },
+    {
+      "step": 90,
+      "hour": 22.5,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.07303434013031775,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8494698700881006,
+        "occupancy": 0.9445642534273693,
+        "price": 0.9744379809543886
+      },
+      "risk": {
+        "thermal_risk": 0.17898794873238688,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.24200359540925773,
+        "forecast_error": 0.07303434013031775,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8494698700881006,
+        "occupancy_reliability": 0.9445642534273693,
+        "price_reliability": 0.9744379809543886
+      }
+    },
+    {
+      "step": 91,
+      "hour": 22.75,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.08015446766806837,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8476650761580463,
+        "occupancy": 0.9494559151858171,
+        "price": 0.9719459363161759
+      },
+      "risk": {
+        "thermal_risk": 0.17318366230839627,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.23318243247313472,
+        "forecast_error": 0.08015446766806837,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8476650761580463,
+        "occupancy_reliability": 0.9494559151858171,
+        "price_reliability": 0.9719459363161759
+      }
+    },
+    {
+      "step": 92,
+      "hour": 23.0,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.07757187738239503,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8565155674667415,
+        "occupancy": 0.9559344581604943,
+        "price": 0.9728498429161616
+      },
+      "risk": {
+        "thermal_risk": 0.15877640357050435,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.23318243247313472,
+        "forecast_error": 0.07757187738239503,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8565155674667415,
+        "occupancy_reliability": 0.9559344581604943,
+        "price_reliability": 0.9728498429161616
+      }
+    },
+    {
+      "step": 93,
+      "hour": 23.25,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.07481499169815498,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8531647023066627,
+        "occupancy": 0.9611011987472071,
+        "price": 0.9738147529056457
+      },
+      "risk": {
+        "thermal_risk": 0.13811517305438858,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.23318243247313472,
+        "forecast_error": 0.07481499169815498,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8531647023066627,
+        "occupancy_reliability": 0.9611011987472071,
+        "price_reliability": 0.9738147529056457
+      }
+    },
+    {
+      "step": 94,
+      "hour": 23.5,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.07512376504145489,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.8427124127821746,
+        "occupancy": 0.9641562825358369,
+        "price": 0.9737066822354907
+      },
+      "risk": {
+        "thermal_risk": 0.1142299055529608,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.23318243247313472,
+        "forecast_error": 0.07512376504145489,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.8427124127821746,
+        "occupancy_reliability": 0.9641562825358369,
+        "price_reliability": 0.9737066822354907
+      }
+    },
+    {
+      "step": 95,
+      "hour": 23.75,
+      "occupancy": 0,
+      "occupancy_surge_score": 0.0,
+      "forecast_error_score": 0.07316388231653913,
+      "anomaly_detected": false,
+      "reliability": {
+        "weather": 0.851103275526848,
+        "occupancy": 0.9672212562533495,
+        "price": 0.9743926411892112
+      },
+      "risk": {
+        "thermal_risk": 0.0900118939826757,
+        "co2_risk": 0.0,
+        "occupancy_surge": 0.0,
+        "forecast_uncertainty": 0.23318243247313472,
+        "forecast_error": 0.07316388231653913,
+        "energy_peak_risk": 0.0,
+        "weather_reliability": 0.851103275526848,
+        "occupancy_reliability": 0.9672212562533495,
+        "price_reliability": 0.9743926411892112
+      }
+    }
+  ]
+}
