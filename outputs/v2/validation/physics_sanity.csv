@@ -1,0 +1,10 @@
+name,passed,requirement,measurements_json
+occupancy_heat_co2_moisture,True,"More occupants increase sensible heat, CO2, and moisture.","{""heat_kw_at_5"": 0.375, ""heat_kw_at_50"": 3.75, ""temperature_delta_c"": 0.03013392857142705, ""co2_delta_ppm"": 135.0, ""humidity_delta_pct"": 1.7038499154185516}"
+internal_electrical_gains,True,Electronics and lighting increase heat and electricity use.,"{""additional_internal_heat_kw"": 8.878, ""temperature_delta_c"": 0.07926785714285955, ""whole_building_energy_delta_kwh"": 2.4125}"
+outdoor_envelope_direction,True,Hotter outdoor air increases envelope heat gain.,"{""envelope_kw_at_24c"": 0.0, ""envelope_kw_at_40c"": 9.575757575757576}"
+door_infiltration_duration,True,Longer/higher door opening category increases hot-air gain.,"{""closed_infiltration_kw"": 0.96576, ""open_infiltration_kw"": 5.6335999999999995, ""left_open_infiltration_kw"": 14.4864}"
+ventilation_co2_thermal_tradeoff,True,Ventilation lowers CO2 but imports heat in hot weather.,"{""off_co2_ppm"": 1371.0366228775379, ""ventilated_co2_ppm"": 1011.4354639184997, ""ventilation_heat_kw"": 15.2912}"
+solar_day_night,True,Night solar is zero and daytime solar is positive.,"{""night_solar_kw"": 0.0, ""noon_solar_kw"": 23.52}"
+hvac_action_energy_ordering,True,"HIGH consumes at least MEDIUM, LOW, and OFF.","{""action_0_controllable_kwh"": 0.0, ""action_1_controllable_kwh"": 0.16429842348607587, ""action_2_controllable_kwh"": 0.433780093908654, ""action_3_controllable_kwh"": 1.1315721837915351}"
+hvac_inertia_and_gradual_temperature,True,HVAC ramps toward command and temperature changes gradually.,"{""command_kw"": 28.0, ""first_delivered_kw"": 14.77373652325159, ""sixth_delivered_kw"": 27.688948096929217, ""maximum_temperature_change_c"": 0.13560799132250878}"
+physical_bounds_stress_rollout,True,State bounds and non-negative energy hold under 24h stress.,"{""steps"": 96, ""maximum_temperature_change_c"": 0.4923918290043261, ""minimum_whole_building_energy_kwh"": 5.1, ""final_temperature_c"": 45.0, ""final_humidity_pct"": 100.0, ""final_co2_ppm"": 1247.8788800582383}"
