@@ -24,3 +24,136 @@ rules:
   held_out_results_may_not_select_profiles: true
   unexpected_events_are_hidden_from_forecasts: true
   capacity_scaled_surges: true
+
+defaults:
+  weather:
+    temperature_min_c: 25.0
+    temperature_max_c: 34.0
+    temperature_peak_hour: 15.0
+    relative_humidity_min_pct: 48.0
+    relative_humidity_max_pct: 78.0
+    solar_peak_w_per_m2: 760.0
+    sunrise_hour: 6.0
+    sunset_hour: 18.0
+    cloud_fraction: 0.12
+    autocorrelation: 0.88
+  occupancy:
+    peak_fraction_of_capacity: 0.62
+    arrival_start_hour: 7.5
+    arrival_end_hour: 9.5
+    lunch_start_hour: 12.0
+    lunch_end_hour: 13.25
+    lunch_fraction: 0.48
+    departure_start_hour: 16.75
+    departure_end_hour: 19.0
+    stochastic_fraction: 0.035
+  electricity_price:
+    off_peak: 0.10
+    shoulder: 0.16
+    peak: 0.29
+    peak_windows: [[9.5, 11.5], [17.0, 20.0]]
+    shoulder_windows: [[7.0, 9.5], [11.5, 17.0], [20.0, 22.0]]
+  equipment:
+    desktop_fraction_per_occupant: 0.36
+    laptop_fraction_per_occupant: 0.68
+    monitor_fraction_per_occupant: 0.82
+    electronics_multiplier: 1.0
+  events:
+    meeting: null
+    occupancy_surge: null
+    door_left_open: null
+    cleaning: [[5.5, 6.5], [20.0, 21.0]]
+    stochastic_door_probability_per_step: 0.012
+
+definitions:
+  normal_v2:
+    description: Typical correlated warm workday.
+  hot_day_v2:
+    description: Hot development day with stronger solar gain.
+    weather:
+      temperature_min_c: 29.0
+      temperature_max_c: 39.0
+      solar_peak_w_per_m2: 880.0
+      cloud_fraction: 0.05
+  high_occupancy_v2:
+    description: Sustained high but capacity-bounded attendance.
+    occupancy:
+      peak_fraction_of_capacity: 0.88
+      lunch_fraction: 0.72
+  high_humidity_v2:
+    description: Warm humid day stressing latent comfort.
+    weather:
+      relative_humidity_min_pct: 68.0
+      relative_humidity_max_pct: 94.0
+      cloud_fraction: 0.28
+  expensive_electricity_v2:
+    description: Normal operation with high and sharply varying TOU rates.
+    electricity_price:
+      off_peak: 0.14
+      shoulder: 0.28
+      peak: 0.55
+  meeting_surge_v2:
+    description: Scheduled afternoon meeting visible to the forecast.
+    events:
+      meeting:
+        start_hour: 14.0
+        end_hour: 16.0
+        additional_fraction_of_capacity: 0.28
+        forecast_visible: true
+  high_electronics_load_v2:
+    description: Compute-heavy office with elevated plug loads.
+    equipment:
+      electronics_multiplier: 1.65
+  cleaning_event_v2:
+    description: Extended cleaning load and open-door periods.
+    events:
+      cleaning: [[5.0, 7.0], [19.0, 22.0]]
+      door_left_open:
+        start_hour: 20.0
+        end_hour: 20.75
+        forecast_visible: true
+  combined_stress_v2:
+    description: Sealed efficiency test combining heat, humidity, occupancy, and price.
+    weather:
+      temperature_min_c: 30.0
+      temperature_max_c: 40.5
+      relative_humidity_min_pct: 62.0
+      relative_humidity_max_pct: 90.0
+      solar_peak_w_per_m2: 900.0
+    occupancy:
+      peak_fraction_of_capacity: 0.90
+      lunch_fraction: 0.76
+    electricity_price:
+      off_peak: 0.15
+      shoulder: 0.30
+      peak: 0.58
+  unexpected_occupancy_surge_v2:
+    description: Hidden capacity-scaled occupancy surge for resilience testing.
+    events:
+      occupancy_surge:
+        start_hour: 13.5
+        end_hour: 15.5
+        additional_fraction_of_capacity: 0.38
+        forecast_visible: false
+  forecast_failure_v2:
+    description: Normal physical day paired with an injected forecast failure.
+    forecast:
+      failure_start_hour: 10.0
+      failure_end_hour: 16.0
+      failure_mode: stale
+  heatwave_v2:
+    description: Sealed extreme heat safety test.
+    weather:
+      temperature_min_c: 33.0
+      temperature_max_c: 44.0
+      relative_humidity_min_pct: 46.0
+      relative_humidity_max_pct: 72.0
+      solar_peak_w_per_m2: 960.0
+      cloud_fraction: 0.02
+  door_left_open_v2:
+    description: Hidden prolonged infiltration safety event.
+    events:
+      door_left_open:
+        start_hour: 11.0
+        end_hour: 13.0
+        forecast_visible: false

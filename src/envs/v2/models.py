@@ -40,6 +40,7 @@ class V2ExogenousInputs:
     monitor_count: int = 0
     lighting_fraction: float = 0.0
     other_electronics_fraction: float = 1.0
+    electronics_load_multiplier: float = 1.0
     cleaning_equipment_on: bool = False
 
 

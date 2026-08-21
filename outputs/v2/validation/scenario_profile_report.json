@@ -1,0 +1,513 @@
+{
+  "schema_version": 1,
+  "simulator_version": "XRL-HVAC-v2",
+  "generated_at_utc": "2026-08-21T13:27:31.744425+00:00",
+  "seed": 42,
+  "scenario_config_sha256": "8b56808882de33f6f14bbb7df023119047ed81f44e40a9ec53191dd6bcb2c716",
+  "scenario_count": 13,
+  "all_checks_passed": true,
+  "profile_design": {
+    "weather": "daily curves plus seeded AR(1) disturbances",
+    "humidity": "anti-correlated with temperature plus seeded AR(1) residual",
+    "occupancy": "arrival, office, lunch dip, departure, bounded events",
+    "event_forecast_visibility": "explicit per event; unexpected events hidden"
+  },
+  "scenarios": [
+    {
+      "scenario": "normal_v2",
+      "split": "train",
+      "description": "Typical correlated warm workday.",
+      "temperature_min_c": 24.642466879438565,
+      "temperature_max_c": 34.11352072182002,
+      "humidity_min_pct": 45.395597879475766,
+      "humidity_max_pct": 78.93449753687788,
+      "solar_peak_w_per_m2": 734.103627979692,
+      "occupancy_peak": 62,
+      "price_peak": 0.29,
+      "door_open_steps": 1,
+      "cleaning_steps": 8,
+      "events": [
+        {
+          "event": "cleaning",
+          "start_hour": 5.5,
+          "end_hour": 6.5,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 20.0,
+          "end_hour": 21.0,
+          "forecast_visible": true
+        }
+      ],
+      "forecast_failure": null,
+      "checks": {
+        "episode_has_96_steps": true,
+        "occupancy_within_capacity": true,
+        "weather_bounds_valid": true,
+        "night_solar_zero": true,
+        "temperature_humidity_correlated": true
+      }
+    },
+    {
+      "scenario": "hot_day_v2",
+      "split": "train",
+      "description": "Hot development day with stronger solar gain.",
+      "temperature_min_c": 28.65207423923695,
+      "temperature_max_c": 39.11245018343932,
+      "humidity_min_pct": 45.50538906300413,
+      "humidity_max_pct": 78.93449753687788,
+      "solar_peak_w_per_m2": 863.0910467548428,
+      "occupancy_peak": 62,
+      "price_peak": 0.29,
+      "door_open_steps": 1,
+      "cleaning_steps": 8,
+      "events": [
+        {
+          "event": "cleaning",
+          "start_hour": 5.5,
+          "end_hour": 6.5,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 20.0,
+          "end_hour": 21.0,
+          "forecast_visible": true
+        }
+      ],
+      "forecast_failure": null,
+      "checks": {
+        "episode_has_96_steps": true,
+        "occupancy_within_capacity": true,
+        "weather_bounds_valid": true,
+        "night_solar_zero": true,
+        "temperature_humidity_correlated": true
+      }
+    },
+    {
+      "scenario": "high_occupancy_v2",
+      "split": "train",
+      "description": "Sustained high but capacity-bounded attendance.",
+      "temperature_min_c": 24.642466879438565,
+      "temperature_max_c": 34.11352072182002,
+      "humidity_min_pct": 45.395597879475766,
+      "humidity_max_pct": 78.93449753687788,
+      "solar_peak_w_per_m2": 734.103627979692,
+      "occupancy_peak": 88,
+      "price_peak": 0.29,
+      "door_open_steps": 1,
+      "cleaning_steps": 8,
+      "events": [
+        {
+          "event": "cleaning",
+          "start_hour": 5.5,
+          "end_hour": 6.5,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 20.0,
+          "end_hour": 21.0,
+          "forecast_visible": true
+        }
+      ],
+      "forecast_failure": null,
+      "checks": {
+        "episode_has_96_steps": true,
+        "occupancy_within_capacity": true,
+        "weather_bounds_valid": true,
+        "night_solar_zero": true,
+        "temperature_humidity_correlated": true
+      }
+    },
+    {
+      "scenario": "high_humidity_v2",
+      "split": "train",
+      "description": "Warm humid day stressing latent comfort.",
+      "temperature_min_c": 24.642466879438565,
+      "temperature_max_c": 34.11352072182002,
+      "humidity_min_pct": 65.21400786526364,
+      "humidity_max_pct": 94.93449753687788,
+      "solar_peak_w_per_m2": 622.4601917788659,
+      "occupancy_peak": 62,
+      "price_peak": 0.29,
+      "door_open_steps": 1,
+      "cleaning_steps": 8,
+      "events": [
+        {
+          "event": "cleaning",
+          "start_hour": 5.5,
+          "end_hour": 6.5,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 20.0,
+          "end_hour": 21.0,
+          "forecast_visible": true
+        }
+      ],
+      "forecast_failure": null,
+      "checks": {
+        "episode_has_96_steps": true,
+        "occupancy_within_capacity": true,
+        "weather_bounds_valid": true,
+        "night_solar_zero": true,
+        "temperature_humidity_correlated": true
+      }
+    },
+    {
+      "scenario": "expensive_electricity_v2",
+      "split": "validation",
+      "description": "Normal operation with high and sharply varying TOU rates.",
+      "temperature_min_c": 24.642466879438565,
+      "temperature_max_c": 34.11352072182002,
+      "humidity_min_pct": 45.395597879475766,
+      "humidity_max_pct": 78.93449753687788,
+      "solar_peak_w_per_m2": 734.103627979692,
+      "occupancy_peak": 62,
+      "price_peak": 0.55,
+      "door_open_steps": 1,
+      "cleaning_steps": 8,
+      "events": [
+        {
+          "event": "cleaning",
+          "start_hour": 5.5,
+          "end_hour": 6.5,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 20.0,
+          "end_hour": 21.0,
+          "forecast_visible": true
+        }
+      ],
+      "forecast_failure": null,
+      "checks": {
+        "episode_has_96_steps": true,
+        "occupancy_within_capacity": true,
+        "weather_bounds_valid": true,
+        "night_solar_zero": true,
+        "temperature_humidity_correlated": true
+      }
+    },
+    {
+      "scenario": "meeting_surge_v2",
+      "split": "validation",
+      "description": "Scheduled afternoon meeting visible to the forecast.",
+      "temperature_min_c": 24.642466879438565,
+      "temperature_max_c": 34.11352072182002,
+      "humidity_min_pct": 45.395597879475766,
+      "humidity_max_pct": 78.93449753687788,
+      "solar_peak_w_per_m2": 734.103627979692,
+      "occupancy_peak": 90,
+      "price_peak": 0.29,
+      "door_open_steps": 1,
+      "cleaning_steps": 8,
+      "events": [
+        {
+          "event": "meeting",
+          "start_hour": 14.0,
+          "end_hour": 16.0,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 5.5,
+          "end_hour": 6.5,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 20.0,
+          "end_hour": 21.0,
+          "forecast_visible": true
+        }
+      ],
+      "forecast_failure": null,
+      "checks": {
+        "episode_has_96_steps": true,
+        "occupancy_within_capacity": true,
+        "weather_bounds_valid": true,
+        "night_solar_zero": true,
+        "temperature_humidity_correlated": true
+      }
+    },
+    {
+      "scenario": "high_electronics_load_v2",
+      "split": "validation",
+      "description": "Compute-heavy office with elevated plug loads.",
+      "temperature_min_c": 24.642466879438565,
+      "temperature_max_c": 34.11352072182002,
+      "humidity_min_pct": 45.395597879475766,
+      "humidity_max_pct": 78.93449753687788,
+      "solar_peak_w_per_m2": 734.103627979692,
+      "occupancy_peak": 62,
+      "price_peak": 0.29,
+      "door_open_steps": 1,
+      "cleaning_steps": 8,
+      "events": [
+        {
+          "event": "cleaning",
+          "start_hour": 5.5,
+          "end_hour": 6.5,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 20.0,
+          "end_hour": 21.0,
+          "forecast_visible": true
+        }
+      ],
+      "forecast_failure": null,
+      "checks": {
+        "episode_has_96_steps": true,
+        "occupancy_within_capacity": true,
+        "weather_bounds_valid": true,
+        "night_solar_zero": true,
+        "temperature_humidity_correlated": true
+      }
+    },
+    {
+      "scenario": "cleaning_event_v2",
+      "split": "validation",
+      "description": "Extended cleaning load and open-door periods.",
+      "temperature_min_c": 24.642466879438565,
+      "temperature_max_c": 34.11352072182002,
+      "humidity_min_pct": 45.395597879475766,
+      "humidity_max_pct": 78.93449753687788,
+      "solar_peak_w_per_m2": 734.103627979692,
+      "occupancy_peak": 62,
+      "price_peak": 0.29,
+      "door_open_steps": 4,
+      "cleaning_steps": 20,
+      "events": [
+        {
+          "event": "door_left_open",
+          "start_hour": 20.0,
+          "end_hour": 20.75,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 5.0,
+          "end_hour": 7.0,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 19.0,
+          "end_hour": 22.0,
+          "forecast_visible": true
+        }
+      ],
+      "forecast_failure": null,
+      "checks": {
+        "episode_has_96_steps": true,
+        "occupancy_within_capacity": true,
+        "weather_bounds_valid": true,
+        "night_solar_zero": true,
+        "temperature_humidity_correlated": true
+      }
+    },
+    {
+      "scenario": "combined_stress_v2",
+      "split": "held_out_efficiency",
+      "description": "Sealed efficiency test combining heat, humidity, occupancy, and price.",
+      "temperature_min_c": 29.656877919136143,
+      "temperature_max_c": 40.61191491424897,
+      "humidity_min_pct": 59.451570051504675,
+      "humidity_max_pct": 90.93449753687788,
+      "solar_peak_w_per_m2": 869.3332436601614,
+      "occupancy_peak": 90,
+      "price_peak": 0.58,
+      "door_open_steps": 1,
+      "cleaning_steps": 8,
+      "events": [
+        {
+          "event": "cleaning",
+          "start_hour": 5.5,
+          "end_hour": 6.5,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 20.0,
+          "end_hour": 21.0,
+          "forecast_visible": true
+        }
+      ],
+      "forecast_failure": null,
+      "checks": {
+        "episode_has_96_steps": true,
+        "occupancy_within_capacity": true,
+        "weather_bounds_valid": true,
+        "night_solar_zero": true,
+        "temperature_humidity_correlated": true
+      }
+    },
+    {
+      "scenario": "unexpected_occupancy_surge_v2",
+      "split": "held_out_resilience",
+      "description": "Hidden capacity-scaled occupancy surge for resilience testing.",
+      "temperature_min_c": 24.642466879438565,
+      "temperature_max_c": 34.11352072182002,
+      "humidity_min_pct": 45.395597879475766,
+      "humidity_max_pct": 78.93449753687788,
+      "solar_peak_w_per_m2": 734.103627979692,
+      "occupancy_peak": 100,
+      "price_peak": 0.29,
+      "door_open_steps": 1,
+      "cleaning_steps": 8,
+      "events": [
+        {
+          "event": "occupancy_surge",
+          "start_hour": 13.5,
+          "end_hour": 15.5,
+          "forecast_visible": false
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 5.5,
+          "end_hour": 6.5,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 20.0,
+          "end_hour": 21.0,
+          "forecast_visible": true
+        }
+      ],
+      "forecast_failure": null,
+      "checks": {
+        "episode_has_96_steps": true,
+        "occupancy_within_capacity": true,
+        "weather_bounds_valid": true,
+        "night_solar_zero": true,
+        "temperature_humidity_correlated": true
+      }
+    },
+    {
+      "scenario": "forecast_failure_v2",
+      "split": "held_out_resilience",
+      "description": "Normal physical day paired with an injected forecast failure.",
+      "temperature_min_c": 24.642466879438565,
+      "temperature_max_c": 34.11352072182002,
+      "humidity_min_pct": 45.395597879475766,
+      "humidity_max_pct": 78.93449753687788,
+      "solar_peak_w_per_m2": 734.103627979692,
+      "occupancy_peak": 62,
+      "price_peak": 0.29,
+      "door_open_steps": 1,
+      "cleaning_steps": 8,
+      "events": [
+        {
+          "event": "cleaning",
+          "start_hour": 5.5,
+          "end_hour": 6.5,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 20.0,
+          "end_hour": 21.0,
+          "forecast_visible": true
+        }
+      ],
+      "forecast_failure": {
+        "failure_start_hour": 10.0,
+        "failure_end_hour": 16.0,
+        "failure_mode": "stale"
+      },
+      "checks": {
+        "episode_has_96_steps": true,
+        "occupancy_within_capacity": true,
+        "weather_bounds_valid": true,
+        "night_solar_zero": true,
+        "temperature_humidity_correlated": true
+      }
+    },
+    {
+      "scenario": "heatwave_v2",
+      "split": "held_out_safety",
+      "description": "Sealed extreme heat safety test.",
+      "temperature_min_c": 32.66168159903533,
+      "temperature_max_c": 44.11137964505862,
+      "humidity_min_pct": 43.38786912234181,
+      "humidity_max_pct": 72.93449753687788,
+      "solar_peak_w_per_m2": 941.5538691871012,
+      "occupancy_peak": 62,
+      "price_peak": 0.29,
+      "door_open_steps": 1,
+      "cleaning_steps": 8,
+      "events": [
+        {
+          "event": "cleaning",
+          "start_hour": 5.5,
+          "end_hour": 6.5,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 20.0,
+          "end_hour": 21.0,
+          "forecast_visible": true
+        }
+      ],
+      "forecast_failure": null,
+      "checks": {
+        "episode_has_96_steps": true,
+        "occupancy_within_capacity": true,
+        "weather_bounds_valid": true,
+        "night_solar_zero": true,
+        "temperature_humidity_correlated": true
+      }
+    },
+    {
+      "scenario": "door_left_open_v2",
+      "split": "held_out_safety",
+      "description": "Hidden prolonged infiltration safety event.",
+      "temperature_min_c": 24.642466879438565,
+      "temperature_max_c": 34.11352072182002,
+      "humidity_min_pct": 45.395597879475766,
+      "humidity_max_pct": 78.93449753687788,
+      "solar_peak_w_per_m2": 734.103627979692,
+      "occupancy_peak": 62,
+      "price_peak": 0.29,
+      "door_open_steps": 9,
+      "cleaning_steps": 8,
+      "events": [
+        {
+          "event": "door_left_open",
+          "start_hour": 11.0,
+          "end_hour": 13.0,
+          "forecast_visible": false
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 5.5,
+          "end_hour": 6.5,
+          "forecast_visible": true
+        },
+        {
+          "event": "cleaning",
+          "start_hour": 20.0,
+          "end_hour": 21.0,
+          "forecast_visible": true
+        }
+      ],
+      "forecast_failure": null,
+      "checks": {
+        "episode_has_96_steps": true,
+        "occupancy_within_capacity": true,
+        "weather_bounds_valid": true,
+        "night_solar_zero": true,
+        "temperature_humidity_correlated": true
+      }
+    }
+  ]
+}

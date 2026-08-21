@@ -422,13 +422,14 @@ class TwoR1CBuildingModel:
         )
 
     def _electronics_power_kw(self, inputs: V2ExogenousInputs) -> float:
-        return (
+        connected_power_kw = (
             inputs.desktop_count * float(self.internal["desktop_kw_each"])
             + inputs.laptop_count * float(self.internal["laptop_kw_each"])
             + inputs.monitor_count * float(self.internal["monitor_kw_each"])
             + float(self.internal["other_electronics_kw"])
             * inputs.other_electronics_fraction
         )
+        return connected_power_kw * inputs.electronics_load_multiplier
 
     def _lighting_power_kw(self, inputs: V2ExogenousInputs) -> float:
         rated_kw = (
@@ -464,6 +465,8 @@ class TwoR1CBuildingModel:
         ):
             if not 0.0 <= value <= 1.0:
                 raise ValueError(f"{label} must be in [0, 1]")
+        if not 0.0 <= inputs.electronics_load_multiplier <= 3.0:
+            raise ValueError("electronics_load_multiplier must be in [0, 3]")
 
     def _validate_config(self) -> None:
         if self.dt_hours <= 0:
