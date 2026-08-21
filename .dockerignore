@@ -1,0 +1,14 @@
+.git
+.venv
+**/__pycache__
+**/.pytest_cache
+frontend/node_modules
+frontend/.next
+outputs/logs
+outputs/metrics/step5/curves
+outputs/trajectories/xai/*_trajectory.csv
+outputs/trajectories/xai/*_trajectory.json
+models/dqn/step5_*
+models/double_dqn
+models/ppo
+models/q_learning

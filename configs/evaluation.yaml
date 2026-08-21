@@ -1,0 +1,50 @@
+experiment:
+  name: step5_robust_benchmark
+  train_scenarios: [normal, hot_day, high_occupancy]
+  validation_scenarios: [expensive_electricity]
+  test_scenarios: [combined_stress]
+  training_seeds: [42, 123, 2026]
+  validation_seeds: [901, 902, 903]
+  evaluation_seeds: [701, 702, 703, 704, 705]
+
+curriculum:
+  strategy: curriculum
+  normal_only_episodes: 12
+  expansion_episodes: 36
+
+budgets:
+  q_learning:
+    total_episodes: 600
+    chunk_episodes: 100
+  dqn:
+    total_steps: 30000
+    chunk_steps: 5000
+  double_dqn:
+    total_steps: 30000
+    chunk_steps: 5000
+  ppo:
+    total_timesteps: 27648
+    chunk_timesteps: 4608
+
+early_stopping:
+  enabled: true
+  patience: 3
+  minimum_evaluations: 4
+  minimum_improvement: 0.50
+
+checkpoint_selection:
+  metric: mean_reward
+  mode: maximize
+
+pareto:
+  maximum_comfort_violation_percent: 40.0
+  maximum_co2_violation_percent: 20.0
+
+significance:
+  minimum_reward_improvement: 5.0
+  confidence_multiplier: 1.96
+
+outputs:
+  metrics_directory: outputs/metrics/step5
+  curves_directory: outputs/metrics/step5/curves
+  checkpoint_directory: models

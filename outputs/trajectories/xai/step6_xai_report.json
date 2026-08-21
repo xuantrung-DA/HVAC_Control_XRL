@@ -1,0 +1,929 @@
+{
+  "controller": "dqn",
+  "checkpoint": "models\\dqn\\demo_best.pt",
+  "checkpoint_sha256": "9d33a157ddb25a79a6ef03efee97c3491ef61bcb8b47d814f237d54695d5236a",
+  "model_unchanged": true,
+  "methods": {
+    "feature_attribution": "integrated_gradients_decision_margin",
+    "faithfulness": "completeness plus reference ablation",
+    "counterfactual": "sparse bounded grid search with verified action flip",
+    "causal_claims": false
+  },
+  "scenario_summaries": [
+    {
+      "scenario": "normal",
+      "seed": 707,
+      "steps": 96,
+      "total_reward": -8.406,
+      "total_energy_kwh": 40.05,
+      "total_electricity_cost": 7.406,
+      "comfort_violation_steps": 0,
+      "co2_violation_steps": 0,
+      "action_distribution": {
+        "OFF": 47,
+        "LOW": 13,
+        "MEDIUM": 36
+      },
+      "top_feature_counts": {
+        "indoor_temperature_c": 13,
+        "relative_humidity_pct": 2,
+        "time_sin": 40,
+        "hvac_action": 5,
+        "occupancy": 3,
+        "time_cos": 27,
+        "outdoor_temperature_c": 6
+      },
+      "counterfactual_found_steps": 96,
+      "counterfactual_found_rate": 1.0,
+      "mean_completeness_relative_error": 0.06227517460009716,
+      "mean_attribution_ablation_correlation": 0.6882046754405744
+    },
+    {
+      "scenario": "hot_day",
+      "seed": 707,
+      "steps": 96,
+      "total_reward": -12.949,
+      "total_energy_kwh": 60.975,
+      "total_electricity_cost": 10.849,
+      "comfort_violation_steps": 0,
+      "co2_violation_steps": 0,
+      "action_distribution": {
+        "OFF": 27,
+        "LOW": 24,
+        "MEDIUM": 34,
+        "HIGH": 11
+      },
+      "top_feature_counts": {
+        "relative_humidity_pct": 3,
+        "time_sin": 28,
+        "hvac_action": 8,
+        "time_cos": 4,
+        "outdoor_temperature_c": 44,
+        "electricity_price_per_kwh": 3,
+        "occupancy": 1,
+        "indoor_temperature_c": 5
+      },
+      "counterfactual_found_steps": 96,
+      "counterfactual_found_rate": 1.0,
+      "mean_completeness_relative_error": 0.01638617991018012,
+      "mean_attribution_ablation_correlation": 0.7731095188389613
+    },
+    {
+      "scenario": "high_occupancy",
+      "seed": 707,
+      "steps": 96,
+      "total_reward": -12.628499999999999,
+      "total_energy_kwh": 57.8,
+      "total_electricity_cost": 10.8285,
+      "comfort_violation_steps": 0,
+      "co2_violation_steps": 0,
+      "action_distribution": {
+        "OFF": 45,
+        "LOW": 11,
+        "MEDIUM": 18,
+        "HIGH": 22
+      },
+      "top_feature_counts": {
+        "indoor_temperature_c": 13,
+        "relative_humidity_pct": 2,
+        "time_sin": 39,
+        "hvac_action": 5,
+        "occupancy": 3,
+        "time_cos": 16,
+        "outdoor_temperature_c": 14,
+        "electricity_price_per_kwh": 4
+      },
+      "counterfactual_found_steps": 96,
+      "counterfactual_found_rate": 1.0,
+      "mean_completeness_relative_error": 0.032962064951684536,
+      "mean_attribution_ablation_correlation": 0.6795354232968956
+    },
+    {
+      "scenario": "combined_stress",
+      "seed": 707,
+      "steps": 96,
+      "total_reward": -24.2365,
+      "total_energy_kwh": 75.475,
+      "total_electricity_cost": 22.9365,
+      "comfort_violation_steps": 0,
+      "co2_violation_steps": 0,
+      "action_distribution": {
+        "LOW": 22,
+        "MEDIUM": 16,
+        "OFF": 27,
+        "HIGH": 31
+      },
+      "top_feature_counts": {
+        "relative_humidity_pct": 2,
+        "time_sin": 38,
+        "hvac_action": 7,
+        "time_cos": 6,
+        "outdoor_temperature_c": 24,
+        "occupancy": 4,
+        "electricity_price_per_kwh": 10,
+        "indoor_temperature_c": 5
+      },
+      "counterfactual_found_steps": 96,
+      "counterfactual_found_rate": 1.0,
+      "mean_completeness_relative_error": 0.03736658093251578,
+      "mean_attribution_ablation_correlation": 0.7527444319324991
+    }
+  ],
+  "representative_explanations": [
+    {
+      "scenario": "normal",
+      "seed": 707,
+      "step": 33,
+      "timestamp": "Day 1 08:15",
+      "hour": 8.25,
+      "state": {
+        "indoor_temperature_c": 22.913923263549805,
+        "outdoor_temperature_c": 27.468740463256836,
+        "relative_humidity_pct": 66.33599853515625,
+        "occupancy": 10.0,
+        "co2_ppm": 420.9347229003906,
+        "electricity_price_per_kwh": 0.18000000715255737,
+        "time_sin": 0.8314695954322815,
+        "time_cos": -0.5555702447891235,
+        "hvac_action": 0.0
+      },
+      "action": 0,
+      "action_name": "OFF",
+      "reward": -0.0,
+      "reward_components": {
+        "reward": -0.0,
+        "energy_cost_penalty": 0.0,
+        "comfort_penalty": 0.0,
+        "co2_penalty": 0.0,
+        "switching_penalty": 0.0,
+        "temperature_violation_c": 0.0,
+        "co2_violation_ppm": 0.0
+      },
+      "feature_attribution": {
+        "method": "integrated_gradients_decision_margin",
+        "action": 0,
+        "action_name": "OFF",
+        "contrast_action": 1,
+        "contrast_action_name": "LOW",
+        "q_values": [
+          -0.5465129613876343,
+          -0.562612771987915,
+          -0.5729360580444336,
+          -0.6102448105812073
+        ],
+        "decision_margin": 0.01609981060028076,
+        "contributions": [
+          {
+            "feature": "indoor_temperature_c",
+            "value": 22.913923263549805,
+            "reference_value": 23.5,
+            "signed_contribution": 0.010816642083227634,
+            "signed_percentage": 14.962442398071289,
+            "absolute_importance": 0.010816642083227634,
+            "absolute_importance_pct": 14.962442398071289,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": 0.007631480693817139
+          },
+          {
+            "feature": "outdoor_temperature_c",
+            "value": 27.468740463256836,
+            "reference_value": 26.0,
+            "signed_contribution": -0.004696980118751526,
+            "signed_percentage": -6.497237682342529,
+            "absolute_importance": 0.004696980118751526,
+            "absolute_importance_pct": 6.497237682342529,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.003976047039031982
+          },
+          {
+            "feature": "relative_humidity_pct",
+            "value": 66.33599853515625,
+            "reference_value": 60.0,
+            "signed_contribution": -0.0033134212717413902,
+            "signed_percentage": -4.583388805389404,
+            "absolute_importance": 0.0033134212717413902,
+            "absolute_importance_pct": 4.583388805389404,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -7.927417755126953e-05
+          },
+          {
+            "feature": "occupancy",
+            "value": 10.0,
+            "reference_value": 0.0,
+            "signed_contribution": -0.0052052997052669525,
+            "signed_percentage": -7.200386047363281,
+            "absolute_importance": 0.0052052997052669525,
+            "absolute_importance_pct": 7.200386047363281,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.0013718605041503906
+          },
+          {
+            "feature": "co2_ppm",
+            "value": 420.9347229003906,
+            "reference_value": 600.0,
+            "signed_contribution": 0.0032955629285424948,
+            "signed_percentage": 4.558685302734375,
+            "absolute_importance": 0.0032955629285424948,
+            "absolute_importance_pct": 4.558685302734375,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": 0.0016469955444335938
+          },
+          {
+            "feature": "electricity_price_per_kwh",
+            "value": 0.18000000715255737,
+            "reference_value": 0.10000000149011612,
+            "signed_contribution": 0.0046483674086630344,
+            "signed_percentage": 6.42999267578125,
+            "absolute_importance": 0.0046483674086630344,
+            "absolute_importance_pct": 6.42999267578125,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": 0.00563320517539978
+          },
+          {
+            "feature": "time_sin",
+            "value": 0.8314695954322815,
+            "reference_value": 0.0,
+            "signed_contribution": -0.029656019061803818,
+            "signed_percentage": -41.0225715637207,
+            "absolute_importance": 0.029656019061803818,
+            "absolute_importance_pct": 41.0225715637207,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.03414642810821533
+          },
+          {
+            "feature": "time_cos",
+            "value": -0.5555702447891235,
+            "reference_value": 1.0,
+            "signed_contribution": 0.010659659281373024,
+            "signed_percentage": 14.745290756225586,
+            "absolute_importance": 0.010659659281373024,
+            "absolute_importance_pct": 14.745290756225586,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": 0.01611386239528656
+          },
+          {
+            "feature": "hvac_action",
+            "value": 0.0,
+            "reference_value": 0.0,
+            "signed_contribution": -0.0,
+            "signed_percentage": -0.0,
+            "absolute_importance": 0.0,
+            "absolute_importance_pct": 0.0,
+            "direction": "neutral",
+            "ablation_margin_change": 0.0
+          }
+        ],
+        "faithfulness": {
+          "integrated_gradients_sum": -0.013451488688588142,
+          "expected_margin_change": -0.01378488540649414,
+          "completeness_absolute_error": 0.00033339671790599823,
+          "completeness_relative_error": 0.02418567206579266,
+          "absolute_attribution_ablation_correlation": 0.9692029026388113,
+          "top_feature_changes_margin_when_ablated": true
+        },
+        "human_readable": "DQN selected OFF mainly because its local decision margin was most associated with time of day (sin=0.83) and indoor temperature (22.9°C). These are model attributions, not causal effects.",
+        "causal_claim": false
+      },
+      "counterfactual": {
+        "found": true,
+        "original_action": 0,
+        "original_action_name": "OFF",
+        "counterfactual_action": 1,
+        "counterfactual_action_name": "LOW",
+        "original_q_values": [
+          -0.5465129613876343,
+          -0.562612771987915,
+          -0.5729360580444336,
+          -0.6102448105812073
+        ],
+        "counterfactual_q_values": [
+          -0.7779949903488159,
+          -0.7771643996238708,
+          -0.7800383567810059,
+          -0.7931457161903381
+        ],
+        "changes": [
+          {
+            "feature": "indoor_temperature_c",
+            "original_value": 22.913923263549805,
+            "counterfactual_value": 24.25,
+            "delta": 1.3360767364501953
+          }
+        ],
+        "normalized_l1_distance": 0.07031982823422081,
+        "within_bounds": true,
+        "action_changed": true,
+        "search_strategy": "one_feature_grid",
+        "human_readable": "DQN selected OFF. Under the model, changing indoor temperature from 22.9°C to 24.2°C switches the predicted action to LOW. This is a local model counterfactual, not a causal claim.",
+        "causal_claim": false
+      },
+      "energy_kwh": 0.0,
+      "electricity_cost": 0.0,
+      "comfort_status": "comfortable",
+      "co2_status": "acceptable"
+    },
+    {
+      "scenario": "hot_day",
+      "seed": 707,
+      "step": 59,
+      "timestamp": "Day 1 14:45",
+      "hour": 14.75,
+      "state": {
+        "indoor_temperature_c": 23.60719871520996,
+        "outdoor_temperature_c": 40.253990173339844,
+        "relative_humidity_pct": 46.84520721435547,
+        "occupancy": 40.0,
+        "co2_ppm": 628.5059204101562,
+        "electricity_price_per_kwh": 0.18000000715255737,
+        "time_sin": -0.659345805644989,
+        "time_cos": -0.751839816570282,
+        "hvac_action": 2.0
+      },
+      "action": 3,
+      "action_name": "HIGH",
+      "reward": -0.39249999999999996,
+      "reward_components": {
+        "reward": -0.39249999999999996,
+        "energy_cost_penalty": 0.2925,
+        "comfort_penalty": 0.0,
+        "co2_penalty": 0.0,
+        "switching_penalty": 0.1,
+        "temperature_violation_c": 0.0,
+        "co2_violation_ppm": 0.0
+      },
+      "feature_attribution": {
+        "method": "integrated_gradients_decision_margin",
+        "action": 3,
+        "action_name": "HIGH",
+        "contrast_action": 2,
+        "contrast_action_name": "MEDIUM",
+        "q_values": [
+          -0.3543901741504669,
+          -0.2978053689002991,
+          -0.25353938341140747,
+          -0.24465149641036987
+        ],
+        "decision_margin": 0.008887887001037598,
+        "contributions": [
+          {
+            "feature": "indoor_temperature_c",
+            "value": 23.60719871520996,
+            "reference_value": 23.5,
+            "signed_contribution": 0.00504966638982296,
+            "signed_percentage": 2.0781471729278564,
+            "absolute_importance": 0.00504966638982296,
+            "absolute_importance_pct": 2.0781471729278564,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": 0.007871195673942566
+          },
+          {
+            "feature": "outdoor_temperature_c",
+            "value": 40.253990173339844,
+            "reference_value": 26.0,
+            "signed_contribution": 0.09236452728509903,
+            "signed_percentage": 38.011837005615234,
+            "absolute_importance": 0.09236452728509903,
+            "absolute_importance_pct": 38.011837005615234,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": 0.09886334091424942
+          },
+          {
+            "feature": "relative_humidity_pct",
+            "value": 46.84520721435547,
+            "reference_value": 60.0,
+            "signed_contribution": -0.00989363994449377,
+            "signed_percentage": -4.071643352508545,
+            "absolute_importance": 0.00989363994449377,
+            "absolute_importance_pct": 4.071643352508545,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.010438352823257446
+          },
+          {
+            "feature": "occupancy",
+            "value": 40.0,
+            "reference_value": 0.0,
+            "signed_contribution": 0.034231413155794144,
+            "signed_percentage": 14.087647438049316,
+            "absolute_importance": 0.034231413155794144,
+            "absolute_importance_pct": 14.087647438049316,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": 0.06295093894004822
+          },
+          {
+            "feature": "co2_ppm",
+            "value": 628.5059204101562,
+            "reference_value": 600.0,
+            "signed_contribution": 0.0004873312427662313,
+            "signed_percentage": 0.20055702328681946,
+            "absolute_importance": 0.0004873312427662313,
+            "absolute_importance_pct": 0.20055702328681946,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": 0.0009559094905853271
+          },
+          {
+            "feature": "electricity_price_per_kwh",
+            "value": 0.18000000715255737,
+            "reference_value": 0.10000000149011612,
+            "signed_contribution": -0.011875235475599766,
+            "signed_percentage": -4.887152671813965,
+            "absolute_importance": 0.011875235475599766,
+            "absolute_importance_pct": 4.887152671813965,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.008419021964073181
+          },
+          {
+            "feature": "time_sin",
+            "value": -0.659345805644989,
+            "reference_value": 0.0,
+            "signed_contribution": -0.07644474506378174,
+            "signed_percentage": -31.460186004638672,
+            "absolute_importance": 0.07644474506378174,
+            "absolute_importance_pct": 31.460186004638672,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.06905144453048706
+          },
+          {
+            "feature": "time_cos",
+            "value": -0.751839816570282,
+            "reference_value": 1.0,
+            "signed_contribution": -0.006022098008543253,
+            "signed_percentage": -2.4783432483673096,
+            "absolute_importance": 0.006022098008543253,
+            "absolute_importance_pct": 2.4783432483673096,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.011727690696716309
+          },
+          {
+            "feature": "hvac_action",
+            "value": 2.0,
+            "reference_value": 0.0,
+            "signed_contribution": 0.006620194762945175,
+            "signed_percentage": 2.724484920501709,
+            "absolute_importance": 0.006620194762945175,
+            "absolute_importance_pct": 2.724484920501709,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": -0.021158456802368164
+          }
+        ],
+        "faithfulness": {
+          "integrated_gradients_sum": 0.03451741114258766,
+          "expected_margin_change": 0.034809648990631104,
+          "completeness_absolute_error": 0.00029223784804344177,
+          "completeness_relative_error": 0.00839531154485633,
+          "absolute_attribution_ablation_correlation": 0.9522873458004099,
+          "top_feature_changes_margin_when_ablated": true
+        },
+        "human_readable": "DQN selected HIGH mainly because its local decision margin was most associated with outdoor temperature (40.3°C) and time of day (sin=-0.66). These are model attributions, not causal effects.",
+        "causal_claim": false
+      },
+      "counterfactual": {
+        "found": true,
+        "original_action": 3,
+        "original_action_name": "HIGH",
+        "counterfactual_action": 2,
+        "counterfactual_action_name": "MEDIUM",
+        "original_q_values": [
+          -0.3543901741504669,
+          -0.2978053689002991,
+          -0.25353938341140747,
+          -0.24465149641036987
+        ],
+        "counterfactual_q_values": [
+          -0.2542790174484253,
+          -0.21176820993423462,
+          -0.17414364218711853,
+          -0.18920546770095825
+        ],
+        "changes": [
+          {
+            "feature": "indoor_temperature_c",
+            "original_value": 23.60719871520996,
+            "counterfactual_value": 23.25,
+            "delta": -0.35719871520996094
+          }
+        ],
+        "normalized_l1_distance": 0.01879993237947163,
+        "within_bounds": true,
+        "action_changed": true,
+        "search_strategy": "one_feature_grid",
+        "human_readable": "DQN selected HIGH. Under the model, changing indoor temperature from 23.6°C to 23.2°C switches the predicted action to MEDIUM. This is a local model counterfactual, not a causal claim.",
+        "causal_claim": false
+      },
+      "energy_kwh": 1.625,
+      "electricity_cost": 0.2925,
+      "comfort_status": "comfortable",
+      "co2_status": "acceptable"
+    },
+    {
+      "scenario": "high_occupancy",
+      "seed": 707,
+      "step": 35,
+      "timestamp": "Day 1 08:45",
+      "hour": 8.75,
+      "state": {
+        "indoor_temperature_c": 23.16473388671875,
+        "outdoor_temperature_c": 27.40351104736328,
+        "relative_humidity_pct": 63.40772247314453,
+        "occupancy": 57.0,
+        "co2_ppm": 526.4049682617188,
+        "electricity_price_per_kwh": 0.18000000715255737,
+        "time_sin": 0.751839816570282,
+        "time_cos": -0.659345805644989,
+        "hvac_action": 0.0
+      },
+      "action": 3,
+      "action_name": "HIGH",
+      "reward": -0.5925,
+      "reward_components": {
+        "reward": -0.5925,
+        "energy_cost_penalty": 0.2925,
+        "comfort_penalty": 0.0,
+        "co2_penalty": 0.0,
+        "switching_penalty": 0.30000000000000004,
+        "temperature_violation_c": 0.0,
+        "co2_violation_ppm": 0.0
+      },
+      "feature_attribution": {
+        "method": "integrated_gradients_decision_margin",
+        "action": 3,
+        "action_name": "HIGH",
+        "contrast_action": 2,
+        "contrast_action_name": "MEDIUM",
+        "q_values": [
+          -0.5780622363090515,
+          -0.5704028606414795,
+          -0.5495725274085999,
+          -0.5471264123916626
+        ],
+        "decision_margin": 0.002446115016937256,
+        "contributions": [
+          {
+            "feature": "indoor_temperature_c",
+            "value": 23.16473388671875,
+            "reference_value": 23.5,
+            "signed_contribution": -0.005780245177447796,
+            "signed_percentage": -4.081533432006836,
+            "absolute_importance": 0.005780245177447796,
+            "absolute_importance_pct": 4.081533432006836,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.0016428232192993164
+          },
+          {
+            "feature": "outdoor_temperature_c",
+            "value": 27.40351104736328,
+            "reference_value": 26.0,
+            "signed_contribution": 0.0071482472121715546,
+            "signed_percentage": 5.047504425048828,
+            "absolute_importance": 0.0071482472121715546,
+            "absolute_importance_pct": 5.047504425048828,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": 0.007565140724182129
+          },
+          {
+            "feature": "relative_humidity_pct",
+            "value": 63.40772247314453,
+            "reference_value": 60.0,
+            "signed_contribution": -0.001566150109283626,
+            "signed_percentage": -1.1058863401412964,
+            "absolute_importance": 0.001566150109283626,
+            "absolute_importance_pct": 1.1058863401412964,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": 0.0007812976837158203
+          },
+          {
+            "feature": "occupancy",
+            "value": 57.0,
+            "reference_value": 0.0,
+            "signed_contribution": 0.0735313892364502,
+            "signed_percentage": 51.921817779541016,
+            "absolute_importance": 0.0735313892364502,
+            "absolute_importance_pct": 51.921817779541016,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": 0.036130547523498535
+          },
+          {
+            "feature": "co2_ppm",
+            "value": 526.4049682617188,
+            "reference_value": 600.0,
+            "signed_contribution": -0.002040568273514509,
+            "signed_percentage": -1.4408814907073975,
+            "absolute_importance": 0.002040568273514509,
+            "absolute_importance_pct": 1.4408814907073975,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.003542304039001465
+          },
+          {
+            "feature": "electricity_price_per_kwh",
+            "value": 0.18000000715255737,
+            "reference_value": 0.10000000149011612,
+            "signed_contribution": -0.022492704913020134,
+            "signed_percentage": -15.882497787475586,
+            "absolute_importance": 0.022492704913020134,
+            "absolute_importance_pct": 15.882497787475586,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.01223096251487732
+          },
+          {
+            "feature": "time_sin",
+            "value": 0.751839816570282,
+            "reference_value": 0.0,
+            "signed_contribution": 0.003907934762537479,
+            "signed_percentage": 2.7594618797302246,
+            "absolute_importance": 0.003907934762537479,
+            "absolute_importance_pct": 2.7594618797302246,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": 0.045494139194488525
+          },
+          {
+            "feature": "time_cos",
+            "value": -0.659345805644989,
+            "reference_value": 1.0,
+            "signed_contribution": -0.02515219897031784,
+            "signed_percentage": -17.760414123535156,
+            "absolute_importance": 0.02515219897031784,
+            "absolute_importance_pct": 17.760414123535156,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.06879490613937378
+          },
+          {
+            "feature": "hvac_action",
+            "value": 0.0,
+            "reference_value": 0.0,
+            "signed_contribution": 0.0,
+            "signed_percentage": 0.0,
+            "absolute_importance": 0.0,
+            "absolute_importance_pct": 0.0,
+            "direction": "neutral",
+            "ablation_margin_change": 5.960464477539063e-08
+          }
+        ],
+        "faithfulness": {
+          "integrated_gradients_sum": 0.02755570411682129,
+          "expected_margin_change": 0.02836787700653076,
+          "completeness_absolute_error": 0.0008121728897094727,
+          "completeness_relative_error": 0.028630020128841395,
+          "absolute_attribution_ablation_correlation": 0.4604569642381797,
+          "top_feature_changes_margin_when_ablated": true
+        },
+        "human_readable": "DQN selected HIGH mainly because its local decision margin was most associated with occupancy (57 people) and time of day (cos=-0.66). These are model attributions, not causal effects.",
+        "causal_claim": false
+      },
+      "counterfactual": {
+        "found": true,
+        "original_action": 3,
+        "original_action_name": "HIGH",
+        "counterfactual_action": 2,
+        "counterfactual_action_name": "MEDIUM",
+        "original_q_values": [
+          -0.5780622363090515,
+          -0.5704028606414795,
+          -0.5495725274085999,
+          -0.5471264123916626
+        ],
+        "counterfactual_q_values": [
+          -0.48519718647003174,
+          -0.4749508500099182,
+          -0.468828022480011,
+          -0.47275087237358093
+        ],
+        "changes": [
+          {
+            "feature": "indoor_temperature_c",
+            "original_value": 23.16473388671875,
+            "counterfactual_value": 22.75,
+            "delta": -0.41473388671875
+          }
+        ],
+        "normalized_l1_distance": 0.021828099300986843,
+        "within_bounds": true,
+        "action_changed": true,
+        "search_strategy": "one_feature_grid",
+        "human_readable": "DQN selected HIGH. Under the model, changing indoor temperature from 23.2°C to 22.8°C switches the predicted action to MEDIUM. This is a local model counterfactual, not a causal claim.",
+        "causal_claim": false
+      },
+      "energy_kwh": 1.625,
+      "electricity_cost": 0.2925,
+      "comfort_status": "comfortable",
+      "co2_status": "acceptable"
+    },
+    {
+      "scenario": "combined_stress",
+      "seed": 707,
+      "step": 35,
+      "timestamp": "Day 1 08:45",
+      "hour": 8.75,
+      "state": {
+        "indoor_temperature_c": 22.891626358032227,
+        "outdoor_temperature_c": 33.870811462402344,
+        "relative_humidity_pct": 63.40772247314453,
+        "occupancy": 57.0,
+        "co2_ppm": 520.21533203125,
+        "electricity_price_per_kwh": 0.3199999928474426,
+        "time_sin": 0.751839816570282,
+        "time_cos": -0.659345805644989,
+        "hvac_action": 1.0
+      },
+      "action": 3,
+      "action_name": "HIGH",
+      "reward": -0.72,
+      "reward_components": {
+        "reward": -0.72,
+        "energy_cost_penalty": 0.52,
+        "comfort_penalty": 0.0,
+        "co2_penalty": 0.0,
+        "switching_penalty": 0.2,
+        "temperature_violation_c": 0.0,
+        "co2_violation_ppm": 0.0
+      },
+      "feature_attribution": {
+        "method": "integrated_gradients_decision_margin",
+        "action": 3,
+        "action_name": "HIGH",
+        "contrast_action": 2,
+        "contrast_action_name": "MEDIUM",
+        "q_values": [
+          -1.023722767829895,
+          -0.9824878573417664,
+          -0.971548318862915,
+          -0.9680576324462891
+        ],
+        "decision_margin": 0.0034906864166259766,
+        "contributions": [
+          {
+            "feature": "indoor_temperature_c",
+            "value": 22.891626358032227,
+            "reference_value": 23.5,
+            "signed_contribution": -0.010695352219045162,
+            "signed_percentage": -5.321556091308594,
+            "absolute_importance": 0.010695352219045162,
+            "absolute_importance_pct": 5.321556091308594,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.005461692810058594
+          },
+          {
+            "feature": "outdoor_temperature_c",
+            "value": 33.870811462402344,
+            "reference_value": 26.0,
+            "signed_contribution": 0.04300656542181969,
+            "signed_percentage": 21.398250579833984,
+            "absolute_importance": 0.04300656542181969,
+            "absolute_importance_pct": 21.398250579833984,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": 0.06711536645889282
+          },
+          {
+            "feature": "relative_humidity_pct",
+            "value": 63.40772247314453,
+            "reference_value": 60.0,
+            "signed_contribution": -0.002013767370954156,
+            "signed_percentage": -1.0019656419754028,
+            "absolute_importance": 0.002013767370954156,
+            "absolute_importance_pct": 1.0019656419754028,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": 0.0006442070007324219
+          },
+          {
+            "feature": "occupancy",
+            "value": 57.0,
+            "reference_value": 0.0,
+            "signed_contribution": 0.0684405267238617,
+            "signed_percentage": 34.05311965942383,
+            "absolute_importance": 0.0684405267238617,
+            "absolute_importance_pct": 34.05311965942383,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": 0.033246636390686035
+          },
+          {
+            "feature": "co2_ppm",
+            "value": 520.21533203125,
+            "reference_value": 600.0,
+            "signed_contribution": -0.001572260633111,
+            "signed_percentage": -0.782290518283844,
+            "absolute_importance": 0.001572260633111,
+            "absolute_importance_pct": 0.782290518283844,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.0033933520317077637
+          },
+          {
+            "feature": "electricity_price_per_kwh",
+            "value": 0.3199999928474426,
+            "reference_value": 0.10000000149011612,
+            "signed_contribution": -0.05328834801912308,
+            "signed_percentage": -26.514034271240234,
+            "absolute_importance": 0.05328834801912308,
+            "absolute_importance_pct": 26.514034271240234,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.0413670539855957
+          },
+          {
+            "feature": "time_sin",
+            "value": 0.751839816570282,
+            "reference_value": 0.0,
+            "signed_contribution": -5.02215807500761e-05,
+            "signed_percentage": -0.024988139048218727,
+            "absolute_importance": 5.02215807500761e-05,
+            "absolute_importance_pct": 0.024988139048218727,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": 0.049682244658470154
+          },
+          {
+            "feature": "time_cos",
+            "value": -0.659345805644989,
+            "reference_value": 1.0,
+            "signed_contribution": -0.019206076860427856,
+            "signed_percentage": -9.556133270263672,
+            "absolute_importance": 0.019206076860427856,
+            "absolute_importance_pct": 9.556133270263672,
+            "direction": "opposes_selected_action",
+            "ablation_margin_change": -0.06901800632476807
+          },
+          {
+            "feature": "hvac_action",
+            "value": 1.0,
+            "reference_value": 0.0,
+            "signed_contribution": 0.0027085482142865658,
+            "signed_percentage": 1.3476593494415283,
+            "absolute_importance": 0.0027085482142865658,
+            "absolute_importance_pct": 1.3476593494415283,
+            "direction": "supports_selected_action",
+            "ablation_margin_change": -0.005079090595245361
+          }
+        ],
+        "faithfulness": {
+          "integrated_gradients_sum": 0.027329610660672188,
+          "expected_margin_change": 0.029412448406219482,
+          "completeness_absolute_error": 0.0020828377455472946,
+          "completeness_relative_error": 0.07081483720025372,
+          "absolute_attribution_ablation_correlation": 0.45495870828051554,
+          "top_feature_changes_margin_when_ablated": true
+        },
+        "human_readable": "DQN selected HIGH mainly because its local decision margin was most associated with occupancy (57 people) and electricity price (0.320/kWh). These are model attributions, not causal effects.",
+        "causal_claim": false
+      },
+      "counterfactual": {
+        "found": true,
+        "original_action": 3,
+        "original_action_name": "HIGH",
+        "counterfactual_action": 1,
+        "counterfactual_action_name": "LOW",
+        "original_q_values": [
+          -1.023722767829895,
+          -0.9824878573417664,
+          -0.971548318862915,
+          -0.9680576324462891
+        ],
+        "counterfactual_q_values": [
+          -0.9399427175521851,
+          -0.8955041170120239,
+          -0.8973864316940308,
+          -0.8980015516281128
+        ],
+        "changes": [
+          {
+            "feature": "indoor_temperature_c",
+            "original_value": 22.891626358032227,
+            "counterfactual_value": 22.5,
+            "delta": -0.39162635803222656
+          }
+        ],
+        "normalized_l1_distance": 0.020611913580643505,
+        "within_bounds": true,
+        "action_changed": true,
+        "search_strategy": "one_feature_grid",
+        "human_readable": "DQN selected HIGH. Under the model, changing indoor temperature from 22.9°C to 22.5°C switches the predicted action to LOW. This is a local model counterfactual, not a causal claim.",
+        "causal_claim": false
+      },
+      "energy_kwh": 1.625,
+      "electricity_cost": 0.52,
+      "comfort_status": "comfortable",
+      "co2_status": "acceptable"
+    }
+  ],
+  "validation": {
+    "steps_validated": 384,
+    "deterministic_replay_checks": 8,
+    "deterministic_replay_passed": true,
+    "maximum_importance_normalization_error_pct": 1.52587890625e-05,
+    "median_completeness_absolute_error": 0.00026712939143180847,
+    "p95_completeness_absolute_error": 0.0012029959820210922,
+    "mean_absolute_attribution_ablation_correlation": 0.7233985123772326,
+    "top_feature_ablation_effect_rate": 1.0,
+    "counterfactual_found_rate": 1.0,
+    "counterfactual_action_flip_validity_rate": 1.0,
+    "counterfactual_bounds_validity_rate": 1.0,
+    "scenario_explanations_are_distinct": true,
+    "scenario_explanation_samples": {
+      "normal": "DQN selected OFF mainly because its local decision margin was most associated with time of day (sin=0.83) and indoor temperature (22.9°C). These are model attributions, not causal effects.",
+      "hot_day": "DQN selected HIGH mainly because its local decision margin was most associated with outdoor temperature (40.3°C) and time of day (sin=-0.66). These are model attributions, not causal effects.",
+      "high_occupancy": "DQN selected HIGH mainly because its local decision margin was most associated with occupancy (57 people) and time of day (cos=-0.66). These are model attributions, not causal effects.",
+      "combined_stress": "DQN selected HIGH mainly because its local decision margin was most associated with occupancy (57 people) and electricity price (0.320/kWh). These are model attributions, not causal effects."
+    }
+  },
+  "limitations": [
+    "Attributions explain the learned DQN locally; they are not physical causal effects.",
+    "Integrated Gradients depends on the configured reference state.",
+    "Counterfactuals are limited to configured features, bounds, and grid resolution.",
+    "A plausible state vector may not be dynamically reachable from every trajectory history.",
+    "Correlated time and weather features can share or redistribute attribution."
+  ]
+}

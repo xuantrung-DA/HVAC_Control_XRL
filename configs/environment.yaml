@@ -1,0 +1,120 @@
+project:
+  name: XRL-HVAC
+  seed: 42
+
+simulation:
+  timestep_minutes: 15
+  episode_hours: 24
+  steps_per_episode: 96
+
+building:
+  initial_indoor_temperature_c: 24.0
+  thermal_mass_kwh_per_c: 12.0
+  envelope_conductance_kw_per_c: 0.32
+  solar_heat_gain_peak_kw: 3.0
+  occupant_heat_gain_kw_per_person: 0.10
+  floor_area_m2: 500.0
+
+weather:
+  daily_low_c: 23.0
+  daily_high_c: 34.0
+  peak_hour: 15.0
+  noise_std_c: 0.25
+  relative_humidity_min_pct: 45.0
+  relative_humidity_max_pct: 80.0
+  humidity_noise_std_pct: 1.0
+
+occupancy:
+  capacity: 50
+  workday_start_hour: 8.0
+  workday_end_hour: 18.0
+  peak_fraction: 0.80
+  arrival_transition_hours: 1.0
+  departure_transition_hours: 1.0
+
+iaq:
+  initial_co2_ppm: 500.0
+  outdoor_co2_ppm: 420.0
+  co2_generation_ppm_per_person_hour: 7.5
+  natural_air_changes_per_hour: 0.15
+  hvac_air_changes_per_hour:
+    0: 0.0
+    1: 0.6
+    2: 1.2
+    3: 2.0
+  co2_limit_ppm: 1000.0
+
+hvac:
+  cooling_power_kw:
+    0: 0.0
+    1: 4.0
+    2: 8.0
+    3: 13.0
+  electrical_power_kw:
+    0: 0.0
+    1: 1.8
+    2: 3.8
+    3: 6.5
+
+energy:
+  off_peak_price_per_kwh: 0.10
+  shoulder_price_per_kwh: 0.18
+  peak_price_per_kwh: 0.32
+  shoulder_start_hour: 7.0
+  peak_start_hour: 16.0
+  peak_end_hour: 21.0
+  shoulder_end_hour: 23.0
+
+comfort:
+  occupied_temperature_min_c: 22.0
+  occupied_temperature_max_c: 25.0
+  unoccupied_temperature_min_c: 18.0
+  unoccupied_temperature_max_c: 29.0
+  occupancy_threshold: 1
+
+reward:
+  energy_cost_weight: 1.0
+  comfort_weight: 2.5
+  co2_weight: 1.5
+  switching_weight: 0.10
+  temperature_scale_c: 1.0
+  co2_scale_ppm: 200.0
+
+baselines:
+  fixed_thermostat:
+    temperature_thresholds_c: [23.5, 24.5, 25.5]
+    hysteresis_c: 0.20
+  rule_based:
+    temperature_low_c: 22.5
+    temperature_medium_c: 24.5
+    temperature_high_c: 25.5
+    co2_medium_ppm: 900.0
+    co2_high_ppm: 1100.0
+    high_price_threshold_per_kwh: 0.30
+    max_unoccupied_action: 1
+    max_action_change_per_step: 1
+
+scenarios:
+  normal: {}
+  hot_day:
+    weather:
+      daily_low_c: 28.0
+      daily_high_c: 40.0
+  high_occupancy:
+    occupancy:
+      capacity: 80
+      peak_fraction: 0.95
+  expensive_electricity:
+    energy:
+      peak_price_per_kwh: 0.60
+      shoulder_price_per_kwh: 0.30
+  combined_stress:
+    weather:
+      daily_low_c: 29.0
+      daily_high_c: 41.0
+    occupancy:
+      capacity: 80
+      peak_fraction: 0.95
+    energy:
+      peak_price_per_kwh: 0.65
+      shoulder_price_per_kwh: 0.32

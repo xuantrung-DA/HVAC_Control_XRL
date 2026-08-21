@@ -1,0 +1,48 @@
+attribution:
+  method: integrated_gradients_decision_margin
+  integration_steps: 128
+  reference_state:
+    indoor_temperature_c: 23.5
+    outdoor_temperature_c: 26.0
+    relative_humidity_pct: 60.0
+    occupancy: 0
+    co2_ppm: 600.0
+    electricity_price_per_kwh: 0.10
+    time_sin: 0.0
+    time_cos: 1.0
+    hvac_action: 0
+
+counterfactual:
+  searchable_features:
+    indoor_temperature_c:
+      minimum: 16.0
+      maximum: 35.0
+      step: 0.25
+      decimals: 2
+    occupancy:
+      minimum: 0
+      maximum: 80
+      step: 1
+      decimals: 0
+    co2_ppm:
+      minimum: 350.0
+      maximum: 2000.0
+      step: 25.0
+      decimals: 0
+    electricity_price_per_kwh:
+      minimum: 0.05
+      maximum: 0.70
+      step: 0.025
+      decimals: 3
+  two_feature_fallback:
+    enabled: true
+    candidates_per_feature: 9
+    maximum_feature_pairs: 3
+
+trajectory:
+  seed: 707
+  scenarios:
+    - normal
+    - hot_day
+    - high_occupancy
+    - combined_stress

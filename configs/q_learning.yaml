@@ -1,0 +1,34 @@
+agent:
+  name: q_learning
+  seed: 42
+
+learning:
+  learning_rate: 0.15
+  gamma: 0.99
+  epsilon_start: 1.0
+  epsilon_end: 0.03
+  epsilon_decay_episodes: 300
+
+discretization:
+  indoor_temperature_c: [20.0, 22.0, 23.0, 24.0, 25.0, 26.0, 28.0, 30.0]
+  outdoor_temperature_c: [24.0, 28.0, 32.0, 36.0, 40.0]
+  occupancy: [0.5, 10.0, 30.0, 50.0, 70.0]
+  co2_ppm: [600.0, 800.0, 1000.0, 1200.0, 1600.0]
+  # A single broad price bin avoids sparse-table failure on unseen tariff levels.
+  # Time-of-day remains in the state, so the policy can still learn the TOU schedule.
+  electricity_price_per_kwh: [0.70]
+  hour: [6.0, 9.0, 12.0, 15.0, 18.0, 21.0]
+
+training:
+  episodes: 1500
+  evaluation_frequency: 100
+  evaluation_episodes: 10
+  log_frequency: 25
+  checkpoint_frequency: 100
+
+smoke_test:
+  episodes: 300
+
+checkpoint:
+  directory: models/q_learning
+  filename: q_learning.npz

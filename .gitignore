@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+.Python
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments and local configuration
+.venv/
+venv/
+env/
+.env
+.env.local
+
+# Training artifacts
+models/**/*.pt
+models/**/*.pth
+models/**/*.zip
+models/**/*.npz
+!models/dqn/demo_best.pt
+outputs/logs/*
+outputs/metrics/*
+outputs/trajectories/*
+!outputs/logs/.gitkeep
+!outputs/metrics/.gitkeep
+!outputs/trajectories/.gitkeep
+!outputs/metrics/step5/
+outputs/metrics/step5/*
+!outputs/metrics/step5/benchmark_report.json
+!outputs/trajectories/xai/
+outputs/trajectories/xai/*
+!outputs/trajectories/xai/step6_xai_report.json
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/coverage/
+frontend/.env.local
+*.tsbuildinfo
+
+# Editors and operating systems
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+outputs/*.png
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
