@@ -1,0 +1,26 @@
+splits:
+  train:
+    - normal_v2
+    - hot_day_v2
+    - high_occupancy_v2
+    - high_humidity_v2
+  validation:
+    - expensive_electricity_v2
+    - meeting_surge_v2
+    - high_electronics_load_v2
+    - cleaning_event_v2
+  held_out_efficiency:
+    - combined_stress_v2
+  held_out_resilience:
+    - unexpected_occupancy_surge_v2
+    - forecast_failure_v2
+  held_out_safety:
+    - heatwave_v2
+    - door_left_open_v2
+
+rules:
+  scenarios_are_disjoint: true
+  all_randomness_is_seeded: true
+  held_out_results_may_not_select_profiles: true
+  unexpected_events_are_hidden_from_forecasts: true
+  capacity_scaled_surges: true

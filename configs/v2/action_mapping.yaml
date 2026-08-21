@@ -1,0 +1,26 @@
+action_space:
+  type: discrete
+  count: 4
+  actions:
+    0:
+      name: OFF
+      cooling_command_fraction: 0.0
+      mechanical_ventilation_ach: 0.0
+    1:
+      name: LOW
+      cooling_command_fraction: 0.30
+      mechanical_ventilation_ach: 0.50
+    2:
+      name: MEDIUM
+      cooling_command_fraction: 0.62
+      mechanical_ventilation_ach: 1.10
+    3:
+      name: HIGH
+      cooling_command_fraction: 1.0
+      mechanical_ventilation_ach: 1.90
+
+future_continuous_control:
+  enabled: false
+  activation_requires_discrete_limitation_evidence: true
+  candidate_algorithm: SAC
+  candidate_actions: [cooling_power_fraction, ventilation_rate_fraction]

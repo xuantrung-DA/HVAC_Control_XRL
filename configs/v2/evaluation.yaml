@@ -1,0 +1,64 @@
+episode:
+  hours: 24
+  timestep_minutes: 15
+  steps: 96
+
+energy_metrics:
+  - hvac_cooling_kwh
+  - ventilation_fan_kwh
+  - controllable_hvac_ventilation_kwh
+  - lighting_kwh
+  - electronics_kwh
+  - base_building_kwh
+  - whole_building_kwh
+  - peak_power_kw
+
+cost_metrics:
+  - total_electricity_cost
+  - peak_period_cost
+
+comfort_metrics:
+  - comfort_violation_percent
+  - temperature_degree_hours
+  - humidity_violation_hours
+  - recovery_steps
+  - overcooling_steps
+
+iaq_metrics:
+  - co2_violation_percent
+  - co2_peak_ppm
+  - co2_excess_ppm_hours
+  - co2_recovery_steps
+
+control_metrics:
+  - switches
+  - aggressive_transitions
+  - compressor_runtime_hours
+  - cycling_count
+  - action_distribution
+  - action_entropy
+
+forecast_metrics:
+  - mae
+  - rmse
+  - interval_coverage
+  - inference_time_ms
+
+resilience_metrics:
+  - surge_detection_delay_steps
+  - forecast_failure_detection_steps
+  - performance_degradation_percent
+  - recovery_steps
+
+safety_metrics:
+  - critical_constraint_violations
+  - proposed_unsafe_actions
+  - shield_interventions
+  - shield_intervention_rate
+  - fallback_rate
+
+reporting:
+  mean_std: true
+  paired_seed_deltas: true
+  confidence_interval_percent: 95
+  pareto_dimensions: [whole_building_kwh, comfort_violation_percent, co2_violation_percent]

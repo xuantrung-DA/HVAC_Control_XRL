@@ -1,0 +1,76 @@
+project:
+  name: XRL-HVAC
+  simulator_version: XRL-HVAC-v2
+  seed: 42
+
+simulation:
+  timestep_minutes: 15
+  episode_hours: 24
+  steps_per_episode: 96
+  thermal_network: 2R1C
+
+zone:
+  floor_area_m2: 500.0
+  ceiling_height_m: 3.0
+  air_volume_m3: 1500.0
+  maximum_occupancy: 100
+  initial_indoor_temperature_c: 24.0
+  initial_thermal_mass_temperature_c: 24.0
+  initial_relative_humidity_pct: 55.0
+  initial_co2_ppm: 500.0
+
+envelope:
+  outdoor_to_indoor_resistance_c_per_kw: 1.70
+  indoor_to_mass_resistance_c_per_kw: 0.45
+  thermal_mass_capacity_kwh_per_c: 28.0
+  indoor_air_effective_capacity_kwh_per_c: 3.2
+  window_area_m2: 70.0
+  solar_heat_gain_coefficient: 0.42
+
+internal_gains:
+  occupant_sensible_kw_per_person: 0.075
+  occupant_latent_kg_per_hour_person: 0.055
+  desktop_kw_each: 0.10
+  laptop_kw_each: 0.045
+  monitor_kw_each: 0.025
+  lighting_w_per_m2: 7.0
+  other_electronics_kw: 1.2
+  heat_fraction_of_electric_load: 0.92
+
+airflow:
+  closed_door_infiltration_ach: 0.12
+  open_door_infiltration_ach: 0.70
+  left_open_door_infiltration_ach: 1.80
+  outdoor_co2_ppm: 420.0
+  co2_generation_liters_per_hour_person: 18.0
+
+hvac:
+  maximum_delivered_cooling_kw: 28.0
+  cooling_time_constant_minutes: 20.0
+  rated_cop: 3.4
+  high_action_cop_multiplier: 0.86
+  fan_rated_power_kw: 2.0
+  dehumidification_kg_per_kwh_cooling: 0.35
+
+building_loads:
+  base_power_kw: 2.2
+  network_and_server_power_kw: 1.0
+  cleaning_equipment_power_kw: 1.5
+
+comfort:
+  occupied_temperature_min_c: 22.0
+  occupied_temperature_max_c: 25.0
+  occupied_humidity_min_pct: 35.0
+  occupied_humidity_max_pct: 65.0
+  unoccupied_temperature_min_c: 18.0
+  unoccupied_temperature_max_c: 29.0
+  unoccupied_humidity_min_pct: 25.0
+  unoccupied_humidity_max_pct: 75.0
+  co2_limit_ppm: 1000.0
+
+physical_bounds:
+  indoor_temperature_c: [5.0, 45.0]
+  thermal_mass_temperature_c: [5.0, 45.0]
+  relative_humidity_pct: [5.0, 100.0]
+  co2_ppm: [350.0, 5000.0]
+  maximum_temperature_change_c_per_step: 2.0

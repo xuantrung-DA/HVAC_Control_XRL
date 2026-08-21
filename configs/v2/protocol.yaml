@@ -1,0 +1,52 @@
+protocol:
+  id: xrl_hvac_v2_001
+  simulator_version: XRL-HVAC-v2
+  status: development
+  v1_git_tag: v1-frozen
+  primary_objective: >-
+    Match or beat the frozen V2 Rule-Based baseline on whole-building energy,
+    controllable HVAC plus ventilation energy, and electricity cost while
+    satisfying comfort, IAQ, safety, generalization, and resilience gates.
+
+seeds:
+  training: [42, 123, 2026]
+  validation: [901, 902, 903, 904, 905]
+  held_out: [1701, 1702, 1703, 1704, 1705]
+
+acceptance_gates:
+  efficiency:
+    whole_building_energy_delta_vs_rule_based_max_pct: 0.0
+    hvac_ventilation_energy_delta_vs_rule_based_max_pct: 0.0
+    electricity_cost_delta_vs_rule_based_max_pct: 0.0
+    applies_to: held_out_aggregate_and_combined_stress
+  constraints:
+    comfort_violation_percent_max_exclusive: 5.0
+    co2_violation_percent_max_exclusive: 1.0
+    critical_safety_violations_max: 0
+    applies_to: every_held_out_scenario_mean
+  policy:
+    maximum_single_action_fraction: 0.90
+    minimum_unique_actions_mean: 2.0
+    checkpoint_reproducibility_required: true
+  resilience:
+    unexpected_surge_detection_delay_steps_max: 2
+    unexpected_surge_recovery_steps_max: 8
+    forecast_failure_energy_degradation_max_pct: 15.0
+    forecast_failure_reliability_must_decrease: true
+    normal_day_shield_intervention_rate_max: 0.20
+    normal_day_fallback_rate_max: 0.05
+
+selection_order:
+  - critical_safety
+  - comfort_and_co2_constraints
+  - energy_and_cost
+  - forecast_and_surge_resilience
+  - pareto_and_reward
+
+held_out_policy:
+  tune_on_held_out: false
+  require_frozen_candidate: true
+  require_frozen_rule_based: true
+  require_manifest_hashes: true
+  write_final_test_receipt: true
+  rerun_after_observing_results: false

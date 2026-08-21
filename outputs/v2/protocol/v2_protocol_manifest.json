@@ -1,0 +1,100 @@
+{
+  "manifest_version": 1,
+  "protocol_id": "xrl_hvac_v2_001",
+  "simulator_version": "XRL-HVAC-v2",
+  "status": "development",
+  "generated_at_utc": "2026-08-21T13:12:59.081311+00:00",
+  "v1_git_tag": "v1-frozen",
+  "v1_git_commit": "4bbd1450c01a9bf862c340a108e1a598533bf3de",
+  "config_hashes": {
+    "configs/v2/protocol.yaml": "536a7358cac6d60174b61f55cbdcc884c8564bd0648387b7eae4837448571ac9",
+    "configs/v2/scenarios.yaml": "bc3c678a4b1952b895073a29bff9a99739d1ead66dfad402cc636a9db0dc4a89",
+    "configs/v2/evaluation.yaml": "66c49330e1be786fee8b2f3979b20c140551c1b2897341af9935ca6271fa87ed",
+    "configs/v2/action_mapping.yaml": "26c1ab3056e5437e3c548eddfe3c5cb37551b674f405418bda60533027d6f646",
+    "configs/v2/environment.yaml": "0d1fa6a1a10053d03521600125dfa29c35756f2fd231aeb8ec8bc717e7f3560d"
+  },
+  "protocol_bundle_sha256": "a600c5aa7a7e03c1c40f0951127e321a37c289f7257c3c7a4c3cb9610d731406",
+  "v1_baseline_manifest_sha256": "18e6438880e91ee9ec1608df3cff0cb2c9d7720277b0ac681f5d45873624f657",
+  "scenario_splits": {
+    "train": [
+      "normal_v2",
+      "hot_day_v2",
+      "high_occupancy_v2",
+      "high_humidity_v2"
+    ],
+    "validation": [
+      "expensive_electricity_v2",
+      "meeting_surge_v2",
+      "high_electronics_load_v2",
+      "cleaning_event_v2"
+    ],
+    "held_out_efficiency": [
+      "combined_stress_v2"
+    ],
+    "held_out_resilience": [
+      "unexpected_occupancy_surge_v2",
+      "forecast_failure_v2"
+    ],
+    "held_out_safety": [
+      "heatwave_v2",
+      "door_left_open_v2"
+    ]
+  },
+  "seeds": {
+    "training": [
+      42,
+      123,
+      2026
+    ],
+    "validation": [
+      901,
+      902,
+      903,
+      904,
+      905
+    ],
+    "held_out": [
+      1701,
+      1702,
+      1703,
+      1704,
+      1705
+    ]
+  },
+  "acceptance_gates": {
+    "efficiency": {
+      "whole_building_energy_delta_vs_rule_based_max_pct": 0.0,
+      "hvac_ventilation_energy_delta_vs_rule_based_max_pct": 0.0,
+      "electricity_cost_delta_vs_rule_based_max_pct": 0.0,
+      "applies_to": "held_out_aggregate_and_combined_stress"
+    },
+    "constraints": {
+      "comfort_violation_percent_max_exclusive": 5.0,
+      "co2_violation_percent_max_exclusive": 1.0,
+      "critical_safety_violations_max": 0,
+      "applies_to": "every_held_out_scenario_mean"
+    },
+    "policy": {
+      "maximum_single_action_fraction": 0.9,
+      "minimum_unique_actions_mean": 2.0,
+      "checkpoint_reproducibility_required": true
+    },
+    "resilience": {
+      "unexpected_surge_detection_delay_steps_max": 2,
+      "unexpected_surge_recovery_steps_max": 8,
+      "forecast_failure_energy_degradation_max_pct": 15.0,
+      "forecast_failure_reliability_must_decrease": true,
+      "normal_day_shield_intervention_rate_max": 0.2,
+      "normal_day_fallback_rate_max": 0.05
+    }
+  },
+  "held_out_policy": {
+    "tune_on_held_out": false,
+    "require_frozen_candidate": true,
+    "require_frozen_rule_based": true,
+    "require_manifest_hashes": true,
+    "write_final_test_receipt": true,
+    "rerun_after_observing_results": false
+  },
+  "final_test_opened": false
+}
