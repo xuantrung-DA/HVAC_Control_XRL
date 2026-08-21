@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-08-21T13:40:38.147194+00:00",
+  "generated_at_utc": "2026-08-21T13:45:15.243842+00:00",
   "environment": "XRL-HVAC-v2",
   "observation_schema": "xrl_hvac_v2_obs_001",
   "observation_size": 34,
@@ -41,7 +41,7 @@
     "price_reliability"
   ],
   "physical_units_emitted": true,
-  "training_reward_authorized": false,
+  "training_reward_authorized": true,
   "v1_adapter": {
     "checkpoint": "models/dqn/demo_best.pt",
     "sha256_before": "9d33a157ddb25a79a6ef03efee97c3491ef61bcb8b47d814f237d54695d5236a",
@@ -57,14 +57,14 @@
     "deterministic_inference": true
   },
   "performance": {
-    "episode_seconds": 0.387174200033769,
-    "steps_per_second_with_forecast_risk_v1_dqn": 247.95040576470996
+    "episode_seconds": 0.4244814000558108,
+    "steps_per_second_with_forecast_risk_v1_dqn": 226.15831927471478
   },
   "checks": {
     "observation_size_is_34": true,
     "v1_checkpoint_unchanged": true,
     "v1_agent_completed_episode": true,
-    "reward_is_explicitly_provisional": true
+    "reward_is_auditable_and_authorized": true
   },
   "all_checks_passed": true
 }

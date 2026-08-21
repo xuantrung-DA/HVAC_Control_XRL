@@ -1,0 +1,62 @@
+{
+  "profile_id": "reward_profile_v2_001",
+  "schema_version": 1,
+  "simulator_version": "XRL-HVAC-v2",
+  "created_at_utc": "2026-08-21T00:00:00+00:00",
+  "selection_seed": 42,
+  "formula": "reward = -sum(normalized_penalty_i * effective_weight_i)",
+  "supported_modes": ["fixed", "dynamic", "cmdp_lagrangian"],
+  "default_mode": "dynamic",
+  "base_weights": {
+    "energy": 1.0,
+    "comfort": 2.5,
+    "co2": 1.5,
+    "switching": 0.1,
+    "peak_power": 0.2,
+    "overcooling": 0.5
+  },
+  "normalization": {
+    "electricity_cost_per_step": 0.5,
+    "temperature_violation_c": 1.0,
+    "humidity_violation_pct": 10.0,
+    "co2_violation_ppm": 200.0,
+    "switch_magnitude": 3.0,
+    "peak_power_kw": 20.0,
+    "overcooling_action_magnitude": 3.0
+  },
+  "adaptive_rules": {
+    "deterministic": true,
+    "observable_context_only": true,
+    "energy_safe_bonus": 1.0,
+    "comfort_risk_multiplier": 2.0,
+    "co2_risk_multiplier": 2.5,
+    "safe_risk_threshold": 0.2,
+    "anti_overcooling_temperature_margin_c": 1.0
+  },
+  "cmdp": {
+    "comfort_violation_target_fraction": 0.05,
+    "co2_violation_target_fraction": 0.01,
+    "initial_comfort_multiplier": 1.0,
+    "initial_co2_multiplier": 1.0,
+    "learning_rate": 0.25,
+    "multiplier_min": 0.0,
+    "multiplier_max": 20.0,
+    "update_frequency": "episode"
+  },
+  "rationale": [
+    "Energy receives more priority only when observable thermal and IAQ risk are low.",
+    "Comfort and CO2 weights rise smoothly before hard violations through observable risk.",
+    "Switching, peak demand, and overcooling remain explicit operational penalties.",
+    "CMDP multipliers update only at episode boundaries to limit objective non-stationarity."
+  ],
+  "selection_protocol": {
+    "train_splits_only": true,
+    "validation_selects_profile": true,
+    "combined_stress_used_for_tuning": false,
+    "constraint_gates_before_reward": true
+  },
+  "evaluation": {
+    "status": "not_evaluated",
+    "results_artifact": null
+  }
+}

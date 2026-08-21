@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-21T13:45:55.633795+00:00",
+  "profile_id": "reward_profile_v2_001",
+  "profile_sha256": "4b67817d4cadd8dde01d00657c3d7f41fd5b639b4370582ef332786132a93763",
+  "scenario": "normal_v2",
+  "seed": 42,
+  "profile_selection_performed": false,
+  "held_out_used": false,
+  "mode_rollout_metrics": {
+    "fixed": {
+      "reward": -352.1569355376294,
+      "whole_building_kwh": 340.52204777171636,
+      "hvac_ventilation_kwh": 169.54262592951258,
+      "electricity_cost": 65.7951470021947
+    },
+    "dynamic": {
+      "reward": -663.4302523634739,
+      "whole_building_kwh": 340.52204777171636,
+      "hvac_ventilation_kwh": 169.54262592951258,
+      "electricity_cost": 65.7951470021947
+    },
+    "cmdp_lagrangian": {
+      "reward": -223.21528661883102,
+      "whole_building_kwh": 340.52204777171636,
+      "hvac_ventilation_kwh": 169.54262592951258,
+      "electricity_cost": 65.7951470021947
+    }
+  },
+  "checks": {
+    "all_modes_complete_96_steps": true,
+    "dynamic_audit_reconstructs_reward": true,
+    "dynamic_weights_changed": true,
+    "priorities_sum_to_100": true
+  },
+  "limitations": [
+    "This is a reward-accounting validation with one deterministic controller, not model selection.",
+    "The profile remains unevaluated until multi-seed train/validation benchmarking."
+  ],
+  "all_checks_passed": true
+}

@@ -51,7 +51,7 @@ def main() -> None:
         "observation_size": len(v2.observation_names),
         "observation_names": list(v2.observation_names),
         "physical_units_emitted": True,
-        "training_reward_authorized": False,
+        "training_reward_authorized": True,
         "v1_adapter": {
             "checkpoint": "models/dqn/demo_best.pt",
             "sha256_before": checksum_before,
@@ -69,8 +69,9 @@ def main() -> None:
             "observation_size_is_34": len(v2.observation_names) == 34,
             "v1_checkpoint_unchanged": checksum_before == checksum_after,
             "v1_agent_completed_episode": len(actions) == 96,
-            "reward_is_explicitly_provisional": info["reward_status"]
-            == "PROVISIONAL_NOT_AUTHORIZED_FOR_TRAINING",
+            "reward_is_auditable_and_authorized": info["reward_status"]
+            == "AUTHORIZED_AUDITABLE_V2_REWARD"
+            and info["reward_audit"]["profile_id"] == "reward_profile_v2_001",
         },
     }
     report["all_checks_passed"] = all(report["checks"].values())

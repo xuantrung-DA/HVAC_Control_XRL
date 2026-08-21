@@ -30,7 +30,8 @@ def test_v2_episode_is_seeded_and_completes() -> None:
         assert not truncated
         steps += 1
     assert steps == 96
-    assert info1["reward_status"] == "PROVISIONAL_NOT_AUTHORIZED_FOR_TRAINING"
+    assert info1["reward_status"] == "AUTHORIZED_AUDITABLE_V2_REWARD"
+    assert info1["reward_audit"]["profile_id"] == "reward_profile_v2_001"
     assert info1["episode_metrics"]["whole_building_kwh"] > 0.0
 
 

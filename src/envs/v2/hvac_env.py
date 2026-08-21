@@ -15,17 +15,23 @@ from src.envs.v2.models import V2BuildingState
 from src.envs.v2.observation import V2_OBSERVATION_NAMES, build_v2_observation, v2_observation_space
 from src.envs.v2.physics import TwoR1CBuildingModel
 from src.envs.v2.profiles import ScenarioTimeline, V2ScenarioGenerator
+from src.envs.v2.reward import V2RewardModel
 from src.forecasting import FORECAST_FEATURES, ForecastBundle, SeasonalProfileForecaster
 from src.risk import ForecastReliabilityTracker, ObservableRiskAnalyzer, OnlineSignalMonitor
 from src.utils.config import PROJECT_ROOT, load_yaml
 
 
 class V2HVACEnv(gym.Env[np.ndarray, int]):
-    """One-day V2 environment; reward remains provisional until Milestone 9."""
+    """One-day V2 environment with auditable reward and proactive context."""
 
     metadata = {"render_modes": ["ansi"], "render_fps": 4}
 
-    def __init__(self, scenario: str = "normal_v2", render_mode: str | None = None) -> None:
+    def __init__(
+        self,
+        scenario: str = "normal_v2",
+        render_mode: str | None = None,
+        reward_mode: str = "dynamic",
+    ) -> None:
         super().__init__()
         if render_mode not in (None, "ansi"):
             raise ValueError("render_mode must be None or 'ansi'")
@@ -35,12 +41,20 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
         self.forecast_config = load_yaml(PROJECT_ROOT / "configs/v2/forecasting.yaml")
         self.risk_config = load_yaml(PROJECT_ROOT / "configs/v2/risk.yaml")
         self.action_config = load_yaml(PROJECT_ROOT / "configs/v2/action_mapping.yaml")
+        self.reward_profile = json.loads(
+            (PROJECT_ROOT / "configs/reward_profiles/reward_profile_v2_001.json").read_text(
+                encoding="utf-8"
+            )
+        )
         self.generator = V2ScenarioGenerator.from_project()
         self.simulator = TwoR1CBuildingModel(self.environment_config, self.action_config)
         self.forecaster = SeasonalProfileForecaster(self.forecast_config)
         model_path = PROJECT_ROOT / "outputs/v2/forecasting/forecast_model.json"
         self.forecaster.load_model_state(json.loads(model_path.read_text(encoding="utf-8")))
         self.risk_analyzer = ObservableRiskAnalyzer(self.risk_config, self.environment_config)
+        self.reward_model = V2RewardModel(
+            self.reward_profile, self.environment_config, mode=reward_mode
+        )
         self.action_space = spaces.Discrete(len(HVACAction))
         self.observation_space = v2_observation_space()
         self.max_steps = int(self.environment_config["simulation"]["steps_per_episode"])
@@ -51,6 +65,7 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
         self._forecast: ForecastBundle | None = None
         self._monitoring = None
         self._risk = None
+        self._reward_audit = None
         self._issued_forecasts: dict[int, Any] = {}
         self._done = False
         self._totals: dict[str, float | int] = {}
@@ -78,6 +93,8 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
         self._monitor = OnlineSignalMonitor(self.risk_config)
         self._reliability = ForecastReliabilityTracker(self.risk_config)
         self._issued_forecasts = {}
+        self.reward_model.reset_episode()
+        self._reward_audit = None
         self._done = False
         self._totals = {
             "reward": 0.0, "whole_building_kwh": 0.0,
@@ -103,12 +120,12 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
         if not self.action_space.contains(action):
             raise ValueError("V2 action must be one of 0, 1, 2, 3")
         interval_inputs = self._timeline.inputs[self.state.step]
+        previous_action = self.state.hvac_action
+        decision_risk = self._risk
         next_state, transition = self.simulator.step(self.state, int(action), interval_inputs)
         self._state = next_state
         terminated = next_state.step >= self.max_steps
         self._done = terminated
-        reward = self._provisional_reward(next_state, transition.energy.electricity_cost)
-        self._totals["reward"] = float(self._totals["reward"]) + reward
         self._totals["whole_building_kwh"] = float(self._totals["whole_building_kwh"]) + transition.energy.whole_building_kwh
         self._totals["hvac_ventilation_kwh"] = float(self._totals["hvac_ventilation_kwh"]) + transition.energy.controllable_hvac_ventilation_kwh
         self._totals["electricity_cost"] = float(self._totals["electricity_cost"]) + transition.energy.electricity_cost
@@ -126,6 +143,18 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
         self._risk = self.risk_analyzer.analyze(
             self.state, inputs, self._monitoring, self._forecast, reliability
         )
+        self._reward_audit = self.reward_model.calculate(
+            state=next_state,
+            inputs=interval_inputs,
+            transition=transition,
+            previous_action=previous_action,
+            action=int(action),
+            decision_risk=decision_risk,
+        )
+        reward = self._reward_audit.reward
+        self._totals["reward"] = float(self._totals["reward"]) + reward
+        if terminated:
+            self.reward_model.end_episode()
         return self._observation(), reward, terminated, False, self._info(transition, reward)
 
     def _observation(self) -> np.ndarray:
@@ -160,16 +189,6 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
             for feature in FORECAST_FEATURES
         }
 
-    def _provisional_reward(self, state: V2BuildingState, cost: float) -> float:
-        comfort = self.environment_config["comfort"]
-        temperature_violation = max(
-            float(comfort["occupied_temperature_min_c"]) - state.indoor_temperature_c,
-            state.indoor_temperature_c - float(comfort["occupied_temperature_max_c"]),
-            0.0,
-        )
-        co2_violation = max(state.co2_ppm - float(comfort["co2_limit_ppm"]), 0.0) / 200.0
-        return float(-(cost + 2.5 * temperature_violation + 1.5 * co2_violation))
-
     def _info(self, transition, reward: float) -> dict[str, Any]:
         return {
             "simulator_version": "XRL-HVAC-v2",
@@ -177,7 +196,10 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
             "scenario": self.scenario,
             "step": self.state.step,
             "reward": reward,
-            "reward_status": "PROVISIONAL_NOT_AUTHORIZED_FOR_TRAINING",
+            "reward_status": "AUTHORIZED_AUDITABLE_V2_REWARD",
+            "reward_profile_id": self.reward_profile["profile_id"],
+            "reward_mode": self.reward_model.mode,
+            "reward_audit": self._reward_audit.as_dict() if self._reward_audit else None,
             "state": self.state.as_dict(),
             "forecast": self._forecast.as_dict(),
             "monitoring": self._monitoring.as_dict(),

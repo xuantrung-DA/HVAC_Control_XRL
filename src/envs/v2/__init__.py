@@ -9,6 +9,11 @@ from src.envs.v2.observation import (
     V1ObservationAdapter,
     V2_OBSERVATION_NAMES,
 )
+from src.envs.v2.reward import (
+    LagrangeConstraintController,
+    V2RewardBreakdown,
+    V2RewardModel,
+)
 
 __all__ = [
     "DoorState",
@@ -19,6 +24,9 @@ __all__ = [
     "V1AgentOnV2Adapter",
     "V1ObservationAdapter",
     "V2_OBSERVATION_NAMES",
+    "LagrangeConstraintController",
+    "V2RewardBreakdown",
+    "V2RewardModel",
     "V2BuildingState",
     "V2ExogenousInputs",
 ]
