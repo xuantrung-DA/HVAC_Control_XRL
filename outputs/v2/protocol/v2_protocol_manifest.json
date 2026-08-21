@@ -3,7 +3,7 @@
   "protocol_id": "xrl_hvac_v2_001",
   "simulator_version": "XRL-HVAC-v2",
   "status": "development",
-  "generated_at_utc": "2026-08-21T13:27:31.937942+00:00",
+  "generated_at_utc": "2026-08-21T13:30:50.855526+00:00",
   "v1_git_tag": "v1-frozen",
   "v1_git_commit": "4bbd1450c01a9bf862c340a108e1a598533bf3de",
   "config_hashes": {
@@ -11,10 +11,11 @@
     "configs/v2/scenarios.yaml": "8b56808882de33f6f14bbb7df023119047ed81f44e40a9ec53191dd6bcb2c716",
     "configs/v2/evaluation.yaml": "66c49330e1be786fee8b2f3979b20c140551c1b2897341af9935ca6271fa87ed",
     "configs/v2/action_mapping.yaml": "26c1ab3056e5437e3c548eddfe3c5cb37551b674f405418bda60533027d6f646",
-    "configs/v2/environment.yaml": "a420553c7c115f9e59be11323c8ca8dee82a121890d38ef360d56613b3075c36"
+    "configs/v2/environment.yaml": "a420553c7c115f9e59be11323c8ca8dee82a121890d38ef360d56613b3075c36",
+    "configs/v2/forecasting.yaml": "a29f7ec7855469472222dac542208ec0bcb6c7bf7efe58a4595b8b6279e613a7"
   },
-  "protocol_bundle_sha256": "ed60174c049f739ca1ca93f15eb142c755b0fd949677f2261852eaadb8631231",
-  "v1_baseline_manifest_sha256": "d51f8a6fe177c97f64f193b7f89e3fae751e307e509d316bf9692bbc1aac258c",
+  "protocol_bundle_sha256": "64642ec80b63901642555f4fad1ec239050efea5bfbba8322a776e424874752c",
+  "v1_baseline_manifest_sha256": "2fc98dbed7e8894cb660c6f61930b3f8f117430311b7bd124b5dc7ac95576da3",
   "scenario_splits": {
     "train": [
       "normal_v2",

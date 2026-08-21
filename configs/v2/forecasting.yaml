@@ -1,0 +1,35 @@
+forecasting:
+  method: seasonal_profile_with_online_bias_correction
+  timestep_minutes: 15
+  horizons_steps: [4, 8, 12, 16]
+  confidence_level: 0.90
+  normal_quantile: 1.645
+  bias_decay_steps: 12.0
+  minimum_standard_deviation:
+    outdoor_temperature_c: 0.35
+    outdoor_relative_humidity_pct: 1.5
+    solar_radiation_w_per_m2: 25.0
+    occupancy: 3.0
+    electricity_price_per_kwh: 0.01
+  physical_bounds:
+    outdoor_temperature_c: [-20.0, 55.0]
+    outdoor_relative_humidity_pct: [0.0, 100.0]
+    solar_radiation_w_per_m2: [0.0, 1200.0]
+    occupancy: [0.0, 100.0]
+    electricity_price_per_kwh: [0.0, 2.0]
+
+evaluation:
+  fit_split: train
+  evaluation_split: validation
+  held_out_access_forbidden: true
+  training_seeds: [42, 123, 2026]
+  evaluation_seeds: [901, 902, 903, 904, 905]
+  metrics: [mae, rmse, interval_coverage]
+
+failure_injection:
+  supported_modes: [stale, unavailable, biased]
+  stale_age_steps: 8
+  biased_offsets:
+    outdoor_temperature_c: -4.0
+    outdoor_relative_humidity_pct: -12.0
+    occupancy: -25.0

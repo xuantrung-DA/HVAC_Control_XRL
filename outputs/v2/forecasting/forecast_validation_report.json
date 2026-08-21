@@ -1,0 +1,257 @@
+{
+  "timeline_count": 20,
+  "scenarios": [
+    "cleaning_event_v2",
+    "expensive_electricity_v2",
+    "high_electronics_load_v2",
+    "meeting_surge_v2"
+  ],
+  "held_out_used": false,
+  "metrics": [
+    {
+      "feature": "electricity_price_per_kwh",
+      "horizon_steps": 4,
+      "horizon_hours": 1.0,
+      "samples": 1840,
+      "mae": 0.012571106323003964,
+      "rmse": 0.03380041501511262,
+      "bias": -0.008688931567194724,
+      "interval_coverage": 0.8260869565217391,
+      "mean_interval_width": 0.0329
+    },
+    {
+      "feature": "electricity_price_per_kwh",
+      "horizon_steps": 8,
+      "horizon_hours": 2.0,
+      "samples": 1760,
+      "mae": 0.017580093566054892,
+      "rmse": 0.04889910122064809,
+      "bias": -0.015371595557834036,
+      "interval_coverage": 0.7954545454545454,
+      "mean_interval_width": 0.0329
+    },
+    {
+      "feature": "electricity_price_per_kwh",
+      "horizon_steps": 12,
+      "horizon_hours": 3.0,
+      "samples": 1680,
+      "mae": 0.02239320311636025,
+      "rmse": 0.05932613510155336,
+      "bias": -0.02096953198195196,
+      "interval_coverage": 0.7619047619047619,
+      "mean_interval_width": 0.032900000000000006
+    },
+    {
+      "feature": "electricity_price_per_kwh",
+      "horizon_steps": 16,
+      "horizon_hours": 4.0,
+      "samples": 1600,
+      "mae": 0.026807553660330146,
+      "rmse": 0.06644021663616274,
+      "bias": -0.025380790864825697,
+      "interval_coverage": 0.75,
+      "mean_interval_width": 0.03290000000000001
+    },
+    {
+      "feature": "occupancy",
+      "horizon_steps": 4,
+      "horizon_hours": 1.0,
+      "samples": 1840,
+      "mae": 2.1023300830306946,
+      "rmse": 4.59565050391811,
+      "bias": 0.626280402054059,
+      "interval_coverage": 0.9717391304347827,
+      "mean_interval_width": 18.59296017715296
+    },
+    {
+      "feature": "occupancy",
+      "horizon_steps": 8,
+      "horizon_hours": 2.0,
+      "samples": 1760,
+      "mae": 2.873076355326272,
+      "rmse": 5.755854444500255,
+      "bias": 1.2055393233399543,
+      "interval_coverage": 0.9818181818181818,
+      "mean_interval_width": 25.96383816603843
+    },
+    {
+      "feature": "occupancy",
+      "horizon_steps": 12,
+      "horizon_hours": 3.0,
+      "samples": 1680,
+      "mae": 3.180982396443382,
+      "rmse": 5.697740706142008,
+      "bias": 1.6663290006493563,
+      "interval_coverage": 0.9940476190476191,
+      "mean_interval_width": 32.19157218242451
+    },
+    {
+      "feature": "occupancy",
+      "horizon_steps": 16,
+      "horizon_hours": 4.0,
+      "samples": 1600,
+      "mae": 3.443794354262518,
+      "rmse": 5.721285019425247,
+      "bias": 1.9680912858054362,
+      "interval_coverage": 0.9875,
+      "mean_interval_width": 37.35938112039093
+    },
+    {
+      "feature": "outdoor_relative_humidity_pct",
+      "horizon_steps": 4,
+      "horizon_hours": 1.0,
+      "samples": 1840,
+      "mae": 1.7149662018473077,
+      "rmse": 2.1169864268422485,
+      "bias": 1.2634751097777193,
+      "interval_coverage": 1.0,
+      "mean_interval_width": 26.38899146728222
+    },
+    {
+      "feature": "outdoor_relative_humidity_pct",
+      "horizon_steps": 8,
+      "horizon_hours": 2.0,
+      "samples": 1760,
+      "mae": 2.4000761381884383,
+      "rmse": 2.8901516300478973,
+      "bias": 2.1580728680116197,
+      "interval_coverage": 1.0,
+      "mean_interval_width": 37.51528956091101
+    },
+    {
+      "feature": "outdoor_relative_humidity_pct",
+      "horizon_steps": 12,
+      "horizon_hours": 3.0,
+      "samples": 1680,
+      "mae": 2.885805123507843,
+      "rmse": 3.3753664490852473,
+      "bias": 2.7528467767268325,
+      "interval_coverage": 1.0,
+      "mean_interval_width": 46.18722214260648
+    },
+    {
+      "feature": "outdoor_relative_humidity_pct",
+      "horizon_steps": 16,
+      "horizon_hours": 4.0,
+      "samples": 1600,
+      "mae": 3.243838286645054,
+      "rmse": 3.71110201499366,
+      "bias": 3.1573812745650867,
+      "interval_coverage": 1.0,
+      "mean_interval_width": 53.326921024801464
+    },
+    {
+      "feature": "outdoor_temperature_c",
+      "horizon_steps": 4,
+      "horizon_hours": 1.0,
+      "samples": 1840,
+      "mae": 0.40717306768241907,
+      "rmse": 0.4822426564407673,
+      "bias": 0.3547338746507138,
+      "interval_coverage": 1.0,
+      "mean_interval_width": 6.487508308369037
+    },
+    {
+      "feature": "outdoor_temperature_c",
+      "horizon_steps": 8,
+      "horizon_hours": 2.0,
+      "samples": 1760,
+      "mae": 0.6335828861626394,
+      "rmse": 0.7223136550888591,
+      "bias": 0.617068654629712,
+      "interval_coverage": 1.0,
+      "mean_interval_width": 9.216723233386114
+    },
+    {
+      "feature": "outdoor_temperature_c",
+      "horizon_steps": 12,
+      "horizon_hours": 3.0,
+      "samples": 1680,
+      "mae": 0.8114946939978946,
+      "rmse": 0.9020484065418104,
+      "bias": 0.8055315905477685,
+      "interval_coverage": 1.0,
+      "mean_interval_width": 11.351818315877951
+    },
+    {
+      "feature": "outdoor_temperature_c",
+      "horizon_steps": 16,
+      "horizon_hours": 4.0,
+      "samples": 1600,
+      "mae": 0.9488713915490159,
+      "rmse": 1.0330861211193556,
+      "bias": 0.9485280734949216,
+      "interval_coverage": 1.0,
+      "mean_interval_width": 13.19249509692966
+    },
+    {
+      "feature": "solar_radiation_w_per_m2",
+      "horizon_steps": 4,
+      "horizon_hours": 1.0,
+      "samples": 1840,
+      "mae": 16.954767773999112,
+      "rmse": 31.292033289563403,
+      "bias": 4.236010061066572,
+      "interval_coverage": 0.9891304347826086,
+      "mean_interval_width": 140.28624274907017
+    },
+    {
+      "feature": "solar_radiation_w_per_m2",
+      "horizon_steps": 8,
+      "horizon_hours": 2.0,
+      "samples": 1760,
+      "mae": 19.432149249777787,
+      "rmse": 35.851539742810886,
+      "bias": 7.691837349871145,
+      "interval_coverage": 0.9954545454545455,
+      "mean_interval_width": 194.97677924554782
+    },
+    {
+      "feature": "solar_radiation_w_per_m2",
+      "horizon_steps": 12,
+      "horizon_hours": 3.0,
+      "samples": 1680,
+      "mae": 21.733815453305326,
+      "rmse": 38.421031534222244,
+      "bias": 10.393249221542083,
+      "interval_coverage": 1.0,
+      "mean_interval_width": 243.01144533863268
+    },
+    {
+      "feature": "solar_radiation_w_per_m2",
+      "horizon_steps": 16,
+      "horizon_hours": 4.0,
+      "samples": 1600,
+      "mae": 23.901608635571357,
+      "rmse": 41.966284326810275,
+      "bias": 12.629423791499585,
+      "interval_coverage": 0.9975,
+      "mean_interval_width": 289.14553866187345
+    }
+  ],
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-21T13:30:50.684306+00:00",
+  "forecast_config_sha256": "a29f7ec7855469472222dac542208ec0bcb6c7bf7efe58a4595b8b6279e613a7",
+  "fit_metadata": {
+    "scenarios": [
+      "high_humidity_v2",
+      "high_occupancy_v2",
+      "hot_day_v2",
+      "normal_v2"
+    ],
+    "seeds": [
+      42,
+      123,
+      2026
+    ],
+    "timeline_count": 12,
+    "held_out_used": false
+  },
+  "held_out_scenarios_excluded": [
+    "combined_stress_v2",
+    "door_left_open_v2",
+    "forecast_failure_v2",
+    "heatwave_v2",
+    "unexpected_occupancy_surge_v2"
+  ]
+}

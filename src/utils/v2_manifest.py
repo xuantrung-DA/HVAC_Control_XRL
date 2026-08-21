@@ -20,6 +20,7 @@ V2_CONFIG_PATHS = (
     Path("configs/v2/evaluation.yaml"),
     Path("configs/v2/action_mapping.yaml"),
     Path("configs/v2/environment.yaml"),
+    Path("configs/v2/forecasting.yaml"),
 )
 
 V1_EVIDENCE_PATHS = (
