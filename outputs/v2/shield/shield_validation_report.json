@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-21T13:50:38.216721+00:00",
+  "shield_config_sha256": "8cb6e101086360606944aee1d5166c1dc91127d4f527beb1001660d4073ba3ef",
+  "held_out_used": false,
+  "controller": "conservative_development_proposal",
+  "scenario_metrics": [
+    {
+      "scenario": "normal_v2",
+      "seed": 901,
+      "steps": 96,
+      "decision_counts": {
+        "ALLOW": 95,
+        "FALLBACK": 1
+      },
+      "intervention_rate": 0.010416666666666666,
+      "fallback_rate": 0.010416666666666666,
+      "proposed_executed_mismatch_rate": 0.010416666666666666
+    },
+    {
+      "scenario": "meeting_surge_v2",
+      "seed": 901,
+      "steps": 96,
+      "decision_counts": {
+        "ALLOW": 91,
+        "FALLBACK": 5
+      },
+      "intervention_rate": 0.052083333333333336,
+      "fallback_rate": 0.052083333333333336,
+      "proposed_executed_mismatch_rate": 0.010416666666666666
+    }
+  ],
+  "checks": {
+    "normal_intervention_rate_at_most_20_percent": true,
+    "normal_fallback_rate_at_most_5_percent": true,
+    "all_decisions_logged": true,
+    "executed_actions_valid": true,
+    "action_mismatch_implies_intervention": true
+  },
+  "all_checks_passed": true,
+  "limitations": [
+    "Selectivity is validated with a deterministic development controller; RL-specific intervention rates are measured after training.",
+    "No held-out safety or resilience scenario is opened in this phase."
+  ]
+}

@@ -24,6 +24,7 @@ V2_CONFIG_PATHS = (
     Path("configs/v2/risk.yaml"),
     Path("configs/v2/observation.yaml"),
     Path("configs/reward_profiles/reward_profile_v2_001.json"),
+    Path("configs/v2/shield.yaml"),
 )
 
 V1_EVIDENCE_PATHS = (

@@ -18,6 +18,7 @@ from src.envs.v2.profiles import ScenarioTimeline, V2ScenarioGenerator
 from src.envs.v2.reward import V2RewardModel
 from src.forecasting import FORECAST_FEATURES, ForecastBundle, SeasonalProfileForecaster
 from src.risk import ForecastReliabilityTracker, ObservableRiskAnalyzer, OnlineSignalMonitor
+from src.shields import PredictiveSafetyShield, ShieldDecision, ShieldDecisionType
 from src.utils.config import PROJECT_ROOT, load_yaml
 
 
@@ -31,6 +32,7 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
         scenario: str = "normal_v2",
         render_mode: str | None = None,
         reward_mode: str = "dynamic",
+        shield_enabled: bool | None = None,
     ) -> None:
         super().__init__()
         if render_mode not in (None, "ansi"):
@@ -41,6 +43,7 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
         self.forecast_config = load_yaml(PROJECT_ROOT / "configs/v2/forecasting.yaml")
         self.risk_config = load_yaml(PROJECT_ROOT / "configs/v2/risk.yaml")
         self.action_config = load_yaml(PROJECT_ROOT / "configs/v2/action_mapping.yaml")
+        self.shield_config = load_yaml(PROJECT_ROOT / "configs/v2/shield.yaml")
         self.reward_profile = json.loads(
             (PROJECT_ROOT / "configs/reward_profiles/reward_profile_v2_001.json").read_text(
                 encoding="utf-8"
@@ -55,6 +58,14 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
         self.reward_model = V2RewardModel(
             self.reward_profile, self.environment_config, mode=reward_mode
         )
+        self.shield_enabled = (
+            bool(self.shield_config["shield"]["enabled_by_default"])
+            if shield_enabled is None
+            else bool(shield_enabled)
+        )
+        self.shield = PredictiveSafetyShield(
+            self.shield_config, self.environment_config, self.action_config
+        )
         self.action_space = spaces.Discrete(len(HVACAction))
         self.observation_space = v2_observation_space()
         self.max_steps = int(self.environment_config["simulation"]["steps_per_episode"])
@@ -66,6 +77,7 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
         self._monitoring = None
         self._risk = None
         self._reward_audit = None
+        self._shield_decision: ShieldDecision | None = None
         self._issued_forecasts: dict[int, Any] = {}
         self._done = False
         self._totals: dict[str, float | int] = {}
@@ -95,10 +107,12 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
         self._issued_forecasts = {}
         self.reward_model.reset_episode()
         self._reward_audit = None
+        self._shield_decision = None
         self._done = False
         self._totals = {
             "reward": 0.0, "whole_building_kwh": 0.0,
             "hvac_ventilation_kwh": 0.0, "electricity_cost": 0.0,
+            "shield_interventions": 0, "shield_fallbacks": 0,
         }
         inputs = self._timeline.inputs[0]
         self._monitoring = self._monitor.update(self._signal_values(inputs))
@@ -120,15 +134,40 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
         if not self.action_space.contains(action):
             raise ValueError("V2 action must be one of 0, 1, 2, 3")
         interval_inputs = self._timeline.inputs[self.state.step]
+        proposed_action = int(action)
         previous_action = self.state.hvac_action
         decision_risk = self._risk
-        next_state, transition = self.simulator.step(self.state, int(action), interval_inputs)
+        if self.shield_enabled:
+            self._shield_decision = self.shield.decide(
+                state=self.state,
+                inputs=interval_inputs,
+                proposed_action=proposed_action,
+                forecast=self._forecast,
+                risk=decision_risk,
+            )
+        else:
+            self._shield_decision = ShieldDecision(
+                decision=ShieldDecisionType.ALLOW,
+                proposed_action=proposed_action,
+                executed_action=proposed_action,
+                intervention=False,
+                constraint=None,
+                reason="Shield disabled for controlled ablation.",
+                risk=decision_risk.as_dict(),
+                projection=None,
+            )
+        executed_action = self._shield_decision.executed_action
+        next_state, transition = self.simulator.step(
+            self.state, executed_action, interval_inputs
+        )
         self._state = next_state
         terminated = next_state.step >= self.max_steps
         self._done = terminated
         self._totals["whole_building_kwh"] = float(self._totals["whole_building_kwh"]) + transition.energy.whole_building_kwh
         self._totals["hvac_ventilation_kwh"] = float(self._totals["hvac_ventilation_kwh"]) + transition.energy.controllable_hvac_ventilation_kwh
         self._totals["electricity_cost"] = float(self._totals["electricity_cost"]) + transition.energy.electricity_cost
+        self._totals["shield_interventions"] = int(self._totals["shield_interventions"]) + int(self._shield_decision.intervention)
+        self._totals["shield_fallbacks"] = int(self._totals["shield_fallbacks"]) + int(self._shield_decision.decision is ShieldDecisionType.FALLBACK)
         display_step = min(next_state.step, self.max_steps - 1)
         inputs = self._timeline.inputs[display_step]
         residuals = self._residuals(display_step, inputs)
@@ -148,7 +187,7 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
             inputs=interval_inputs,
             transition=transition,
             previous_action=previous_action,
-            action=int(action),
+            action=executed_action,
             decision_risk=decision_risk,
         )
         reward = self._reward_audit.reward
@@ -200,6 +239,18 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
             "reward_profile_id": self.reward_profile["profile_id"],
             "reward_mode": self.reward_model.mode,
             "reward_audit": self._reward_audit.as_dict() if self._reward_audit else None,
+            "control": {
+                "shield_enabled": self.shield_enabled,
+                "proposed_action": self._shield_decision.proposed_action
+                if self._shield_decision
+                else None,
+                "executed_action": self._shield_decision.executed_action
+                if self._shield_decision
+                else None,
+                "shield": self._shield_decision.as_dict()
+                if self._shield_decision
+                else None,
+            },
             "state": self.state.as_dict(),
             "forecast": self._forecast.as_dict(),
             "monitoring": self._monitoring.as_dict(),

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-08-21T13:45:15.243842+00:00",
+  "generated_at_utc": "2026-08-21T13:50:56.095462+00:00",
   "environment": "XRL-HVAC-v2",
   "observation_schema": "xrl_hvac_v2_obs_001",
   "observation_size": 34,
@@ -57,8 +57,8 @@
     "deterministic_inference": true
   },
   "performance": {
-    "episode_seconds": 0.4244814000558108,
-    "steps_per_second_with_forecast_risk_v1_dqn": 226.15831927471478
+    "episode_seconds": 0.42558349994942546,
+    "steps_per_second_with_forecast_risk_v1_dqn": 225.57265498170918
   },
   "checks": {
     "observation_size_is_34": true,
