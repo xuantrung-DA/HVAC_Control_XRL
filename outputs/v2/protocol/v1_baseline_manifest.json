@@ -3,7 +3,7 @@
   "project_version": "XRL-HVAC-v1",
   "git_tag": "v1-frozen",
   "git_commit": "4bbd1450c01a9bf862c340a108e1a598533bf3de",
-  "generated_at_utc": "2026-08-21T13:50:57.297893+00:00",
+  "generated_at_utc": "2026-08-21T14:53:56.178750+00:00",
   "evidence_hashes": {
     "models/dqn/demo_best.pt": "9d33a157ddb25a79a6ef03efee97c3491ef61bcb8b47d814f237d54695d5236a",
     "models/demo_manifest.json": "d63584727d1907d36ba46c1c3e3dc4fbf0facd46949c8d16dd9ec355b70b7d63",

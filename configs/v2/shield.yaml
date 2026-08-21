@@ -8,6 +8,7 @@ shield:
   thermal_clamp_high_risk: 0.75
   co2_clamp_medium_risk: 0.35
   co2_clamp_high_risk: 0.70
+  humidity_clamp_medium_risk: 0.60
   overcool_reject_margin_c: 0.30
   projected_temperature_tolerance_c: 0.20
   projected_co2_tolerance_ppm: 20.0

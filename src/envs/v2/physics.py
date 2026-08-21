@@ -64,11 +64,56 @@ class TwoR1CBuildingModel:
     ) -> tuple[V2BuildingState, V2Transition]:
         if action not in range(len(HVACAction)):
             raise ValueError("V2 HVAC action must be one of 0, 1, 2, 3")
-        self._validate_inputs(inputs)
         action_settings = self._action(action)
+        return self._step_commands(
+            state=state,
+            action_code=action,
+            action_name=HVACAction(action).name,
+            cooling_fraction=float(action_settings["cooling_command_fraction"]),
+            ventilation_fraction=float(action_settings["mechanical_ventilation_ach"])
+            / self._maximum_ventilation_ach(),
+            continuous_control=False,
+            inputs=inputs,
+        )
+
+    def step_continuous(
+        self,
+        state: V2BuildingState,
+        cooling_fraction: float,
+        ventilation_fraction: float,
+        inputs: V2ExogenousInputs,
+    ) -> tuple[V2BuildingState, V2Transition]:
+        """Advance with independently modulated cooling and outdoor airflow."""
+
+        if not 0.0 <= cooling_fraction <= 1.0:
+            raise ValueError("continuous cooling fraction must be in [0, 1]")
+        if not 0.0 <= ventilation_fraction <= 1.0:
+            raise ValueError("continuous ventilation fraction must be in [0, 1]")
+        action_code = int(np.clip(round(cooling_fraction * 3.0), 0, 3))
+        return self._step_commands(
+            state=state,
+            action_code=action_code,
+            action_name="CONTINUOUS",
+            cooling_fraction=float(cooling_fraction),
+            ventilation_fraction=float(ventilation_fraction),
+            continuous_control=True,
+            inputs=inputs,
+        )
+
+    def _step_commands(
+        self,
+        *,
+        state: V2BuildingState,
+        action_code: int,
+        action_name: str,
+        cooling_fraction: float,
+        ventilation_fraction: float,
+        continuous_control: bool,
+        inputs: V2ExogenousInputs,
+    ) -> tuple[V2BuildingState, V2Transition]:
+        self._validate_inputs(inputs)
         command_kw = (
-            float(action_settings["cooling_command_fraction"])
-            * float(self.hvac["maximum_delivered_cooling_kw"])
+            cooling_fraction * float(self.hvac["maximum_delivered_cooling_kw"])
         )
         delivered_kw = self._delivered_cooling(
             state.delivered_cooling_kw, command_kw
@@ -76,13 +121,13 @@ class TwoR1CBuildingModel:
         effective_cooling_kw = (state.delivered_cooling_kw + delivered_kw) / 2.0
 
         infiltration_ach = self._infiltration_ach(inputs.door_state)
-        ventilation_ach = float(
-            action_settings["mechanical_ventilation_ach"]
-        )
+        ventilation_ach = ventilation_fraction * self._maximum_ventilation_ach()
+        sensible_heat_ratio = self._sensible_heat_ratio(state, inputs)
+        sensible_cooling_kw = effective_cooling_kw * sensible_heat_ratio
         heat_flows, electrical_powers = self._heat_flows(
             state,
             inputs,
-            effective_cooling_kw,
+            sensible_cooling_kw,
             infiltration_ach,
             ventilation_ach,
         )
@@ -117,9 +162,12 @@ class TwoR1CBuildingModel:
             inputs,
             infiltration_ach + ventilation_ach,
             effective_cooling_kw,
+            sensible_heat_ratio,
         )
         cop = self._coefficient_of_performance(
-            action, inputs.outdoor_temperature_c
+            action_code,
+            inputs.outdoor_temperature_c,
+            cooling_fraction=cooling_fraction if continuous_control else None,
         )
         energy = self._energy_breakdown(
             inputs,
@@ -133,12 +181,14 @@ class TwoR1CBuildingModel:
             indoor_relative_humidity_pct=next_humidity,
             co2_ppm=next_co2,
             delivered_cooling_kw=delivered_kw,
-            hvac_action=action,
+            hvac_action=action_code,
             step=state.step + 1,
+            cooling_command_fraction=cooling_fraction,
+            ventilation_fraction=ventilation_fraction,
         )
         transition = V2Transition(
-            action=action,
-            action_name=HVACAction(action).name,
+            action=action_code,
+            action_name=action_name,
             commanded_cooling_kw=command_kw,
             previous_delivered_cooling_kw=state.delivered_cooling_kw,
             delivered_cooling_kw=delivered_kw,
@@ -274,6 +324,7 @@ class TwoR1CBuildingModel:
         inputs: V2ExogenousInputs,
         total_ach: float,
         effective_cooling_kw: float,
+        sensible_heat_ratio: float,
     ) -> tuple[float, float, float]:
         indoor_ratio = humidity_ratio(
             state.indoor_temperature_c,
@@ -295,11 +346,25 @@ class TwoR1CBuildingModel:
             * float(self.internal["occupant_latent_kg_per_hour_person"])
             * self.dt_hours
         )
+        pre_conditioning_ratio = exchanged_ratio + (
+            occupant_moisture_kg / dry_air_mass_kg
+        )
+        target_ratio = humidity_ratio(
+            next_temperature_c,
+            float(self.hvac["dehumidification_target_relative_humidity_pct"]),
+        )
+        removable_moisture_kg = max(
+            (pre_conditioning_ratio - target_ratio) * dry_air_mass_kg,
+            0.0,
+        )
+        latent_capacity_kw = effective_cooling_kw * (
+            1.0 - sensible_heat_ratio
+        )
         dehumidification_kg = min(
-            effective_cooling_kw
+            latent_capacity_kw
             * self.dt_hours
-            * float(self.hvac["dehumidification_kg_per_kwh_cooling"]),
-            max(0.0, exchanged_ratio * dry_air_mass_kg + occupant_moisture_kg),
+            / float(self.hvac["water_latent_heat_kwh_per_kg"]),
+            removable_moisture_kg,
         )
         next_ratio = exchanged_ratio + (
             occupant_moisture_kg - dehumidification_kg
@@ -388,25 +453,57 @@ class TwoR1CBuildingModel:
         return float(previous_kw + alpha * (command_kw - previous_kw))
 
     def _coefficient_of_performance(
-        self, action: int, outdoor_temperature_c: float
+        self,
+        action: int,
+        outdoor_temperature_c: float,
+        *,
+        cooling_fraction: float | None = None,
     ) -> float:
         outdoor_multiplier = float(
             np.clip(1.0 - 0.015 * max(outdoor_temperature_c - 30.0, 0.0), 0.65, 1.05)
         )
-        part_load_multiplier = {
-            int(HVACAction.OFF): 1.0,
-            int(HVACAction.LOW): 1.05,
-            int(HVACAction.MEDIUM): 1.0,
-            int(HVACAction.HIGH): float(
-                self.hvac["high_action_cop_multiplier"]
-            ),
-        }[action]
+        if cooling_fraction is None:
+            part_load_multiplier = {
+                int(HVACAction.OFF): 1.0,
+                int(HVACAction.LOW): 1.05,
+                int(HVACAction.MEDIUM): 1.0,
+                int(HVACAction.HIGH): float(
+                    self.hvac["high_action_cop_multiplier"]
+                ),
+            }[action]
+        else:
+            part_load_multiplier = float(
+                np.interp(
+                    cooling_fraction,
+                    [0.0, 0.25, 1.0],
+                    [1.0, 1.05, float(self.hvac["high_action_cop_multiplier"])],
+                )
+            )
         return max(
             1.0,
             float(self.hvac["rated_cop"])
             * outdoor_multiplier
             * part_load_multiplier,
         )
+
+    def _sensible_heat_ratio(
+        self, state: V2BuildingState, inputs: V2ExogenousInputs
+    ) -> float:
+        humidity = max(
+            state.indoor_relative_humidity_pct,
+            inputs.outdoor_relative_humidity_pct,
+        )
+        lower, upper = self.hvac["sensible_heat_ratio_humidity_range_pct"]
+        fraction = float(
+            np.clip(
+                (humidity - float(lower)) / (float(upper) - float(lower)),
+                0.0,
+                1.0,
+            )
+        )
+        dry = float(self.hvac["sensible_heat_ratio_dry"])
+        humid = float(self.hvac["sensible_heat_ratio_humid"])
+        return dry + fraction * (humid - dry)
 
     def _air_exchange_heat_kw(self, ach: float, delta_temperature_c: float) -> float:
         mass_flow_kg_per_second = (
@@ -419,6 +516,12 @@ class TwoR1CBuildingModel:
             mass_flow_kg_per_second
             * float(self.airflow["air_specific_heat_kj_per_kg_c"])
             * delta_temperature_c
+        )
+
+    def _maximum_ventilation_ach(self) -> float:
+        return max(
+            float(self._action(index)["mechanical_ventilation_ach"])
+            for index in range(len(HVACAction))
         )
 
     def _electronics_power_kw(self, inputs: V2ExogenousInputs) -> float:

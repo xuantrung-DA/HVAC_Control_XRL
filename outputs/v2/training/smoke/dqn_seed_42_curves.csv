@@ -1,0 +1,2 @@
+step,selected,epsilon,training_reward,training_loss,steps_per_second,validation_reward,validation_energy_kwh,validation_comfort_percent,validation_co2_percent,validation_constraint_pass
+5000,True,0.7840909090909092,-669.1847811000705,0.12780421439185738,298.5511901881233,-317.1781504805293,475.8135802157018,37.77777777777778,0.0,False

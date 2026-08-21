@@ -1,0 +1,362 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-21T14:18:35.431386+00:00",
+  "experiment_id": "xrl_hvac_v2_dqn_001",
+  "mode": "full",
+  "seed": 123,
+  "held_out_used": false,
+  "training_scenarios": [
+    "normal_v2",
+    "hot_day_v2",
+    "high_occupancy_v2",
+    "high_humidity_v2"
+  ],
+  "validation_scenarios": [
+    "expensive_electricity_v2",
+    "meeting_surge_v2",
+    "high_electronics_load_v2",
+    "cleaning_event_v2"
+  ],
+  "steps": 30000,
+  "best_step": 25000,
+  "checkpoint": "models\\v2\\dqn\\seed_123_full_best.pt",
+  "checkpoint_sha256": "9ad0d8b69d6048abd7f0e11e805f817e6bb602de5cddf72d114303bea01e6bcf",
+  "checkpoint_reproducible": true,
+  "parameters": 21508,
+  "device": "cuda",
+  "duration_seconds": 140.67896370007657,
+  "mean_training_steps_per_second": 213.25149980461273,
+  "rss_delta_mb": 574.1796875,
+  "cuda_peak_allocated_mb": 66.080078125,
+  "best_validation_during_training": {
+    "episodes": 12,
+    "metrics": {
+      "reward": {
+        "mean": -213.50843830059924,
+        "std": 47.18643780062684
+      },
+      "whole_building_kwh": {
+        "mean": 384.9966280968531,
+        "std": 28.853922098343357
+      },
+      "hvac_ventilation_kwh": {
+        "mean": 202.41849703551145,
+        "std": 15.21682485212073
+      },
+      "electricity_cost": {
+        "mean": 84.87370005557176,
+        "std": 18.746383381294525
+      },
+      "peak_power_kw": {
+        "mean": 41.840708607060115,
+        "std": 2.6406576027631568
+      },
+      "comfort_violation_percent": {
+        "mean": 18.888888888888886,
+        "std": 7.3981423538659925
+      },
+      "temperature_violation_percent": {
+        "mean": 8.518518518518519,
+        "std": 9.636749504635324
+      },
+      "humidity_violation_percent": {
+        "mean": 13.518518518518517,
+        "std": 6.049067767059657
+      },
+      "comfort_degree_hours": {
+        "mean": 0.13600469001625762,
+        "std": 0.17967500107988432
+      },
+      "humidity_percent_hours": {
+        "mean": 4.5951123102933575,
+        "std": 3.890268441143275
+      },
+      "co2_violation_percent": {
+        "mean": 4.166666666666666,
+        "std": 3.0959296007164943
+      },
+      "co2_ppm_hours": {
+        "mean": 55.27979177560578,
+        "std": 75.30623350620944
+      },
+      "co2_peak_ppm": {
+        "mean": 1079.459939867391,
+        "std": 78.98036744439337
+      },
+      "switches": {
+        "mean": 29.916666666666668,
+        "std": 4.030267429781249
+      },
+      "aggressive_transitions": {
+        "mean": 20.833333333333332,
+        "std": 5.241395064505463
+      },
+      "shield_intervention_percent": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "shield_fallback_percent": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "critical_safety_violations": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "action_distribution_mean": [
+      0.4756944444444445,
+      0.22048611111111108,
+      0.02864583333333333,
+      0.2751736111111111
+    ]
+  },
+  "validation_without_shield": {
+    "episodes": 12,
+    "metrics": {
+      "reward": {
+        "mean": -213.50843830059924,
+        "std": 47.18643780062684
+      },
+      "whole_building_kwh": {
+        "mean": 384.9966280968531,
+        "std": 28.853922098343357
+      },
+      "hvac_ventilation_kwh": {
+        "mean": 202.41849703551145,
+        "std": 15.21682485212073
+      },
+      "electricity_cost": {
+        "mean": 84.87370005557176,
+        "std": 18.746383381294525
+      },
+      "peak_power_kw": {
+        "mean": 41.840708607060115,
+        "std": 2.6406576027631568
+      },
+      "comfort_violation_percent": {
+        "mean": 18.888888888888886,
+        "std": 7.3981423538659925
+      },
+      "temperature_violation_percent": {
+        "mean": 8.518518518518519,
+        "std": 9.636749504635324
+      },
+      "humidity_violation_percent": {
+        "mean": 13.518518518518517,
+        "std": 6.049067767059657
+      },
+      "comfort_degree_hours": {
+        "mean": 0.13600469001625762,
+        "std": 0.17967500107988432
+      },
+      "humidity_percent_hours": {
+        "mean": 4.5951123102933575,
+        "std": 3.890268441143275
+      },
+      "co2_violation_percent": {
+        "mean": 4.166666666666666,
+        "std": 3.0959296007164943
+      },
+      "co2_ppm_hours": {
+        "mean": 55.27979177560578,
+        "std": 75.30623350620944
+      },
+      "co2_peak_ppm": {
+        "mean": 1079.459939867391,
+        "std": 78.98036744439337
+      },
+      "switches": {
+        "mean": 29.916666666666668,
+        "std": 4.030267429781249
+      },
+      "aggressive_transitions": {
+        "mean": 20.833333333333332,
+        "std": 5.241395064505463
+      },
+      "shield_intervention_percent": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "shield_fallback_percent": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "critical_safety_violations": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "action_distribution_mean": [
+      0.4756944444444445,
+      0.22048611111111108,
+      0.02864583333333333,
+      0.2751736111111111
+    ]
+  },
+  "validation_with_shield": {
+    "episodes": 12,
+    "metrics": {
+      "reward": {
+        "mean": -241.26612194067502,
+        "std": 68.5814099331432
+      },
+      "whole_building_kwh": {
+        "mean": 394.62036106429014,
+        "std": 28.11887075728385
+      },
+      "hvac_ventilation_kwh": {
+        "mean": 212.04223000294851,
+        "std": 14.151616491520425
+      },
+      "electricity_cost": {
+        "mean": 88.33492451623317,
+        "std": 21.243978876971216
+      },
+      "peak_power_kw": {
+        "mean": 42.05577296152048,
+        "std": 2.4361522416885015
+      },
+      "comfort_violation_percent": {
+        "mean": 36.851851851851855,
+        "std": 11.491930728963114
+      },
+      "temperature_violation_percent": {
+        "mean": 19.62962962962963,
+        "std": 16.1992057249104
+      },
+      "humidity_violation_percent": {
+        "mean": 27.40740740740741,
+        "std": 5.832598425193934
+      },
+      "comfort_degree_hours": {
+        "mean": 0.7862387292142782,
+        "std": 1.0622579392734521
+      },
+      "humidity_percent_hours": {
+        "mean": 7.318069845028796,
+        "std": 4.136559440598518
+      },
+      "co2_violation_percent": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "co2_ppm_hours": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "co2_peak_ppm": {
+        "mean": 911.3847157546166,
+        "std": 54.69422884897408
+      },
+      "switches": {
+        "mean": 25.75,
+        "std": 2.48746859276655
+      },
+      "aggressive_transitions": {
+        "mean": 10.833333333333334,
+        "std": 1.6244657241348275
+      },
+      "shield_intervention_percent": {
+        "mean": 16.05902777777778,
+        "std": 5.436966723885278
+      },
+      "shield_fallback_percent": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "critical_safety_violations": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "action_distribution_mean": [
+      0.40451388888888884,
+      0.18836805555555555,
+      0.16927083333333334,
+      0.2378472222222222
+    ]
+  },
+  "curves": [
+    {
+      "step": 5000,
+      "selected": true,
+      "epsilon": 0.7840909090909092,
+      "training_reward": -756.3050538275727,
+      "training_loss": 0.13890499178506435,
+      "steps_per_second": 304.89269850356965,
+      "validation_reward": -254.62277432487238,
+      "validation_energy_kwh": 411.8772560620137,
+      "validation_comfort_percent": 32.407407407407405,
+      "validation_co2_percent": 0.08680555555555557,
+      "validation_constraint_pass": false
+    },
+    {
+      "step": 10000,
+      "selected": false,
+      "epsilon": 0.5681818181818182,
+      "training_reward": -517.0129819849262,
+      "training_loss": 0.20156488701701164,
+      "steps_per_second": 281.0218424059193,
+      "validation_reward": -289.7270931770137,
+      "validation_energy_kwh": 416.43933686376573,
+      "validation_comfort_percent": 28.148148148148152,
+      "validation_co2_percent": 13.020833333333336,
+      "validation_constraint_pass": false
+    },
+    {
+      "step": 15000,
+      "selected": true,
+      "epsilon": 0.3522727272727274,
+      "training_reward": -396.7617413350723,
+      "training_loss": 0.16107232056558132,
+      "steps_per_second": 273.95939264375545,
+      "validation_reward": -236.8054467718813,
+      "validation_energy_kwh": 392.47614511831216,
+      "validation_comfort_percent": 16.48148148148148,
+      "validation_co2_percent": 8.333333333333334,
+      "validation_constraint_pass": false
+    },
+    {
+      "step": 20000,
+      "selected": true,
+      "epsilon": 0.13636363636363646,
+      "training_reward": -318.26035748002073,
+      "training_loss": 0.12311448058113456,
+      "steps_per_second": 251.04756752356724,
+      "validation_reward": -236.97981992440225,
+      "validation_energy_kwh": 397.80408234205146,
+      "validation_comfort_percent": 10.370370370370372,
+      "validation_co2_percent": 8.506944444444443,
+      "validation_constraint_pass": false
+    },
+    {
+      "step": 25000,
+      "selected": true,
+      "epsilon": 0.050000000000000044,
+      "training_reward": -261.387951363045,
+      "training_loss": 0.11073567514307797,
+      "steps_per_second": 219.95777936843035,
+      "validation_reward": -213.50843830059924,
+      "validation_energy_kwh": 384.9966280968531,
+      "validation_comfort_percent": 18.888888888888886,
+      "validation_co2_percent": 4.166666666666666,
+      "validation_constraint_pass": false
+    },
+    {
+      "step": 30000,
+      "selected": false,
+      "epsilon": 0.050000000000000044,
+      "training_reward": -264.4807326140417,
+      "training_loss": 0.12554543826542794,
+      "steps_per_second": 237.48752786770544,
+      "validation_reward": -222.5819397206299,
+      "validation_energy_kwh": 404.8506553733991,
+      "validation_comfort_percent": 35.55555555555555,
+      "validation_co2_percent": 4.947916666666667,
+      "validation_constraint_pass": false
+    }
+  ],
+  "raw_episode_count_without_shield": 12,
+  "raw_episode_count_with_shield": 12
+}

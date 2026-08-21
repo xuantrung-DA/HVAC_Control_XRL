@@ -231,7 +231,7 @@ class V2HVACEnv(gym.Env[np.ndarray, int]):
     def _info(self, transition, reward: float) -> dict[str, Any]:
         return {
             "simulator_version": "XRL-HVAC-v2",
-            "observation_schema": "xrl_hvac_v2_obs_001",
+            "observation_schema": "xrl_hvac_v2_obs_002",
             "scenario": self.scenario,
             "step": self.state.step,
             "reward": reward,

@@ -39,8 +39,8 @@ def test_observation_schema_is_named_and_compact() -> None:
     env = V2HVACEnv()
     observation, _ = env.reset(seed=42)
     assert observation.shape == env.observation_space.shape
-    assert len(env.observation_names) == observation.size == 34
-    assert len(set(env.observation_names)) == 34
+    assert len(env.observation_names) == observation.size == 35
+    assert len(set(env.observation_names)) == 35
 
 
 def test_frozen_v1_dqn_runs_via_adapter_without_checkpoint_change() -> None:

@@ -11,6 +11,7 @@ from src.agents.double_dqn import DoubleDQNAgent
 from src.agents.dqn import DQNAgent
 from src.agents.ppo import PPOAgent
 from src.agents.q_learning import QLearningAgent
+from src.agents.sac_v2 import SACV2Agent
 
 
 RL_AGENT_NAMES = ("q_learning", "dqn", "double_dqn", "ppo")
@@ -41,5 +42,6 @@ __all__ = [
     "PPOAgent",
     "QLearningAgent",
     "RL_AGENT_NAMES",
+    "SACV2Agent",
     "create_agent",
 ]

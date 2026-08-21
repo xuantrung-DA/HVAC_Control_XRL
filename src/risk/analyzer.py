@@ -15,6 +15,7 @@ from src.risk.monitoring import MonitoringSnapshot
 @dataclass(frozen=True)
 class RiskVector:
     thermal_risk: float
+    humidity_risk: float
     co2_risk: float
     occupancy_surge: float
     forecast_uncertainty: float
@@ -72,6 +73,28 @@ class ObservableRiskAnalyzer:
                 1.0,
             )
         )
+        humidity_lower = float(
+            self.comfort[
+                "occupied_humidity_min_pct" if occupied else "unoccupied_humidity_min_pct"
+            ]
+        )
+        humidity_upper = float(
+            self.comfort[
+                "occupied_humidity_max_pct" if occupied else "unoccupied_humidity_max_pct"
+            ]
+        )
+        humidity_warning = float(self.config["humidity_warning_margin_pct"])
+        high_humidity_risk = (
+            state.indoor_relative_humidity_pct
+            - (humidity_upper - humidity_warning)
+        ) / (2.0 * humidity_warning)
+        low_humidity_risk = (
+            (humidity_lower + humidity_warning)
+            - state.indoor_relative_humidity_pct
+        ) / (2.0 * humidity_warning)
+        humidity_risk = float(
+            np.clip(max(high_humidity_risk, low_humidity_risk, 0.0), 0.0, 1.0)
+        )
 
         warning_co2 = float(self.config["co2_warning_ppm"])
         limit_co2 = float(self.comfort["co2_limit_ppm"])
@@ -98,6 +121,7 @@ class ObservableRiskAnalyzer:
         )
         return RiskVector(
             thermal_risk=thermal_risk,
+            humidity_risk=humidity_risk,
             co2_risk=co2_risk,
             occupancy_surge=monitoring.occupancy_surge_score,
             forecast_uncertainty=uncertainty,

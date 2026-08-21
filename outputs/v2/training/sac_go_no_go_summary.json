@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-21T14:53:11.161793+00:00",
+  "experiment_id": "xrl_hvac_v2_sac_002_cpu_decoupled",
+  "held_out_used": false,
+  "continuous_control_physically_decoupled": true,
+  "go_no_go_seed": 42,
+  "steps_requested": 20000,
+  "steps_used": 10000,
+  "stopped_early": true,
+  "checkpoint_reproducible": true,
+  "validation": {
+    "whole_building_kwh": 376.65037277380503,
+    "electricity_cost": 83.24488388158852,
+    "comfort_violation_percent": 73.14814814814815,
+    "co2_violation_percent": 2.170138888888889,
+    "cooling_fraction_mean": 0.32777000466982525,
+    "ventilation_fraction_mean": 0.342086561024189
+  },
+  "development_status": "FAIL",
+  "decision": {
+    "run_remaining_training_seeds": false,
+    "reason": "After replay warmup and 10k transitions, comfort remained above 70% and worsened between evaluations. The predeclared go/no-go threshold stopped an unpromising, resource-expensive candidate.",
+    "claim_continuous_control_improves_v2": false,
+    "retain_continuous_interface_for_future_work": true
+  },
+  "resource_usage": {
+    "parameters": 108936,
+    "device": "cpu",
+    "steps_per_second_including_validation": 54.673589189401376,
+    "rss_delta_mb": 18.265625,
+    "cuda_peak_allocated_mb": 0.0
+  },
+  "dqn_justification_artifact": "outputs/v2/training/dqn_development_summary.json"
+}

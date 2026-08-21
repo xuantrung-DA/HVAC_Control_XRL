@@ -173,6 +173,21 @@ class DQNAgent(BaseAgent):
             self.epsilon_end - self.epsilon_start
         )
 
+    def predict(self, observation: np.ndarray, deterministic: bool = True) -> int:
+        """Support both the frozen nine-feature V1 and engineered V2 vectors."""
+
+        values = np.asarray(observation, dtype=np.float32)
+        if values.shape != (self.observation_size,):
+            raise ValueError(
+                f"Expected DQN observation shape ({self.observation_size},), "
+                f"received {values.shape}"
+            )
+        if not np.all(np.isfinite(values)):
+            raise ValueError("Observation contains a non-finite value")
+        if not deterministic and self.rng.random() < self.epsilon:
+            return int(self.rng.integers(self.action_count))
+        return int(np.argmax(self.action_scores(values)))
+
     def _predict(
         self, observation: ObservationView, *, deterministic: bool
     ) -> int:

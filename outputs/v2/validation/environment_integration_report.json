@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-08-21T13:50:56.095462+00:00",
+  "generated_at_utc": "2026-08-21T14:53:41.012190+00:00",
   "environment": "XRL-HVAC-v2",
-  "observation_schema": "xrl_hvac_v2_obs_001",
-  "observation_size": 34,
+  "observation_schema": "xrl_hvac_v2_obs_002",
+  "observation_size": 35,
   "observation_names": [
     "indoor_temperature_c",
     "outdoor_temperature_c",
@@ -31,6 +31,7 @@
     "co2_slope",
     "occupancy_delta",
     "thermal_risk",
+    "humidity_risk",
     "co2_risk",
     "occupancy_surge",
     "forecast_uncertainty",
@@ -57,11 +58,11 @@
     "deterministic_inference": true
   },
   "performance": {
-    "episode_seconds": 0.42558349994942546,
-    "steps_per_second_with_forecast_risk_v1_dqn": 225.57265498170918
+    "episode_seconds": 0.40771180007141083,
+    "steps_per_second_with_forecast_risk_v1_dqn": 235.46044039732374
   },
   "checks": {
-    "observation_size_is_34": true,
+    "observation_size_is_35": true,
     "v1_checkpoint_unchanged": true,
     "v1_agent_completed_episode": true,
     "reward_is_auditable_and_authorized": true

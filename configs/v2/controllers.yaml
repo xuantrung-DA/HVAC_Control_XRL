@@ -1,0 +1,13 @@
+rule_based_v2:
+  version: rule_based_v2_001
+  frozen_before_held_out: true
+  temperature_thresholds_c: [22.5, 23.8, 24.7]
+  co2_thresholds_ppm: [700.0, 950.0]
+  humidity_thresholds_pct: [60.0, 68.0]
+  high_price_threshold_per_kwh: 0.29
+  maximum_unoccupied_action: 1
+  maximum_action_change_per_step: 1
+
+safety_metrics:
+  critical_temperature_bounds_c: [15.0, 35.0]
+  critical_co2_ppm: 2000.0

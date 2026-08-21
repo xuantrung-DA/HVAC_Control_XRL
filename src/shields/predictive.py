@@ -78,7 +78,7 @@ class PredictiveSafetyShield:
             risk.occupancy_reliability,
         ) < float(self.config["reliability_fallback_threshold"])
         high_context_risk = max(
-            risk.thermal_risk, risk.co2_risk, risk.forecast_error
+            risk.thermal_risk, risk.humidity_risk, risk.co2_risk, risk.forecast_error
         ) >= float(self.config["high_context_risk_threshold"])
         if (not forecast.forecasts or unreliable) and high_context_risk:
             fallback = self._fallback_action(state, inputs, risk)
@@ -119,6 +119,10 @@ class PredictiveSafetyShield:
             required, constraint = max(required, 3), "CO2_RISK"
         elif risk.co2_risk >= float(self.config["co2_clamp_medium_risk"]):
             required, constraint = max(required, 2), "CO2_RISK"
+        if risk.humidity_risk >= float(
+            self.config["humidity_clamp_medium_risk"]
+        ):
+            required, constraint = max(required, 2), "HUMIDITY_RISK"
 
         proposed_projection = self._project(state, inputs, proposed_action, forecast)
         if proposed_projection.final_temperature_c > upper + float(
@@ -228,7 +232,7 @@ class PredictiveSafetyShield:
     ) -> int:
         _, upper = self._temperature_bounds(inputs.occupancy > 0)
         if state.co2_ppm >= 900.0 or state.indoor_temperature_c >= upper or max(
-            risk.thermal_risk, risk.co2_risk
+            risk.thermal_risk, risk.humidity_risk, risk.co2_risk
         ) >= 0.75:
             return 3
         if inputs.occupancy > 0:

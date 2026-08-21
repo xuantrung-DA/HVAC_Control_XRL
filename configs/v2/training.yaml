@@ -1,0 +1,46 @@
+experiment:
+  id: xrl_hvac_v2_dqn_002_humidity_risk
+  algorithm: dqn
+  training_scenarios: [normal_v2, hot_day_v2, high_occupancy_v2, high_humidity_v2]
+  validation_scenarios: [expensive_electricity_v2, meeting_surge_v2, high_electronics_load_v2, cleaning_event_v2]
+  held_out_access_forbidden: true
+  training_seeds: [42, 123, 2026]
+  validation_seeds: [901, 902, 903]
+  reward_mode: dynamic
+  train_with_shield: false
+  evaluate_with_and_without_shield: true
+
+curriculum:
+  normal_only_episodes: 10
+  sampling: uniform_after_warmup
+
+budgets:
+  smoke_total_steps: 5000
+  full_total_steps: 30000
+  chunk_steps: 5000
+
+dqn_overrides:
+  model_hidden_sizes: [128, 128]
+  replay_capacity: 40000
+  batch_size: 64
+  warmup_steps: 1000
+  learning_rate: 0.0005
+  reward_scale: 0.10
+  epsilon_decay_steps: 22000
+  target_update_frequency: 500
+
+selection:
+  comfort_violation_percent_max_exclusive: 5.0
+  co2_violation_percent_max_exclusive: 1.0
+  critical_safety_violations_max: 0
+  order: [constraints, whole_building_energy, electricity_cost, reward]
+
+continuous_experiment:
+  id: xrl_hvac_v2_sac_002_cpu_decoupled
+  algorithm: sac
+  justification_artifact: outputs/v2/training/dqn_development_summary.json
+  training_scenarios: [normal_v2, hot_day_v2, high_occupancy_v2, high_humidity_v2]
+  validation_scenarios: [expensive_electricity_v2, meeting_surge_v2, high_electronics_load_v2, cleaning_event_v2]
+  training_seeds: [42, 123, 2026]
+  validation_seeds: [901, 902, 903]
+  held_out_access_forbidden: true

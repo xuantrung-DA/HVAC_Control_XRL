@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-08-21T13:50:38.216721+00:00",
-  "shield_config_sha256": "8cb6e101086360606944aee1d5166c1dc91127d4f527beb1001660d4073ba3ef",
+  "generated_at_utc": "2026-08-21T14:53:55.134422+00:00",
+  "shield_config_sha256": "0095515ae85673d7d6307e50b8cc6b50dc099393cd05b2f1b304ff974a61be7f",
   "held_out_used": false,
   "controller": "conservative_development_proposal",
   "scenario_metrics": [
@@ -22,12 +22,12 @@
       "seed": 901,
       "steps": 96,
       "decision_counts": {
-        "ALLOW": 91,
-        "FALLBACK": 5
+        "ALLOW": 92,
+        "FALLBACK": 4
       },
-      "intervention_rate": 0.052083333333333336,
-      "fallback_rate": 0.052083333333333336,
-      "proposed_executed_mismatch_rate": 0.010416666666666666
+      "intervention_rate": 0.041666666666666664,
+      "fallback_rate": 0.041666666666666664,
+      "proposed_executed_mismatch_rate": 0.03125
     }
   ],
   "checks": {

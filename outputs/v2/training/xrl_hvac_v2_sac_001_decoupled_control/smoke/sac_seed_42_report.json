@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-21T14:43:02.596687+00:00",
+  "experiment_id": "xrl_hvac_v2_sac_001_decoupled_control",
+  "mode": "smoke",
+  "seed": 42,
+  "held_out_used": false,
+  "steps": 5000,
+  "best_step": 5000,
+  "checkpoint": "models\\v2\\sac\\xrl_hvac_v2_sac_001_decoupled_control\\seed_42_smoke_best.zip",
+  "checkpoint_sha256": "8ff57947f96e1d6eb498db66687692943c3bf3d098b826901450f308073ace06",
+  "checkpoint_reproducible": true,
+  "parameters": 108936,
+  "device": "cuda",
+  "duration_seconds": 86.37438719999045,
+  "steps_per_second_including_validation": 57.88753080728719,
+  "rss_delta_mb": 673.734375,
+  "cuda_peak_allocated_mb": 68.044921875,
+  "validation": {
+    "episodes": 4,
+    "metrics": {
+      "reward": {
+        "mean": -436.39269285164517,
+        "std": 91.40298540776125
+      },
+      "whole_building_kwh": {
+        "mean": 366.9493165333813,
+        "std": 25.82956618708332
+      },
+      "hvac_ventilation_kwh": {
+        "mean": 183.29366956676242,
+        "std": 13.091901240412586
+      },
+      "electricity_cost": {
+        "mean": 79.8231148931431,
+        "std": 17.459768385143164
+      },
+      "peak_power_kw": {
+        "mean": 39.58998464250597,
+        "std": 2.792303364012836
+      },
+      "comfort_violation_percent": {
+        "mean": 80.0,
+        "std": 10.061539042374907
+      },
+      "co2_violation_percent": {
+        "mean": 5.208333333333333,
+        "std": 3.0369541118985937
+      },
+      "critical_safety_violations": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "cooling_fraction_mean": {
+        "mean": 0.30849485099315643,
+        "std": 0.02053323434933105
+      },
+      "cooling_fraction_std": {
+        "mean": 0.30344851315021515,
+        "std": 0.010502753372612875
+      },
+      "ventilation_fraction_mean": {
+        "mean": 0.3032923638820648,
+        "std": 0.02677164776929345
+      },
+      "ventilation_fraction_std": {
+        "mean": 0.27517616748809814,
+        "std": 0.013044094199885826
+      }
+    }
+  },
+  "curves": [
+    {
+      "step": 5000,
+      "selected": true,
+      "training_reward": -450.07250167028263,
+      "steps_per_second": 59.02124697839744,
+      "validation_reward": -436.39269285164517,
+      "validation_energy_kwh": 366.9493165333813,
+      "validation_comfort_percent": 80.0,
+      "validation_co2_percent": 5.208333333333333,
+      "validation_cooling_mean": 0.30849485099315643,
+      "validation_ventilation_mean": 0.3032923638820648,
+      "constraint_pass": false
+    }
+  ]
+}

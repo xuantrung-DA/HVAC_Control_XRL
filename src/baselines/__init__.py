@@ -37,3 +37,6 @@ __all__ = [
     "RuleBasedController",
     "create_baseline",
 ]
+from src.baselines.v2_controllers import V2RandomController, V2RuleBasedController
+
+__all__ = ["V2RandomController", "V2RuleBasedController"]

@@ -24,6 +24,7 @@ reliability:
 risk:
   co2_warning_ppm: 800.0
   comfort_warning_margin_c: 1.0
+  humidity_warning_margin_pct: 5.0
   price_low: 0.10
   price_high: 0.58
   forecast_uncertainty_scales:

@@ -1,0 +1,29 @@
+agent:
+  name: sac_v2
+  device: cpu
+  seed: 42
+
+model:
+  policy: MlpPolicy
+  hidden_sizes: [128, 128]
+  activation: relu
+
+optimization:
+  learning_rate: 0.0003
+  gamma: 0.99
+  tau: 0.005
+  batch_size: 128
+  learning_starts: 1000
+  train_frequency: 1
+  gradient_steps: 1
+  ent_coef: auto
+
+replay_buffer:
+  capacity: 50000
+
+training:
+  smoke_total_steps: 5000
+  full_total_steps: 20000
+  chunk_steps: 5000
+  go_no_go_evaluations: 2
+  stop_if_comfort_above_percent: 50.0

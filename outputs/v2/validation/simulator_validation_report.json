@@ -2,9 +2,9 @@
   "report_version": 1,
   "simulator_version": "XRL-HVAC-v2",
   "thermal_network": "2R1C",
-  "configuration_sha256": "a420553c7c115f9e59be11323c8ca8dee82a121890d38ef360d56613b3075c36",
-  "action_mapping_sha256": "26c1ab3056e5437e3c548eddfe3c5cb37551b674f405418bda60533027d6f646",
-  "physics_source_sha256": "8ce8a97e7df1557bb243ee554e7dbffd6e6144c32268be55afacdb66f5d30ef3",
+  "configuration_sha256": "eedac89b4129f3d8eaa518c9fc9fd7578df19c29fa37511fd23500b49215dcee",
+  "action_mapping_sha256": "f795ae9830ba640570cd9abdfed813cee9014c6572d9e560de75030273d5b83a",
+  "physics_source_sha256": "674bbf4965a87a771dde59a56fa8e9510f4a6f0986f9aa2cf4c062ecfedcd58d",
   "all_checks_passed": true,
   "checks_passed": 9,
   "checks_total": 9,
@@ -56,8 +56,8 @@
       "requirement": "Ventilation lowers CO2 but imports heat in hot weather.",
       "measurements": {
         "off_co2_ppm": 1371.0366228775379,
-        "ventilated_co2_ppm": 1011.4354639184997,
-        "ventilation_heat_kw": 15.2912
+        "ventilated_co2_ppm": 916.4846525182777,
+        "ventilation_heat_kw": 20.9248
       }
     },
     {
@@ -75,9 +75,9 @@
       "requirement": "HIGH consumes at least MEDIUM, LOW, and OFF.",
       "measurements": {
         "action_0_controllable_kwh": 0.0,
-        "action_1_controllable_kwh": 0.16429842348607587,
-        "action_2_controllable_kwh": 0.433780093908654,
-        "action_3_controllable_kwh": 1.1315721837915351
+        "action_1_controllable_kwh": 0.17241578713543546,
+        "action_2_controllable_kwh": 0.9280740533354259,
+        "action_3_controllable_kwh": 2.1917112065844693
       }
     },
     {
@@ -85,10 +85,10 @@
       "passed": true,
       "requirement": "HVAC ramps toward command and temperature changes gradually.",
       "measurements": {
-        "command_kw": 28.0,
-        "first_delivered_kw": 14.77373652325159,
-        "sixth_delivered_kw": 27.688948096929217,
-        "maximum_temperature_change_c": 0.13560799132250878
+        "command_kw": 75.0,
+        "first_delivered_kw": 39.5725085444239,
+        "sixth_delivered_kw": 74.16682525963182,
+        "maximum_temperature_change_c": 0.38086428535482497
       }
     },
     {
@@ -107,10 +107,10 @@
   ],
   "performance": {
     "steps": 100000,
-    "duration_seconds": 2.6040622000582516,
-    "steps_per_second": 38401.54048461786,
-    "rss_before_mb": 39.875,
-    "rss_after_mb": 39.875,
+    "duration_seconds": 5.923670699936338,
+    "steps_per_second": 16881.424553372744,
+    "rss_before_mb": 729.2421875,
+    "rss_after_mb": 729.2421875,
     "rss_delta_mb": 0.0
   },
   "training_authorized": true,

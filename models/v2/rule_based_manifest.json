@@ -1,0 +1,8 @@
+{
+  "controller": "rule_based_v2",
+  "version": "rule_based_v2_001",
+  "config_sha256": "e9772213142f68322570d136db8298761d909f445dc32cc8583538044543a588",
+  "frozen_before_held_out": true,
+  "held_out_used": false,
+  "development_report": "outputs/v2/baselines/development_baseline_report.json"
+}

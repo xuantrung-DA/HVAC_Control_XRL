@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-21T14:52:30.207223+00:00",
+  "experiment_id": "xrl_hvac_v2_sac_002_cpu_decoupled",
+  "mode": "full",
+  "seed": 42,
+  "held_out_used": false,
+  "steps_requested": 20000,
+  "steps_used": 10000,
+  "stopped_early": true,
+  "best_step": 10000,
+  "checkpoint": "models\\v2\\sac\\xrl_hvac_v2_sac_002_cpu_decoupled\\seed_42_full_best.zip",
+  "checkpoint_sha256": "319150d5fc157e2d5fc7e420c149bed714c63daa30fb183224fe1f637bf59271",
+  "checkpoint_reproducible": true,
+  "parameters": 108936,
+  "device": "cpu",
+  "duration_seconds": 182.9036679000128,
+  "steps_per_second_including_validation": 54.673589189401376,
+  "rss_delta_mb": 18.265625,
+  "cuda_peak_allocated_mb": 0.0,
+  "validation": {
+    "episodes": 12,
+    "metrics": {
+      "reward": {
+        "mean": -279.71986207276314,
+        "std": 90.45040664475809
+      },
+      "whole_building_kwh": {
+        "mean": 376.65037277380503,
+        "std": 26.692896430054436
+      },
+      "hvac_ventilation_kwh": {
+        "mean": 194.0722417124634,
+        "std": 13.77698612043298
+      },
+      "electricity_cost": {
+        "mean": 83.24488388158852,
+        "std": 18.226732324983125
+      },
+      "peak_power_kw": {
+        "mean": 37.23500677702984,
+        "std": 2.854086834975686
+      },
+      "comfort_violation_percent": {
+        "mean": 73.14814814814815,
+        "std": 16.138758738133543
+      },
+      "co2_violation_percent": {
+        "mean": 2.170138888888889,
+        "std": 3.0207834446710615
+      },
+      "critical_safety_violations": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "cooling_fraction_mean": {
+        "mean": 0.32777000466982525,
+        "std": 0.0198047958131437
+      },
+      "cooling_fraction_std": {
+        "mean": 0.30112264553705853,
+        "std": 0.014460561082875197
+      },
+      "ventilation_fraction_mean": {
+        "mean": 0.342086561024189,
+        "std": 0.02078973911443755
+      },
+      "ventilation_fraction_std": {
+        "mean": 0.26412097240487736,
+        "std": 0.01889176941453127
+      }
+    }
+  },
+  "curves": [
+    {
+      "step": 5000,
+      "selected": true,
+      "training_reward": -402.19691311739956,
+      "steps_per_second": 62.900180936511404,
+      "validation_reward": -344.71743758020784,
+      "validation_energy_kwh": 370.6380202605585,
+      "validation_comfort_percent": 70.0,
+      "validation_co2_percent": 8.767361111111112,
+      "validation_cooling_mean": 0.32679077486197156,
+      "validation_ventilation_mean": 0.3843344946702321,
+      "constraint_pass": false
+    },
+    {
+      "step": 10000,
+      "selected": true,
+      "training_reward": -244.12095643837864,
+      "steps_per_second": 52.37984417310615,
+      "validation_reward": -279.71986207276314,
+      "validation_energy_kwh": 376.65037277380503,
+      "validation_comfort_percent": 73.14814814814815,
+      "validation_co2_percent": 2.170138888888889,
+      "validation_cooling_mean": 0.32777000466982525,
+      "validation_ventilation_mean": 0.342086561024189,
+      "constraint_pass": false
+    }
+  ]
+}

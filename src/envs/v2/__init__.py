@@ -14,6 +14,9 @@ from src.envs.v2.reward import (
     V2RewardBreakdown,
     V2RewardModel,
 )
+from src.envs.v2.scenario_sampler import V2ScenarioSamplerEnv
+from src.envs.v2.continuous_env import V2ContinuousHVACEnv
+from src.envs.v2.continuous_sampler import V2ContinuousScenarioSamplerEnv
 
 __all__ = [
     "DoorState",
@@ -27,6 +30,9 @@ __all__ = [
     "LagrangeConstraintController",
     "V2RewardBreakdown",
     "V2RewardModel",
+    "V2ScenarioSamplerEnv",
+    "V2ContinuousHVACEnv",
+    "V2ContinuousScenarioSamplerEnv",
     "V2BuildingState",
     "V2ExogenousInputs",
 ]

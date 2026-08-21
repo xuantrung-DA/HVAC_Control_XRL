@@ -21,6 +21,8 @@ class V2BuildingState:
     delivered_cooling_kw: float
     hvac_action: int
     step: int
+    cooling_command_fraction: float = 0.0
+    ventilation_fraction: float = 0.0
 
     def as_dict(self) -> dict[str, float | int]:
         return asdict(self)

@@ -25,7 +25,7 @@ V2_OBSERVATION_NAMES = (
     "forecast_4h_electricity_price_per_kwh", "uncertainty_1h_outdoor_temperature_c",
     "uncertainty_1h_outdoor_relative_humidity_pct", "uncertainty_1h_occupancy",
     "indoor_temperature_slope", "co2_slope", "occupancy_delta",
-    "thermal_risk", "co2_risk", "occupancy_surge", "forecast_uncertainty",
+    "thermal_risk", "humidity_risk", "co2_risk", "occupancy_surge", "forecast_uncertainty",
     "forecast_error", "energy_peak_risk", "weather_reliability",
     "occupancy_reliability", "price_reliability",
 )
@@ -36,13 +36,13 @@ def v2_observation_space() -> gym.spaces.Box:
         5, -20, 5, 0, 350, 0, -1, -1, 0,
         -20, 0, 0, 0, 0, -20, 0, 0, 0, 0,
         0, 0, 0, -2, -500, -100,
-        *([0] * 9),
+        *([0] * 10),
     ], dtype=np.float32)
     high = np.array([
         45, 55, 100, 100, 5000, 2, 1, 1, 3,
         55, 100, 1200, 100, 2, 55, 100, 1200, 100, 2,
         20, 50, 100, 2, 500, 100,
-        *([1] * 9),
+        *([1] * 10),
     ], dtype=np.float32)
     return gym.spaces.Box(low=low, high=high, dtype=np.float32)
 

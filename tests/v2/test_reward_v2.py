@@ -20,6 +20,7 @@ def load_profile():
 def risk(thermal: float, co2: float) -> RiskVector:
     return RiskVector(
         thermal_risk=thermal,
+        humidity_risk=thermal,
         co2_risk=co2,
         occupancy_surge=0.0,
         forecast_uncertainty=0.1,

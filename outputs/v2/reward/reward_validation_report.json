@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-08-21T13:50:45.760112+00:00",
+  "generated_at_utc": "2026-08-21T14:53:30.721985+00:00",
   "profile_id": "reward_profile_v2_001",
   "profile_sha256": "4b67817d4cadd8dde01d00657c3d7f41fd5b639b4370582ef332786132a93763",
   "scenario": "normal_v2",
@@ -9,27 +9,27 @@
   "held_out_used": false,
   "mode_rollout_metrics": {
     "fixed": {
-      "reward": -347.14878134002646,
-      "whole_building_kwh": 341.3555379494002,
-      "hvac_ventilation_kwh": 170.3761161071963,
-      "electricity_cost": 65.92932269943469,
-      "shield_interventions": 1,
+      "reward": -156.48781003923145,
+      "whole_building_kwh": 373.02505152242645,
+      "hvac_ventilation_kwh": 202.04562968022222,
+      "electricity_cost": 71.57891704164524,
+      "shield_interventions": 12,
       "shield_fallbacks": 0
     },
     "dynamic": {
-      "reward": -650.104358848366,
-      "whole_building_kwh": 341.3555379494002,
-      "hvac_ventilation_kwh": 170.3761161071963,
-      "electricity_cost": 65.92932269943469,
-      "shield_interventions": 1,
+      "reward": -179.24178226611147,
+      "whole_building_kwh": 373.02505152242645,
+      "hvac_ventilation_kwh": 202.04562968022222,
+      "electricity_cost": 71.57891704164524,
+      "shield_interventions": 12,
       "shield_fallbacks": 0
     },
     "cmdp_lagrangian": {
-      "reward": -221.37446324376654,
-      "whole_building_kwh": 341.3555379494002,
-      "hvac_ventilation_kwh": 170.3761161071963,
-      "electricity_cost": 65.92932269943469,
-      "shield_interventions": 1,
+      "reward": -151.86245761681144,
+      "whole_building_kwh": 373.02505152242645,
+      "hvac_ventilation_kwh": 202.04562968022222,
+      "electricity_cost": 71.57891704164524,
+      "shield_interventions": 12,
       "shield_fallbacks": 0
     }
   },

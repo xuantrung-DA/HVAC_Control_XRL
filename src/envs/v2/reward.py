@@ -21,6 +21,7 @@ class V2RewardBreakdown:
     effective_weights: Mapping[str, float]
     weighted_penalties: Mapping[str, float]
     priority_percent: Mapping[str, float]
+    occupied: bool
     comfort_violation: bool
     co2_violation: bool
     comfort_margin_c: float
@@ -103,10 +104,12 @@ class V2RewardModel:
         inputs: V2ExogenousInputs,
         transition: V2Transition,
         previous_action: int,
-        action: int,
+        action: float,
         decision_risk: RiskVector,
+        control_change_magnitude: float | None = None,
     ) -> V2RewardBreakdown:
-        bounds = self._comfort_bounds(inputs.occupancy > 0)
+        occupied = inputs.occupancy > 0
+        bounds = self._comfort_bounds(occupied)
         temperature_violation = max(
             bounds[0] - state.indoor_temperature_c,
             state.indoor_temperature_c - bounds[1],
@@ -146,7 +149,14 @@ class V2RewardModel:
             "energy": transition.energy.electricity_cost,
             "comfort": temperature_violation + humidity_violation / 10.0,
             "co2": co2_violation_ppm,
-            "switching": abs(action - previous_action),
+            "temperature_violation_c": temperature_violation,
+            "humidity_violation_pct": humidity_violation,
+            "co2_violation_ppm": co2_violation_ppm,
+            "switching": (
+                abs(action - previous_action)
+                if control_change_magnitude is None
+                else float(control_change_magnitude)
+            ),
             "peak_power": transition.energy.interval_peak_power_kw,
             "overcooling": overcooling,
         }
@@ -181,6 +191,7 @@ class V2RewardModel:
             effective_weights=weights,
             weighted_penalties=weighted,
             priority_percent=priorities,
+            occupied=occupied,
             comfort_violation=comfort_violation,
             co2_violation=co2_violation,
             comfort_margin_c=float(temperature_margin),
@@ -206,7 +217,8 @@ class V2RewardModel:
             base["co2"] = self.lagrange.co2_multiplier
             return base
         rules = self.profile["adaptive_rules"]
-        maximum_risk = max(risk.thermal_risk, risk.co2_risk)
+        comfort_risk = max(risk.thermal_risk, risk.humidity_risk)
+        maximum_risk = max(comfort_risk, risk.co2_risk)
         safe_threshold = float(rules["safe_risk_threshold"])
         safe_fraction = (
             1.0 - maximum_risk / safe_threshold
@@ -214,7 +226,7 @@ class V2RewardModel:
             else 0.0
         )
         base["energy"] *= 1.0 + float(rules["energy_safe_bonus"]) * safe_fraction
-        base["comfort"] *= 1.0 + float(rules["comfort_risk_multiplier"]) * risk.thermal_risk
+        base["comfort"] *= 1.0 + float(rules["comfort_risk_multiplier"]) * comfort_risk
         base["co2"] *= 1.0 + float(rules["co2_risk_multiplier"]) * risk.co2_risk
         return base
 

@@ -66,7 +66,7 @@ def main() -> None:
             "steps_per_second_with_forecast_risk_v1_dqn": len(actions) / duration,
         },
         "checks": {
-            "observation_size_is_34": len(v2.observation_names) == 34,
+            "observation_size_is_35": len(v2.observation_names) == 35,
             "v1_checkpoint_unchanged": checksum_before == checksum_after,
             "v1_agent_completed_episode": len(actions) == 96,
             "reward_is_auditable_and_authorized": info["reward_status"]

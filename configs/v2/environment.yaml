@@ -45,12 +45,17 @@ airflow:
   co2_generation_liters_per_hour_person: 18.0
 
 hvac:
-  maximum_delivered_cooling_kw: 28.0
+  # 150 W/m2 peak design capacity for the configured 500 m2 office zone.
+  maximum_delivered_cooling_kw: 75.0
   cooling_time_constant_minutes: 20.0
   rated_cop: 3.4
   high_action_cop_multiplier: 0.86
   fan_rated_power_kw: 2.0
-  dehumidification_kg_per_kwh_cooling: 0.35
+  sensible_heat_ratio_dry: 0.80
+  sensible_heat_ratio_humid: 0.55
+  sensible_heat_ratio_humidity_range_pct: [60.0, 85.0]
+  water_latent_heat_kwh_per_kg: 0.68
+  dehumidification_target_relative_humidity_pct: 50.0
 
 building_loads:
   base_power_kw: 2.2

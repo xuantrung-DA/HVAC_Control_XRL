@@ -1,0 +1,276 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-21T14:33:59.680258+00:00",
+  "held_out_used": false,
+  "development_scenarios": [
+    "normal_v2",
+    "hot_day_v2",
+    "high_occupancy_v2",
+    "high_humidity_v2",
+    "expensive_electricity_v2",
+    "meeting_surge_v2",
+    "high_electronics_load_v2",
+    "cleaning_event_v2"
+  ],
+  "evaluation_seeds": [
+    901,
+    902,
+    903,
+    904,
+    905
+  ],
+  "rule_based_version": "rule_based_v2_001",
+  "rule_based_config_sha256": "e9772213142f68322570d136db8298761d909f445dc32cc8583538044543a588",
+  "v1_checkpoint_sha256": "9d33a157ddb25a79a6ef03efee97c3491ef61bcb8b47d814f237d54695d5236a",
+  "controllers": {
+    "random_v2": {
+      "episodes": 40,
+      "metrics": {
+        "reward": {
+          "mean": -636.0650341430845,
+          "std": 255.4087645149198
+        },
+        "whole_building_kwh": {
+          "mean": 433.82046962040886,
+          "std": 13.742974948530104
+        },
+        "hvac_ventilation_kwh": {
+          "mean": 254.4305863713048,
+          "std": 3.588457741718648
+        },
+        "electricity_cost": {
+          "mean": 78.61289571929147,
+          "std": 16.3347125957151
+        },
+        "peak_power_kw": {
+          "mean": 33.64973843294771,
+          "std": 1.3752700134283242
+        },
+        "comfort_violation_percent": {
+          "mean": 87.88888888888889,
+          "std": 5.941068615686599
+        },
+        "temperature_violation_percent": {
+          "mean": 65.77777777777779,
+          "std": 3.2508308529617325
+        },
+        "humidity_violation_percent": {
+          "mean": 53.166666666666664,
+          "std": 17.35886652156702
+        },
+        "comfort_degree_hours": {
+          "mean": 9.821376984583765,
+          "std": 6.734916272302095
+        },
+        "humidity_percent_hours": {
+          "mean": 46.42970791985634,
+          "std": 38.155596146121184
+        },
+        "co2_violation_percent": {
+          "mean": 16.927083333333332,
+          "std": 7.193347560902674
+        },
+        "co2_ppm_hours": {
+          "mean": 516.757021289887,
+          "std": 544.738094513785
+        },
+        "co2_peak_ppm": {
+          "mean": 1260.2596692991822,
+          "std": 140.1904491400235
+        },
+        "switches": {
+          "mean": 79.0,
+          "std": 0.0
+        },
+        "aggressive_transitions": {
+          "mean": 41.0,
+          "std": 0.0
+        },
+        "shield_intervention_percent": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "shield_fallback_percent": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "critical_safety_violations": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      "action_distribution_mean": [
+        0.20833333333333326,
+        0.27083333333333337,
+        0.22916666666666669,
+        0.2916666666666666
+      ]
+    },
+    "rule_based_v2": {
+      "episodes": 40,
+      "metrics": {
+        "reward": {
+          "mean": -307.6143690254906,
+          "std": 145.4091309698708
+        },
+        "whole_building_kwh": {
+          "mean": 444.90104595802757,
+          "std": 48.32268823867651
+        },
+        "hvac_ventilation_kwh": {
+          "mean": 265.5111627089235,
+          "std": 49.2231066906754
+        },
+        "electricity_cost": {
+          "mean": 91.94666485135338,
+          "std": 18.663369341538033
+        },
+        "peak_power_kw": {
+          "mean": 42.05103377840814,
+          "std": 1.8135649715805493
+        },
+        "comfort_violation_percent": {
+          "mean": 54.277777777777786,
+          "std": 25.852800311583604
+        },
+        "temperature_violation_percent": {
+          "mean": 9.11111111111111,
+          "std": 21.885222479174455
+        },
+        "humidity_violation_percent": {
+          "mean": 53.222222222222214,
+          "std": 25.642123908103216
+        },
+        "comfort_degree_hours": {
+          "mean": 0.3898359420478448,
+          "std": 1.2541188869029736
+        },
+        "humidity_percent_hours": {
+          "mean": 24.326954192302793,
+          "std": 28.096052117063103
+        },
+        "co2_violation_percent": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "co2_ppm_hours": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "co2_peak_ppm": {
+          "mean": 861.7582226412902,
+          "std": 71.06526562840557
+        },
+        "switches": {
+          "mean": 15.9,
+          "std": 4.763402145525822
+        },
+        "aggressive_transitions": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "shield_intervention_percent": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "shield_fallback_percent": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "critical_safety_violations": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      "action_distribution_mean": [
+        0.02317708333333333,
+        0.5096354166666667,
+        0.19791666666666669,
+        0.26927083333333335
+      ]
+    },
+    "v1_dqn_on_v2": {
+      "episodes": 40,
+      "metrics": {
+        "reward": {
+          "mean": -337.6317161654999,
+          "std": 163.23156668056953
+        },
+        "whole_building_kwh": {
+          "mean": 434.8034091970752,
+          "std": 51.1378764932147
+        },
+        "hvac_ventilation_kwh": {
+          "mean": 255.41352594797118,
+          "std": 49.8821950052775
+        },
+        "electricity_cost": {
+          "mean": 85.587922440076,
+          "std": 15.18065403749841
+        },
+        "peak_power_kw": {
+          "mean": 42.31370995458427,
+          "std": 1.6332751210967518
+        },
+        "comfort_violation_percent": {
+          "mean": 54.33333333333333,
+          "std": 26.401225186684513
+        },
+        "temperature_violation_percent": {
+          "mean": 9.0,
+          "std": 12.6583793552427
+        },
+        "humidity_violation_percent": {
+          "mean": 51.38888888888889,
+          "std": 27.01251424665845
+        },
+        "comfort_degree_hours": {
+          "mean": 0.29301425562566996,
+          "std": 0.5522010835567578
+        },
+        "humidity_percent_hours": {
+          "mean": 33.192612199624136,
+          "std": 36.63955126904318
+        },
+        "co2_violation_percent": {
+          "mean": 0.5208333333333334,
+          "std": 1.7585357308473057
+        },
+        "co2_ppm_hours": {
+          "mean": 6.166423846179806,
+          "std": 21.471156007975164
+        },
+        "co2_peak_ppm": {
+          "mean": 923.2835873660415,
+          "std": 90.37948230057698
+        },
+        "switches": {
+          "mean": 15.025,
+          "std": 4.286534147770201
+        },
+        "aggressive_transitions": {
+          "mean": 4.25,
+          "std": 2.2666053913286275
+        },
+        "shield_intervention_percent": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "shield_fallback_percent": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "critical_safety_violations": {
+          "mean": 0.0,
+          "std": 0.0
+        }
+      },
+      "action_distribution_mean": [
+        0.30104166666666676,
+        0.20104166666666665,
+        0.2270833333333333,
+        0.27083333333333337
+      ]
+    }
+  }
+}

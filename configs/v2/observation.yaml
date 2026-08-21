@@ -1,5 +1,5 @@
 observation:
-  schema_version: xrl_hvac_v2_obs_001
+  schema_version: xrl_hvac_v2_obs_002
   dtype: float32
   forecast_horizons_hours: [1.0, 4.0]
   groups:

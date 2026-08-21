@@ -13,6 +13,7 @@ from src.shields import ShieldDecisionType
 def make_risk(thermal=0.0, co2=0.0, reliability=1.0, error=0.0):
     return RiskVector(
         thermal_risk=thermal,
+        humidity_risk=0.0,
         co2_risk=co2,
         occupancy_surge=0.0,
         forecast_uncertainty=0.1,
