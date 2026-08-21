@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-21T13:40:38.147194+00:00",
+  "environment": "XRL-HVAC-v2",
+  "observation_schema": "xrl_hvac_v2_obs_001",
+  "observation_size": 34,
+  "observation_names": [
+    "indoor_temperature_c",
+    "outdoor_temperature_c",
+    "indoor_relative_humidity_pct",
+    "occupancy",
+    "co2_ppm",
+    "electricity_price_per_kwh",
+    "time_sin",
+    "time_cos",
+    "hvac_action",
+    "forecast_1h_outdoor_temperature_c",
+    "forecast_1h_outdoor_relative_humidity_pct",
+    "forecast_1h_solar_radiation_w_per_m2",
+    "forecast_1h_occupancy",
+    "forecast_1h_electricity_price_per_kwh",
+    "forecast_4h_outdoor_temperature_c",
+    "forecast_4h_outdoor_relative_humidity_pct",
+    "forecast_4h_solar_radiation_w_per_m2",
+    "forecast_4h_occupancy",
+    "forecast_4h_electricity_price_per_kwh",
+    "uncertainty_1h_outdoor_temperature_c",
+    "uncertainty_1h_outdoor_relative_humidity_pct",
+    "uncertainty_1h_occupancy",
+    "indoor_temperature_slope",
+    "co2_slope",
+    "occupancy_delta",
+    "thermal_risk",
+    "co2_risk",
+    "occupancy_surge",
+    "forecast_uncertainty",
+    "forecast_error",
+    "energy_peak_risk",
+    "weather_reliability",
+    "occupancy_reliability",
+    "price_reliability"
+  ],
+  "physical_units_emitted": true,
+  "training_reward_authorized": false,
+  "v1_adapter": {
+    "checkpoint": "models/dqn/demo_best.pt",
+    "sha256_before": "9d33a157ddb25a79a6ef03efee97c3491ef61bcb8b47d814f237d54695d5236a",
+    "sha256_after": "9d33a157ddb25a79a6ef03efee97c3491ef61bcb8b47d814f237d54695d5236a",
+    "checkpoint_unchanged": true,
+    "episode_steps": 96,
+    "unique_actions": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "deterministic_inference": true
+  },
+  "performance": {
+    "episode_seconds": 0.387174200033769,
+    "steps_per_second_with_forecast_risk_v1_dqn": 247.95040576470996
+  },
+  "checks": {
+    "observation_size_is_34": true,
+    "v1_checkpoint_unchanged": true,
+    "v1_agent_completed_episode": true,
+    "reward_is_explicitly_provisional": true
+  },
+  "all_checks_passed": true
+}

@@ -170,6 +170,25 @@ class SeasonalProfileForecaster:
             "seasonal_standard_deviation": {key: value.tolist() for key, value in self._std.items()},
         }
 
+    def load_model_state(self, state: Mapping[str, Any]) -> None:
+        if tuple(int(value) for value in state["horizons_steps"]) != self.horizons:
+            raise ValueError("Forecast artifact horizons do not match configuration")
+        if tuple(state["features"]) != FORECAST_FEATURES:
+            raise ValueError("Forecast artifact features do not match implementation")
+        self._means = {
+            feature: np.asarray(state["seasonal_mean"][feature], dtype=np.float64)
+            for feature in FORECAST_FEATURES
+        }
+        self._std = {
+            feature: np.asarray(
+                state["seasonal_standard_deviation"][feature], dtype=np.float64
+            )
+            for feature in FORECAST_FEATURES
+        }
+        if any(values.shape != (self.steps_per_day,) for values in self._means.values()):
+            raise ValueError("Forecast artifact has invalid seasonal array shape")
+        self.fit_metadata = dict(state["fit_metadata"])
+
 
 class ForecastFaultInjector:
     """Apply explicit fault modes without changing the physical timeline."""

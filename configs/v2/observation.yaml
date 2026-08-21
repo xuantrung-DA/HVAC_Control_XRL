@@ -1,0 +1,18 @@
+observation:
+  schema_version: xrl_hvac_v2_obs_001
+  dtype: float32
+  forecast_horizons_hours: [1.0, 4.0]
+  groups:
+    current_state: true
+    forecast_points: true
+    selected_uncertainties: true
+    trend_features: true
+    observable_risk: true
+  normalization:
+    performed_by_agent_scaler: true
+    environment_emits_physical_units: true
+
+compatibility:
+  v1_observation_size: 9
+  frozen_v1_checkpoint_modified: false
+  adapter_clips_to_v1_bounds: true

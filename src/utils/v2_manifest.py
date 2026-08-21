@@ -22,6 +22,7 @@ V2_CONFIG_PATHS = (
     Path("configs/v2/environment.yaml"),
     Path("configs/v2/forecasting.yaml"),
     Path("configs/v2/risk.yaml"),
+    Path("configs/v2/observation.yaml"),
 )
 
 V1_EVIDENCE_PATHS = (
