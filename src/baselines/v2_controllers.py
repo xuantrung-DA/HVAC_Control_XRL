@@ -75,3 +75,36 @@ class V2RandomController:
 
     def reset(self) -> None:
         self.rng = np.random.default_rng(self.seed)
+
+
+class HybridRuleBasedController:
+    """Sensible-cooling baseline with the same hybrid actuator stack as DQN."""
+
+    name = "hybrid_rule_based_v2"
+
+    def __init__(self, config: Mapping) -> None:
+        settings = config["hybrid_control"]["matched_rule_based"]
+        self.version = str(settings["version"])
+        self.medium = float(settings["temperature_medium_c"])
+        self.high = float(settings["temperature_high_c"])
+        self.maximum_unoccupied_action = int(settings["maximum_unoccupied_action"])
+
+    def predict(self, observation: np.ndarray, deterministic: bool = True) -> int:
+        del deterministic
+        temperature = float(observation[0])
+        occupied = float(observation[3]) > 0.0
+        thermal_risk = float(observation[25])
+        if temperature >= self.high or thermal_risk >= 0.75:
+            action = 3
+        elif temperature >= self.medium or thermal_risk >= 0.45:
+            action = 2
+        elif occupied and temperature >= 23.0:
+            action = 1
+        else:
+            action = 0
+        if not occupied:
+            action = min(action, self.maximum_unoccupied_action)
+        return action
+
+    def reset(self) -> None:
+        return None

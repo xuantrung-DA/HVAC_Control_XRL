@@ -41,7 +41,9 @@ V1 is not overwritten: V2 lives under versioned configs, models, outputs, tests,
 
 ## Control and safety boundary
 
-The V2 learned DQN proposes a discrete action. `PredictiveSafetyShield` independently evaluates constraints and records one of `ALLOW`, `CLAMP`, `REJECT`, or `FALLBACK`; only the executed action reaches physics. Both proposed and executed actions are present in every trajectory row.
+The original V2 learned DQN proposed a coupled discrete action. `PredictiveSafetyShield` independently evaluated constraints and recorded one of `ALLOW`, `CLAMP`, `REJECT`, or `FALLBACK`; both proposed and executed actions remain available in the development XAI artifacts.
+
+The final hybrid iteration reuses the frozen DQN as a **sensible-cooling proposer**. `HybridControlGuard` clamps cooling at thermal bounds, chooses ventilation independently from CO₂/risk, and operates an independently metered dehumidifier from relative humidity. The architecture is learning-augmented: deterministic control retains physical constraint authority.
 
 Continuous SAC was implemented only after development evidence showed that discrete actions coupled cooling and ventilation in conflicting ways. It did not pass the go/no-go gate and is not exposed as a demo controller.
 
@@ -53,8 +55,8 @@ Policy and shield explanations are separate. The policy explanation is associati
 
 ## Evaluation boundary
 
-V2 train, validation, and held-out scenarios are disjoint. Model selection uses development gates in this order: critical safety, comfort/CO₂, energy/cost, resilience, then Pareto/reward. The API enforces the held-out seal while no eligible checkpoint exists.
+V2 train, validation, and held-out scenarios are disjoint. Model selection used development gates in this order: critical safety, comfort/CO₂, energy/cost, resilience, then Pareto/reward. The hybrid seed-42 candidate passed development, was frozen with 28 component hashes, and failed the one-shot Combined Stress comfort gate. That scenario is now observed and cannot be reused for tuning; four resilience/safety scenarios remain sealed.
 
 ## Runtime boundary
 
-The frontend requests a deterministic 96-step trajectory, then replays it locally. Animation cannot change simulator state or model outputs. V1 remains the official demo; V2 panels are visibly labeled `DEVELOPMENT FAIL` and `HELD-OUT SEALED`.
+The frontend requests a deterministic 96-step trajectory, then replays it locally. Animation cannot change simulator state or model outputs. V1 remains the official demo. V2 is retained as an auditable closed iteration rather than promoted as a replacement controller.

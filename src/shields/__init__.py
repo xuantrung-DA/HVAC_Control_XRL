@@ -7,10 +7,13 @@ from src.shields.predictive import (
     ShieldDecision,
     ShieldDecisionType,
 )
+from src.shields.hybrid_guard import HybridControlDecision, HybridControlGuard
 
 __all__ = [
     "ActionProjection",
     "PredictiveSafetyShield",
     "ShieldDecision",
     "ShieldDecisionType",
+    "HybridControlDecision",
+    "HybridControlGuard",
 ]

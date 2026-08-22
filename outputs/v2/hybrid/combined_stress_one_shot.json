@@ -1,0 +1,460 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-08-22T01:14:19.667692+00:00",
+  "status": "COMPLETED_FAIL",
+  "final_test_opened": true,
+  "rerun_permitted": false,
+  "scenario": "combined_stress_v2",
+  "seeds": [
+    1701,
+    1702,
+    1703,
+    1704,
+    1705
+  ],
+  "frozen_bundle_sha256": "1fa47a571bd99a15168b2c45ea6183156da20753253835e6397eed15f3bd9e73",
+  "candidate": {
+    "training_seed": 42,
+    "checkpoint": "models/v2/dqn/xrl_hvac_v2_dqn_002_humidity_risk/seed_42_full_best.pt",
+    "checkpoint_sha256": "06b0aede0b4e5ca91f4c5976fe493f3be6f4a6a62e24cf136291a560ac2429e0",
+    "selection_rule": "constraints_then_energy_then_cost_then_comfort"
+  },
+  "local_only": true,
+  "completed_at_utc": "2026-08-22T01:14:23.820994+00:00",
+  "matched_rule_based": {
+    "episodes": [
+      {
+        "controller": "hybrid_rule_based_v2",
+        "scenario": "combined_stress_v2",
+        "seed": 1701,
+        "reward": -1310.8546674445565,
+        "whole_building_kwh": 584.6518706396457,
+        "hvac_cooling_kwh": 353.4859228950827,
+        "ventilation_fan_kwh": 15.15777196176604,
+        "dehumidification_kwh": 24.375,
+        "hvac_ventilation_kwh": 393.0186948568488,
+        "electricity_cost": 219.0441454829023,
+        "peak_power_kw": 49.55426992985669,
+        "comfort_violation_percent": 88.63636363636364,
+        "temperature_violation_percent": 84.0909090909091,
+        "humidity_violation_percent": 84.0909090909091,
+        "co2_violation_percent": 0.0,
+        "critical_safety_violations": 0,
+        "cooling_intervention_percent": 0.0,
+        "ventilation_intervention_percent": 84.375,
+        "dehumidifier_runtime_percent": 40.625,
+        "action_distribution": [
+          0.0,
+          0.5416666666666666,
+          0.010416666666666666,
+          0.4479166666666667
+        ]
+      },
+      {
+        "controller": "hybrid_rule_based_v2",
+        "scenario": "combined_stress_v2",
+        "seed": 1702,
+        "reward": -1238.6327645525873,
+        "whole_building_kwh": 580.3948275376606,
+        "hvac_cooling_kwh": 352.2081852919545,
+        "ventilation_fan_kwh": 14.362312243969042,
+        "dehumidification_kwh": 23.75,
+        "hvac_ventilation_kwh": 390.3204975359235,
+        "electricity_cost": 218.64964453202793,
+        "peak_power_kw": 49.02509058870439,
+        "comfort_violation_percent": 88.88888888888889,
+        "temperature_violation_percent": 86.66666666666667,
+        "humidity_violation_percent": 80.0,
+        "co2_violation_percent": 0.0,
+        "critical_safety_violations": 0,
+        "cooling_intervention_percent": 0.0,
+        "ventilation_intervention_percent": 87.5,
+        "dehumidifier_runtime_percent": 39.583333333333336,
+        "action_distribution": [
+          0.0,
+          0.53125,
+          0.020833333333333332,
+          0.4479166666666667
+        ]
+      },
+      {
+        "controller": "hybrid_rule_based_v2",
+        "scenario": "combined_stress_v2",
+        "seed": 1703,
+        "reward": -1323.6323252347627,
+        "whole_building_kwh": 588.8069643890846,
+        "hvac_cooling_kwh": 354.7821702516041,
+        "ventilation_fan_kwh": 15.65777196176604,
+        "dehumidification_kwh": 25.625,
+        "hvac_ventilation_kwh": 396.0649422133702,
+        "electricity_cost": 222.99430444553707,
+        "peak_power_kw": 49.55673069095829,
+        "comfort_violation_percent": 88.88888888888889,
+        "temperature_violation_percent": 82.22222222222223,
+        "humidity_violation_percent": 84.44444444444444,
+        "co2_violation_percent": 0.0,
+        "critical_safety_violations": 0,
+        "cooling_intervention_percent": 0.0,
+        "ventilation_intervention_percent": 83.33333333333333,
+        "dehumidifier_runtime_percent": 42.708333333333336,
+        "action_distribution": [
+          0.0,
+          0.53125,
+          0.020833333333333332,
+          0.4479166666666667
+        ]
+      },
+      {
+        "controller": "hybrid_rule_based_v2",
+        "scenario": "combined_stress_v2",
+        "seed": 1704,
+        "reward": -1304.2164991159616,
+        "whole_building_kwh": 589.3387517938089,
+        "hvac_cooling_kwh": 358.62770644705637,
+        "ventilation_fan_kwh": 14.702292899408278,
+        "dehumidification_kwh": 24.375,
+        "hvac_ventilation_kwh": 397.7049993464647,
+        "electricity_cost": 222.45690343365078,
+        "peak_power_kw": 49.65573576199708,
+        "comfort_violation_percent": 88.88888888888889,
+        "temperature_violation_percent": 82.22222222222223,
+        "humidity_violation_percent": 82.22222222222223,
+        "co2_violation_percent": 0.0,
+        "critical_safety_violations": 0,
+        "cooling_intervention_percent": 0.0,
+        "ventilation_intervention_percent": 87.5,
+        "dehumidifier_runtime_percent": 40.625,
+        "action_distribution": [
+          0.0,
+          0.53125,
+          0.010416666666666666,
+          0.4583333333333333
+        ]
+      },
+      {
+        "controller": "hybrid_rule_based_v2",
+        "scenario": "combined_stress_v2",
+        "seed": 1705,
+        "reward": -1304.0859982074148,
+        "whole_building_kwh": 586.9163845658404,
+        "hvac_cooling_kwh": 354.6796255963363,
+        "ventilation_fan_kwh": 15.196148156577145,
+        "dehumidification_kwh": 25.0,
+        "hvac_ventilation_kwh": 394.87577375291335,
+        "electricity_cost": 222.33053577685254,
+        "peak_power_kw": 49.673203225901155,
+        "comfort_violation_percent": 88.88888888888889,
+        "temperature_violation_percent": 84.44444444444444,
+        "humidity_violation_percent": 84.44444444444444,
+        "co2_violation_percent": 0.0,
+        "critical_safety_violations": 0,
+        "cooling_intervention_percent": 0.0,
+        "ventilation_intervention_percent": 86.45833333333333,
+        "dehumidifier_runtime_percent": 41.666666666666664,
+        "action_distribution": [
+          0.0,
+          0.53125,
+          0.020833333333333332,
+          0.4479166666666667
+        ]
+      }
+    ],
+    "aggregate": {
+      "episodes": 5,
+      "metrics": {
+        "reward": {
+          "mean": -1296.2844509110569,
+          "std": 29.690725517494045
+        },
+        "whole_building_kwh": {
+          "mean": 586.0217597852081,
+          "std": 3.2588070503887527
+        },
+        "hvac_cooling_kwh": {
+          "mean": 354.75672209640686,
+          "std": 2.149468854188576
+        },
+        "ventilation_fan_kwh": {
+          "mean": 15.015259444697307,
+          "std": 0.4450035918070413
+        },
+        "dehumidification_kwh": {
+          "mean": 24.625,
+          "std": 0.6373774391990981
+        },
+        "hvac_ventilation_kwh": {
+          "mean": 394.3969815411041,
+          "std": 2.5483999927557393
+        },
+        "electricity_cost": {
+          "mean": 221.09510673419408,
+          "std": 1.8533458691452716
+        },
+        "peak_power_kw": {
+          "mean": 49.49300603948352,
+          "std": 0.23904432774247003
+        },
+        "comfort_violation_percent": {
+          "mean": 88.83838383838386,
+          "std": 0.1010101010100982
+        },
+        "temperature_violation_percent": {
+          "mean": 83.92929292929293,
+          "std": 1.650024038806687
+        },
+        "humidity_violation_percent": {
+          "mean": 83.04040404040404,
+          "std": 1.7297224048962891
+        },
+        "co2_violation_percent": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "critical_safety_violations": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "cooling_intervention_percent": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "ventilation_intervention_percent": {
+          "mean": 85.83333333333333,
+          "std": 1.6925080009658262
+        },
+        "dehumidifier_runtime_percent": {
+          "mean": 41.04166666666667,
+          "std": 1.0622957319984967
+        }
+      },
+      "action_distribution_mean": [
+        0.0,
+        0.5333333333333333,
+        0.016666666666666666,
+        0.45
+      ]
+    }
+  },
+  "candidate_result": {
+    "episodes": [
+      {
+        "controller": "dqn_seed_42",
+        "scenario": "combined_stress_v2",
+        "seed": 1701,
+        "reward": -1343.3234751872997,
+        "whole_building_kwh": 570.182598131887,
+        "hvac_cooling_kwh": 339.64165038732403,
+        "ventilation_fan_kwh": 15.15777196176604,
+        "dehumidification_kwh": 23.75,
+        "hvac_ventilation_kwh": 378.54942234909026,
+        "electricity_cost": 215.53633112625388,
+        "peak_power_kw": 49.55426992991595,
+        "comfort_violation_percent": 100.0,
+        "temperature_violation_percent": 100.0,
+        "humidity_violation_percent": 84.0909090909091,
+        "co2_violation_percent": 0.0,
+        "critical_safety_violations": 0,
+        "cooling_intervention_percent": 8.333333333333334,
+        "ventilation_intervention_percent": 55.208333333333336,
+        "dehumidifier_runtime_percent": 39.583333333333336,
+        "action_distribution": [
+          0.28125,
+          0.2604166666666667,
+          0.0,
+          0.4583333333333333
+        ]
+      },
+      {
+        "controller": "dqn_seed_42",
+        "scenario": "combined_stress_v2",
+        "seed": 1702,
+        "reward": -1233.9621211284846,
+        "whole_building_kwh": 568.4034609123445,
+        "hvac_cooling_kwh": 340.8418186666384,
+        "ventilation_fan_kwh": 14.362312243969042,
+        "dehumidification_kwh": 23.125,
+        "hvac_ventilation_kwh": 378.32913091060766,
+        "electricity_cost": 216.49738626692053,
+        "peak_power_kw": 49.02509059046217,
+        "comfort_violation_percent": 100.0,
+        "temperature_violation_percent": 100.0,
+        "humidity_violation_percent": 77.77777777777777,
+        "co2_violation_percent": 0.0,
+        "critical_safety_violations": 0,
+        "cooling_intervention_percent": 9.375,
+        "ventilation_intervention_percent": 53.125,
+        "dehumidifier_runtime_percent": 38.541666666666664,
+        "action_distribution": [
+          0.3125,
+          0.21875,
+          0.0,
+          0.46875
+        ]
+      },
+      {
+        "controller": "dqn_seed_42",
+        "scenario": "combined_stress_v2",
+        "seed": 1703,
+        "reward": -1317.6338813818666,
+        "whole_building_kwh": 578.9619139202173,
+        "hvac_cooling_kwh": 346.18711978273706,
+        "ventilation_fan_kwh": 15.65777196176604,
+        "dehumidification_kwh": 24.375,
+        "hvac_ventilation_kwh": 386.21989174450323,
+        "electricity_cost": 221.09346938255996,
+        "peak_power_kw": 49.55673069104539,
+        "comfort_violation_percent": 95.55555555555556,
+        "temperature_violation_percent": 91.11111111111111,
+        "humidity_violation_percent": 84.44444444444444,
+        "co2_violation_percent": 0.0,
+        "critical_safety_violations": 0,
+        "cooling_intervention_percent": 9.375,
+        "ventilation_intervention_percent": 56.25,
+        "dehumidifier_runtime_percent": 40.625,
+        "action_distribution": [
+          0.2708333333333333,
+          0.2604166666666667,
+          0.0,
+          0.46875
+        ]
+      },
+      {
+        "controller": "dqn_seed_42",
+        "scenario": "combined_stress_v2",
+        "seed": 1704,
+        "reward": -1333.786948103243,
+        "whole_building_kwh": 573.5582103708397,
+        "hvac_cooling_kwh": 342.84716502408713,
+        "ventilation_fan_kwh": 14.702292899408278,
+        "dehumidification_kwh": 24.375,
+        "hvac_ventilation_kwh": 381.9244579234954,
+        "electricity_cost": 219.14988089289236,
+        "peak_power_kw": 49.655735762025046,
+        "comfort_violation_percent": 100.0,
+        "temperature_violation_percent": 100.0,
+        "humidity_violation_percent": 82.22222222222223,
+        "co2_violation_percent": 0.0,
+        "critical_safety_violations": 0,
+        "cooling_intervention_percent": 9.375,
+        "ventilation_intervention_percent": 54.166666666666664,
+        "dehumidifier_runtime_percent": 40.625,
+        "action_distribution": [
+          0.3125,
+          0.21875,
+          0.0,
+          0.46875
+        ]
+      },
+      {
+        "controller": "dqn_seed_42",
+        "scenario": "combined_stress_v2",
+        "seed": 1705,
+        "reward": -1304.4722491765024,
+        "whole_building_kwh": 574.2757265371449,
+        "hvac_cooling_kwh": 342.663967567641,
+        "ventilation_fan_kwh": 15.196148156577145,
+        "dehumidification_kwh": 24.375,
+        "hvac_ventilation_kwh": 382.23511572421813,
+        "electricity_cost": 220.0776810252023,
+        "peak_power_kw": 49.67320322598888,
+        "comfort_violation_percent": 97.77777777777777,
+        "temperature_violation_percent": 97.77777777777777,
+        "humidity_violation_percent": 82.22222222222223,
+        "co2_violation_percent": 0.0,
+        "critical_safety_violations": 0,
+        "cooling_intervention_percent": 9.375,
+        "ventilation_intervention_percent": 54.166666666666664,
+        "dehumidifier_runtime_percent": 40.625,
+        "action_distribution": [
+          0.3229166666666667,
+          0.20833333333333334,
+          0.0,
+          0.46875
+        ]
+      }
+    ],
+    "aggregate": {
+      "episodes": 5,
+      "metrics": {
+        "reward": {
+          "mean": -1306.6357349954792,
+          "std": 38.704709534939234
+        },
+        "whole_building_kwh": {
+          "mean": 573.0763819744867,
+          "std": 3.647471684562578
+        },
+        "hvac_cooling_kwh": {
+          "mean": 342.43634428568555,
+          "std": 2.2199877838496205
+        },
+        "ventilation_fan_kwh": {
+          "mean": 15.015259444697307,
+          "std": 0.4450035918070413
+        },
+        "dehumidification_kwh": {
+          "mean": 24.0,
+          "std": 0.5
+        },
+        "hvac_ventilation_kwh": {
+          "mean": 381.45160373038294,
+          "std": 2.8895171222260694
+        },
+        "electricity_cost": {
+          "mean": 218.47094973876582,
+          "std": 2.117880138215905
+        },
+        "peak_power_kw": {
+          "mean": 49.49300603988748,
+          "std": 0.23904432707903275
+        },
+        "comfort_violation_percent": {
+          "mean": 98.66666666666666,
+          "std": 1.777777777777778
+        },
+        "temperature_violation_percent": {
+          "mean": 97.77777777777777,
+          "std": 3.4426518632954806
+        },
+        "humidity_violation_percent": {
+          "mean": 82.15151515151516,
+          "std": 2.3731140380796822
+        },
+        "co2_violation_percent": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "critical_safety_violations": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "cooling_intervention_percent": {
+          "mean": 9.166666666666668,
+          "std": 0.4166666666666664
+        },
+        "ventilation_intervention_percent": {
+          "mean": 54.583333333333336,
+          "std": 1.0622957319984976
+        },
+        "dehumidifier_runtime_percent": {
+          "mean": 40.0,
+          "std": 0.8333333333333338
+        }
+      },
+      "action_distribution_mean": [
+        0.3,
+        0.23333333333333334,
+        0.0,
+        0.4666666666666666
+      ]
+    }
+  },
+  "acceptance_gates": {
+    "energy_at_or_below_matched_rule_based": true,
+    "cost_at_or_below_matched_rule_based": true,
+    "comfort_below_5_percent": false,
+    "co2_below_1_percent": true,
+    "no_critical_safety_violations": true
+  },
+  "acceptance_pass": false
+}

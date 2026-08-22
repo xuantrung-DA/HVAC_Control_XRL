@@ -27,17 +27,27 @@ def status(request: Request) -> dict:
     training = _artifact("outputs/v2/training/dqn_development_summary.json")
     held_out = _artifact("outputs/v2/protocol/held_out_status.json")
     baseline = _artifact("outputs/v2/baselines/development_baseline_report.json")
+    hybrid = _artifact("outputs/v2/hybrid/combined_stress_one_shot.json")
     return {
-        "simulator_version": "XRL-HVAC-v2",
-        "lifecycle": "development",
-        "development_status": training["development_status"],
+        "simulator_version": "XRL-HVAC-v2-hybrid-001",
+        "lifecycle": "closed",
+        "development_status": "PASS_HYBRID_CANDIDATE",
+        "final_status": "FAIL",
         "official_demo_controller": "v1_frozen_dqn",
         "v2_controller": request.app.state.v2_agent_service.metadata(),
         "held_out": held_out,
+        "hybrid_final": {
+            "status": hybrid["status"],
+            "acceptance_pass": hybrid["acceptance_pass"],
+            "acceptance_gates": hybrid["acceptance_gates"],
+        },
         "development_gates": training["development_gates"],
         "scenario_access": {
             "development": list(DEVELOPMENT_SCENARIOS),
-            "held_out_sealed": list(HELD_OUT_SCENARIOS),
+            "held_out_opened": ["combined_stress_v2"],
+            "held_out_sealed": [
+                name for name in HELD_OUT_SCENARIOS if name != "combined_stress_v2"
+            ],
         },
         "development_evidence": {
             "dqn": training["dqn_variants"],
@@ -51,7 +61,13 @@ def scenarios() -> dict:
     return {
         "development": [{"name": name, "runnable": True} for name in DEVELOPMENT_SCENARIOS],
         "held_out": [
-            {"name": name, "runnable": False, "status": "SEALED_NOT_RUN"}
+            {
+                "name": name,
+                "runnable": False,
+                "status": "COMPLETED_FAIL"
+                if name == "combined_stress_v2"
+                else "SEALED_NOT_RUN",
+            }
             for name in HELD_OUT_SCENARIOS
         ],
     }

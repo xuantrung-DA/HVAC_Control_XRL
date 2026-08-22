@@ -28,7 +28,11 @@ class V2SimulationService:
 
     def run(self, *, scenario: str, seed: int, include_explanations: bool = True) -> dict[str, Any]:
         if scenario in HELD_OUT_SCENARIOS:
-            raise ValueError("Held-out V2 scenarios are sealed because no candidate passed development gates")
+            if scenario == "combined_stress_v2":
+                raise ValueError(
+                    "Combined Stress was opened once for the frozen hybrid candidate; reruns are prohibited"
+                )
+            raise ValueError("This held-out V2 scenario remains sealed")
         if scenario not in DEVELOPMENT_SCENARIOS:
             raise ValueError(f"Unsupported V2 development scenario: {scenario}")
         env = V2HVACEnv(scenario=scenario, shield_enabled=True)

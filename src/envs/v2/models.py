@@ -77,6 +77,7 @@ class EnergyBreakdown:
     controllable_hvac_ventilation_kwh: float
     interval_peak_power_kw: float
     electricity_cost: float
+    dehumidification_kwh: float = 0.0
 
     def as_dict(self) -> dict[str, float]:
         return asdict(self)
@@ -90,6 +91,7 @@ class AirQualityBreakdown:
     occupant_co2_generation_ppm: float
     occupant_moisture_generation_kg: float
     hvac_dehumidification_kg: float
+    independent_dehumidification_kg: float = 0.0
 
     def as_dict(self) -> dict[str, float]:
         return asdict(self)

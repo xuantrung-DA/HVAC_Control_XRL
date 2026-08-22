@@ -18,6 +18,8 @@ from src.envs.v2.scenario_sampler import V2ScenarioSamplerEnv
 from src.envs.v2.continuous_env import V2ContinuousHVACEnv
 from src.envs.v2.continuous_sampler import V2ContinuousScenarioSamplerEnv
 from src.envs.v2.masking import MaskedController, MaskedObservationEnv
+from src.envs.v2.hybrid_env import V2HybridHVACEnv
+from src.envs.v2.hybrid_physics import HybridBuildingModel
 
 __all__ = [
     "DoorState",
@@ -38,4 +40,6 @@ __all__ = [
     "MaskedObservationEnv",
     "V2BuildingState",
     "V2ExogenousInputs",
+    "V2HybridHVACEnv",
+    "HybridBuildingModel",
 ]

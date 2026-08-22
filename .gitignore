@@ -42,6 +42,8 @@ frontend/.next/
 frontend/out/
 frontend/coverage/
 frontend/.env.local
+frontend/AGENTS.md
+frontend/CLAUDE.md
 *.tsbuildinfo
 
 # Editors and operating systems
@@ -51,6 +53,10 @@ frontend/.env.local
 .DS_Store
 Thumbs.db
 outputs/*.png
+
+# Local-only diagnostic experiments (never publish)
+local_experiments/
+outputs/local/
 
 # Build artifacts
 build/

@@ -64,14 +64,14 @@ export function V2DevelopmentLab() {
   return (
     <section className="v2-lab" id="v2-lab">
       <div className="v2-heading">
-        <div><p className="eyebrow">V2 development laboratory</p><h2>Physics, foresight and guarded control.</h2><p>The next simulator is richer, but its learned controllers have not passed the locked comfort and IAQ gates.</p></div>
-        <div className="v2-badges"><span className="fail-badge"><AlertTriangle /> DEVELOPMENT FAIL</span><span className="sealed-badge"><LockKeyhole /> HELD-OUT SEALED</span></div>
+        <div><p className="eyebrow">V2 closed engineering iteration</p><h2>Physics, foresight and guarded control.</h2><p>The hybrid candidate passed development, then failed the one-shot Combined Stress comfort gate. V1 remains the official demo.</p></div>
+        <div className="v2-badges"><span className="fail-badge"><AlertTriangle /> FINAL GATE FAIL</span><span className="sealed-badge"><LockKeyhole /> OPENED ONCE</span></div>
       </div>
 
       <div className="protocol-strip">
         <span><strong>Official demo</strong> V1 frozen DQN</span>
         <span><strong>Experimental model</strong> {status?.v2_controller.parameters?.toLocaleString() ?? "21,636"} params</span>
-        <span><strong>Final test</strong> Never opened</span>
+        <span><strong>Final test</strong> Combined Stress · complete</span>
         <span><strong>Replacement eligible</strong> No</span>
       </div>
 
@@ -115,7 +115,7 @@ export function V2DevelopmentLab() {
       </div>
 
       <div className="v2-timeline panel"><span>{step?.timestamp ?? "00:00"}</span><input aria-label="V2 simulation timeline" type="range" min="0" max={Math.max(0, (result?.trajectory.length ?? 1) - 1)} value={index} onChange={(event) => setIndex(Number(event.target.value))} /><span>{index + 1}/{result?.trajectory.length ?? 96}</span></div>
-      <div className="protocol-note"><LockKeyhole /><p><strong>Protocol integrity:</strong> Combined Stress, Unexpected Surge, Forecast Failure, Heatwave and Door Left Open remain inaccessible here. They will be opened once, only after a controller passes every development gate.</p></div>
+      <div className="protocol-note"><LockKeyhole /><p><strong>Protocol integrity:</strong> Combined Stress was opened once for the frozen hybrid candidate and failed comfort; reruns are prohibited. Unexpected Surge, Forecast Failure, Heatwave and Door Left Open remain sealed.</p></div>
     </section>
   );
 }

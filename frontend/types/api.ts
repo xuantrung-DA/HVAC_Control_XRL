@@ -103,8 +103,9 @@ export type V2Scenario =
 
 export interface V2Status {
   simulator_version: string;
-  lifecycle: "development";
-  development_status: "FAIL";
+  lifecycle: "closed";
+  development_status: "PASS_HYBRID_CANDIDATE";
+  final_status: "FAIL";
   official_demo_controller: string;
   v2_controller: {
     parameters: number;
@@ -113,8 +114,9 @@ export interface V2Status {
     checkpoint_sha256: string;
     development_gates: Record<string, boolean>;
   };
-  held_out: { status: "SEALED_NOT_RUN"; final_test_opened: false; reason: string };
-  scenario_access: { development: V2Scenario[]; held_out_sealed: string[] };
+  held_out: { status: "PARTIALLY_OPENED_HYBRID_COMBINED_STRESS"; final_test_opened: true; reason: string };
+  hybrid_final: { status: "COMPLETED_FAIL"; acceptance_pass: false; acceptance_gates: Record<string, boolean> };
+  scenario_access: { development: V2Scenario[]; held_out_opened: string[]; held_out_sealed: string[] };
 }
 
 export interface V2TrajectoryStep {

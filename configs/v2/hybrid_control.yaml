@@ -1,0 +1,49 @@
+hybrid_control:
+  version: xrl_hvac_v2_hybrid_001
+  architecture: learning_augmented_hvac_control
+  frozen_before_held_out: true
+  cooling:
+    command_fractions: [0.0, 0.12, 0.40, 1.0]
+  thermal_guard:
+    occupied_cold_stop_c: 22.2
+    occupied_cold_limit_c: 22.8
+    occupied_medium_c: 23.8
+    occupied_high_c: 24.8
+    maximum_unoccupied_action: 1
+  ventilation:
+    command_ach: [0.0, 0.60, 2.30, 2.60]
+    co2_medium_ppm: 800.0
+    co2_high_ppm: 975.0
+    co2_risk_medium: 0.35
+    co2_risk_high: 0.70
+  dehumidifier:
+    occupied_only: true
+    activation_relative_humidity_pct: 57.0
+    target_relative_humidity_pct: 50.0
+    rated_capacity_kg_per_hour: 8.0
+    rated_power_kw: 2.5
+  matched_rule_based:
+    version: hybrid_rule_based_v2_001
+    temperature_medium_c: 23.8
+    temperature_high_c: 24.8
+    maximum_unoccupied_action: 1
+  intervention_accounting:
+    compare_ventilation_to_legacy_coupled_action: true
+    legacy_action_ventilation_ach: [0.0, 0.60, 2.30, 2.60]
+
+development_protocol:
+  training_checkpoints: [42, 123, 2026]
+  validation_scenarios:
+    - expensive_electricity_v2
+    - meeting_surge_v2
+    - high_electronics_load_v2
+    - cleaning_event_v2
+  validation_seeds: [901, 902, 903]
+  candidate_selection_order:
+    - all_constraints
+    - no_critical_safety_violations
+    - whole_building_energy
+    - electricity_cost
+    - comfort_violation
+  held_out_scenario: combined_stress_v2
+  held_out_seeds: [1701, 1702, 1703, 1704, 1705]

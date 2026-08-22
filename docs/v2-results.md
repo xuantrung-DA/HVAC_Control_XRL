@@ -1,43 +1,71 @@
-# V2 development results
+# V2 results — closed iteration
+
+V2 is complete as an engineering iteration. Its hybrid candidate passed development validation, was frozen with a SHA-256 manifest, and then failed the one-shot Combined Stress comfort gate. V1 remains the official demo controller.
 
 ## Locked objective
 
-Before training, V2 required whole-building energy and electricity cost at or below the frozen Rule-Based V2 baseline, comfort violation below 5%, CO₂ violation below 1%, zero critical safety violations, reproducible checkpoints, and no action collapse. Constraint gates precede cumulative reward in controller selection.
+The final gate required energy and cost at or below an actuator-matched Rule-Based controller, comfort violation below 5%, CO₂ violation below 1%, and zero critical safety violations. Constraints precede reward in model selection.
 
-Training scenarios: Normal, Hot Day, High Occupancy, High Humidity. Validation scenarios: Expensive Electricity, Meeting Surge, High Electronics Load, Cleaning Event. Combined Stress and four resilience/safety scenarios remain sealed.
+Development scenarios were Expensive Electricity, Meeting Surge, High Electronics Load, and Cleaning Event with seeds 901–903. The final Combined Stress run used the predeclared seeds 1701–1705. Unexpected Surge, Forecast Failure, Heatwave, and Door Left Open remain unopened.
 
-## Multi-seed DQN validation
+## Root-cause investigation
 
-Across training seeds 42, 123, and 2026:
+The original V2 action coupled sensible cooling and ventilation. Controlled ablations found that occupant latent moisture and infiltration created a physical conflict: ventilation protected CO₂ but imported heat/moisture, while extra cooling could overcool the zone without sufficient latent removal.
 
-| Variant | Energy, kWh | Cost | Comfort violation | CO₂ violation | Shield intervention |
+The resulting learning-augmented architecture separates:
+
+- DQN sensible-cooling proposal;
+- deterministic thermal guard;
+- deterministic IAQ ventilation;
+- independent, separately metered dehumidification.
+
+The dehumidifier is configured at 8 kg/h and 2.5 kW. Its energy is included in whole-building energy, controllable energy, peak power, and Time-of-Use cost.
+
+## Clean development benchmark
+
+| Controller | Energy | Cost | Comfort | CO₂ | Critical safety |
 |---|---:|---:|---:|---:|---:|
-| Rule-Based V2 | 423.32 ± 25.99 | 94.38 ± 23.88 | 39.44 ± 5.53% | 0.00% | 0.00% |
-| DQN without shield | **401.20 ± 4.85** | **88.70 ± 1.64** | **15.93 ± 2.64%** | 3.67 ± 2.20% | 0.00% |
-| DQN with shield | 409.36 ± 2.47 | 91.70 ± 1.01 | 32.84 ± 4.55% | **0.00%** | 14.44 ± 1.47% |
+| Matched Rule-Based | 401.62 kWh | 90.86 | 5.00% | 0.00% | 0 |
+| **DQN seed 42 + hybrid guard** | **396.98 kWh** | **90.73** | **1.11%** | **0.00%** | **0** |
+| DQN seed 123 + hybrid guard | 398.21 kWh | 93.27 | 4.26% | 0.00% | 0 |
+| DQN seed 2026 + hybrid guard | 405.43 kWh | 91.71 | 0.74% | 0.00% | 0 |
 
-The selected development checkpoint is seed 2026 at 15,000 steps. Its development metrics were 403.03 kWh, 12.22% comfort violation, and 1.04% CO₂ violation. It is reproducible and avoids single-action collapse, but it is not acceptance-eligible.
+Only seed 42 passed every gate against the matched baseline and was selected by the locked order: constraints, safety, energy, cost, then comfort. The clean benchmark was executed twice; the timestamp-independent result hash was identical.
 
-## SAC go/no-go
+## Freeze
 
-SAC decoupled cooling and ventilation after DQN evidence justified continuous action research. The first locked seed was stopped after 20,000 steps: comfort violation was 73.15% and CO₂ violation 2.17%. Remaining seeds were not run, consistent with the predeclared go/no-go rule.
+- Candidate: `seed_42_full_best.pt`
+- Checkpoint SHA-256: `06b0aede0b4e5ca91f4c5976fe493f3be6f4a6a62e24cf136291a560ac2429e0`
+- Frozen components: 28
+- Frozen bundle SHA-256: `1fa47a571bd99a15168b2c45ea6183156da20753253835e6397eed15f3bd9e73`
+- Verification: 149 Python tests passed
 
-## Equal-budget ablations
+The simulator, actuator configuration, guard thresholds, checkpoint, evaluator, reward, forecast model, scenario protocol, and one-shot runner were hashed before opening Combined Stress.
 
-At 10,000 steps on seed 2026 / validation seed 901:
+## One-shot Combined Stress — FINAL FAIL
 
-| Variant | Energy, kWh | Comfort violation | CO₂ violation |
-|---|---:|---:|---:|
-| Full dynamic V2 | 397.93 | 22.22% | 9.64% |
-| Fixed reward | 417.66 | 22.78% | 7.55% |
-| No forecast | 435.74 | 68.33% | 9.64% |
-| No trend | 402.59 | 21.11% | 8.59% |
-| No risk | 437.25 | 20.00% | 12.50% |
+| Controller | Energy | Cost | Comfort | Temperature | Humidity | CO₂ | Critical safety |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Matched Rule-Based | 586.02 kWh | 221.10 | 88.84% | 83.93% | 83.04% | 0.00% | 0 |
+| **Frozen DQN + hybrid guard** | **573.08 kWh** | **218.47** | **98.67%** | **97.78%** | **82.15%** | **0.00%** | **0** |
 
-Forecast and risk features were directionally valuable, but no ablation passed all gates. These runs support diagnosis, not a final controller claim.
+Gate result:
 
-## Protocol decision
+- Energy ≤ Rule-Based: **PASS**
+- Cost ≤ Rule-Based: **PASS**
+- Comfort < 5%: **FAIL**
+- CO₂ < 1%: **PASS**
+- Critical safety = 0: **PASS**
 
-`outputs/v2/protocol/held_out_status.json` records `SEALED_NOT_RUN`, `final_test_opened=false`, and `candidate_checkpoint=null`. This is the final V2 MVP outcome: the system and evaluation protocol are complete, while controller performance remains an explicit development failure.
+The frozen DQN saved 2.21% energy and 1.19% cost but did not preserve comfort. The matched baseline also failed comfort severely, and both controllers spent roughly 45–47% of the episode at HIGH cooling while the dehumidifier ran about 40–41%. This supports an actuator-capacity/design-envelope limitation. Because DQN comfort was worse than the matched baseline, policy generalization remains a secondary failure rather than being excused by hardware limits.
 
-Representative policy/shield explanations from three development scenarios are stored as JSON and CSV under `outputs/v2/xai`. They were generated without accessing any held-out scenario.
+Combined Stress is now observed and cannot be reused for tuning or V3 model selection. Its one-shot receipt is immutable evidence. The remaining four held-out scenarios were not opened.
+
+## Evidence
+
+- [`development_benchmark.json`](../outputs/v2/hybrid/development_benchmark.json)
+- [`frozen_candidate_manifest.json`](../outputs/v2/hybrid/frozen_candidate_manifest.json)
+- [`combined_stress_one_shot.json`](../outputs/v2/hybrid/combined_stress_one_shot.json)
+- [`held_out_status.json`](../outputs/v2/protocol/held_out_status.json)
+
+The local failure-diagnosis search space is intentionally excluded from Git. The production hybrid implementation and final evidence are retained.

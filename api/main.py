@@ -53,9 +53,9 @@ def create_app() -> FastAPI:
         return {
             "status": "healthy",
             "project": "XRL-HVAC",
-            "version": "2.0.0-dev",
+            "version": "2.0.0",
             "official_demo": "v1_frozen",
-            "v2_status": "development_fail_heldout_sealed",
+            "v2_status": "final_fail_combined_stress_opened_once",
         }
 
     prefix = "/api/v1"
